@@ -284,3 +284,11 @@ The original planning record is preserved in `docs/`:
 | [Source chat archive](docs/00-source-chat.md) | The original conversation |
 
 No interviews, partnerships, real listings or verified providers are claimed anywhere in the app or documents.
+
+
+Copyright (c) 2026 Hamza Memon and Hamza Ahmad. All rights reserved.
+
+This project is proprietary. No permission is granted
+to use, reproduce, modify, distribute, or commercially
+exploit the original source code without prior
+written authorization from the copyright owner.

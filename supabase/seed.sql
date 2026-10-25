@@ -149,6 +149,618 @@ insert into auth.identities (id, user_id, provider_id, identity_data, provider, 
 values ('11111111-1111-4111-8111-000000000012', '11111111-1111-4111-8111-000000000012', '11111111-1111-4111-8111-000000000012',
   jsonb_build_object('sub', '11111111-1111-4111-8111-000000000012', 'email', 'hassan@example.test', 'email_verified', true),
   'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000013', 'authenticated', 'authenticated', 'tariq@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Tariq Abdullah"}'::jsonb, now() - interval '7776000 seconds', now() - interval '3888000 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000013', '11111111-1111-4111-8111-000000000013', '11111111-1111-4111-8111-000000000013',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000013', 'email', 'tariq@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000014', 'authenticated', 'authenticated', 'rashid@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Rashid Malik"}'::jsonb, now() - interval '6480000 seconds', now() - interval '3196800 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000014', '11111111-1111-4111-8111-000000000014', '11111111-1111-4111-8111-000000000014',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000014', 'email', 'rashid@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000015', 'authenticated', 'authenticated', 'samir@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Samir Qureshi"}'::jsonb, now() - interval '4320000 seconds', now() - interval '2160000 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000015', '11111111-1111-4111-8111-000000000015', '11111111-1111-4111-8111-000000000015',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000015', 'email', 'samir@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000016', 'authenticated', 'authenticated', 'nadia@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Nadia Farouk"}'::jsonb, now() - interval '3456000 seconds', now() - interval '1728000 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000016', '11111111-1111-4111-8111-000000000016', '11111111-1111-4111-8111-000000000016',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000016', 'email', 'nadia@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000017', 'authenticated', 'authenticated', 'imran@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Imran Sheikh"}'::jsonb, now() - interval '3024000 seconds', now() - interval '1468800 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000017', '11111111-1111-4111-8111-000000000017', '11111111-1111-4111-8111-000000000017',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000017', 'email', 'imran@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000018', 'authenticated', 'authenticated', 'layla@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Layla Hamdan"}'::jsonb, now() - interval '5184000 seconds', now() - interval '2592000 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000018', '11111111-1111-4111-8111-000000000018', '11111111-1111-4111-8111-000000000018',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000018', 'email', 'layla@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000019', 'authenticated', 'authenticated', 'mustafa@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Mustafa Osman"}'::jsonb, now() - interval '5184000 seconds', now() - interval '2592000 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000019', '11111111-1111-4111-8111-000000000019', '11111111-1111-4111-8111-000000000019',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000019', 'email', 'mustafa@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000020', 'authenticated', 'authenticated', 'aisha@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Aisha Bakr"}'::jsonb, now() - interval '10368000 seconds', now() - interval '5184000 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000020', '11111111-1111-4111-8111-000000000020', '11111111-1111-4111-8111-000000000020',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000020', 'email', 'aisha@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000021', 'authenticated', 'authenticated', 'kareem@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Kareem Yassin"}'::jsonb, now() - interval '8640000 seconds', now() - interval '4320000 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000021', '11111111-1111-4111-8111-000000000021', '11111111-1111-4111-8111-000000000021',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000021', 'email', 'kareem@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000022', 'authenticated', 'authenticated', 'ruqayyah@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Ruqayyah Jamal"}'::jsonb, now() - interval '5184000 seconds', now() - interval '2592000 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000022', '11111111-1111-4111-8111-000000000022', '11111111-1111-4111-8111-000000000022',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000022', 'email', 'ruqayyah@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000023', 'authenticated', 'authenticated', 'idris@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Idris Mohammed"}'::jsonb, now() - interval '5184000 seconds', now() - interval '2592000 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000023', '11111111-1111-4111-8111-000000000023', '11111111-1111-4111-8111-000000000023',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000023', 'email', 'idris@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000024', 'authenticated', 'authenticated', 'safiya@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Safiya Khan"}'::jsonb, now() - interval '5184000 seconds', now() - interval '2592000 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000024', '11111111-1111-4111-8111-000000000024', '11111111-1111-4111-8111-000000000024',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000024', 'email', 'safiya@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000025', 'authenticated', 'authenticated', 'ahmed@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Ahmed Saleh"}'::jsonb, now() - interval '6912000 seconds', now() - interval '3456000 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000025', '11111111-1111-4111-8111-000000000025', '11111111-1111-4111-8111-000000000025',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000025', 'email', 'ahmed@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000026', 'authenticated', 'authenticated', 'zainab@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Zainab Okafor"}'::jsonb, now() - interval '9504000 seconds', now() - interval '4752000 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000026', '11111111-1111-4111-8111-000000000026', '11111111-1111-4111-8111-000000000026',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000026', 'email', 'zainab@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000027', 'authenticated', 'authenticated', 'usman@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Usman Ghani"}'::jsonb, now() - interval '5184000 seconds', now() - interval '2592000 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000027', '11111111-1111-4111-8111-000000000027', '11111111-1111-4111-8111-000000000027',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000027', 'email', 'usman@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000028', 'authenticated', 'authenticated', 'huda@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Huda Nasser"}'::jsonb, now() - interval '5184000 seconds', now() - interval '2592000 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000028', '11111111-1111-4111-8111-000000000028', '11111111-1111-4111-8111-000000000028',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000028', 'email', 'huda@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000029', 'authenticated', 'authenticated', 'faisal@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Faisal Darwish"}'::jsonb, now() - interval '5184000 seconds', now() - interval '2592000 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000029', '11111111-1111-4111-8111-000000000029', '11111111-1111-4111-8111-000000000029',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000029', 'email', 'faisal@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000030', 'authenticated', 'authenticated', 'asma@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Asma Sadiq"}'::jsonb, now() - interval '5184000 seconds', now() - interval '2592000 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000030', '11111111-1111-4111-8111-000000000030', '11111111-1111-4111-8111-000000000030',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000030', 'email', 'asma@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000031', 'authenticated', 'authenticated', 'noah@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Noah Sulaiman"}'::jsonb, now() - interval '5184000 seconds', now() - interval '2592000 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000031', '11111111-1111-4111-8111-000000000031', '11111111-1111-4111-8111-000000000031',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000031', 'email', 'noah@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000032', 'authenticated', 'authenticated', 'sumaya@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Sumaya Aziz"}'::jsonb, now() - interval '5184000 seconds', now() - interval '2592000 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000032', '11111111-1111-4111-8111-000000000032', '11111111-1111-4111-8111-000000000032',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000032', 'email', 'sumaya@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000033', 'authenticated', 'authenticated', 'dawud@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Dawud Ellis"}'::jsonb, now() - interval '6048000 seconds', now() - interval '3024000 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000033', '11111111-1111-4111-8111-000000000033', '11111111-1111-4111-8111-000000000033',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000033', 'email', 'dawud@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000034', 'authenticated', 'authenticated', 'amir@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Amir Tehrani"}'::jsonb, now() - interval '1728000 seconds', now() - interval '864000 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000034', '11111111-1111-4111-8111-000000000034', '11111111-1111-4111-8111-000000000034',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000034', 'email', 'amir@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000035', 'authenticated', 'authenticated', 'jamila@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Jamila Wright"}'::jsonb, now() - interval '5184000 seconds', now() - interval '2592000 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000035', '11111111-1111-4111-8111-000000000035', '11111111-1111-4111-8111-000000000035',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000035', 'email', 'jamila@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000036', 'authenticated', 'authenticated', 'yasmin@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Yasmin Ezz"}'::jsonb, now() - interval '5184000 seconds', now() - interval '2592000 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000036', '11111111-1111-4111-8111-000000000036', '11111111-1111-4111-8111-000000000036',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000036', 'email', 'yasmin@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000037', 'authenticated', 'authenticated', 'hamid@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Hamid Rahimi"}'::jsonb, now() - interval '12960000 seconds', now() - interval '6480000 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000037', '11111111-1111-4111-8111-000000000037', '11111111-1111-4111-8111-000000000037',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000037', 'email', 'hamid@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000038', 'authenticated', 'authenticated', 'salma@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Salma Begum"}'::jsonb, now() - interval '5184000 seconds', now() - interval '2592000 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000038', '11111111-1111-4111-8111-000000000038', '11111111-1111-4111-8111-000000000038',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000038', 'email', 'salma@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000039', 'authenticated', 'authenticated', 'khalid@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Khalid Mahmoud"}'::jsonb, now() - interval '11232000 seconds', now() - interval '5616000 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000039', '11111111-1111-4111-8111-000000000039', '11111111-1111-4111-8111-000000000039',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000039', 'email', 'khalid@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000040', 'authenticated', 'authenticated', 'rania@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Rania Abbas"}'::jsonb, now() - interval '5184000 seconds', now() - interval '2592000 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000040', '11111111-1111-4111-8111-000000000040', '11111111-1111-4111-8111-000000000040',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000040', 'email', 'rania@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000041', 'authenticated', 'authenticated', 'ismail@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Ismail Diallo"}'::jsonb, now() - interval '5184000 seconds', now() - interval '2592000 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000041', '11111111-1111-4111-8111-000000000041', '11111111-1111-4111-8111-000000000041',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000041', 'email', 'ismail@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000042', 'authenticated', 'authenticated', 'lina@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Lina Saeed"}'::jsonb, now() - interval '1296000 seconds', now() - interval '604800 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000042', '11111111-1111-4111-8111-000000000042', '11111111-1111-4111-8111-000000000042',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000042', 'email', 'lina@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000043', 'authenticated', 'authenticated', 'bashir@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Bashir Ahmadi"}'::jsonb, now() - interval '5184000 seconds', now() - interval '2592000 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000043', '11111111-1111-4111-8111-000000000043', '11111111-1111-4111-8111-000000000043',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000043', 'email', 'bashir@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000044', 'authenticated', 'authenticated', 'noura@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Noura Al-Amin"}'::jsonb, now() - interval '5184000 seconds', now() - interval '2592000 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000044', '11111111-1111-4111-8111-000000000044', '11111111-1111-4111-8111-000000000044',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000044', 'email', 'noura@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000045', 'authenticated', 'authenticated', 'sami@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Sami Kassem"}'::jsonb, now() - interval '2160000 seconds', now() - interval '1036800 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000045', '11111111-1111-4111-8111-000000000045', '11111111-1111-4111-8111-000000000045',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000045', 'email', 'sami@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000046', 'authenticated', 'authenticated', 'cardamom@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Cardamom & Co. Coffee House"}'::jsonb, now() - interval '17280000 seconds', now() - interval '8640000 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000046', '11111111-1111-4111-8111-000000000046', '11111111-1111-4111-8111-000000000046',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000046', 'email', 'cardamom@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000047', 'authenticated', 'authenticated', 'zaytoon@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Zaytoon Mediterranean Grill"}'::jsonb, now() - interval '19008000 seconds', now() - interval '9504000 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000047', '11111111-1111-4111-8111-000000000047', '11111111-1111-4111-8111-000000000047',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000047', 'email', 'zaytoon@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000048', 'authenticated', 'authenticated', 'barakah@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Barakah Halal Market"}'::jsonb, now() - interval '20736000 seconds', now() - interval '10368000 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000048', '11111111-1111-4111-8111-000000000048', '11111111-1111-4111-8111-000000000048',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000048', 'email', 'barakah@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000049', 'authenticated', 'authenticated', 'medina@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Medina Books & Gifts"}'::jsonb, now() - interval '15552000 seconds', now() - interval '7776000 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000049', '11111111-1111-4111-8111-000000000049', '11111111-1111-4111-8111-000000000049',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000049', 'email', 'medina@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000050', 'authenticated', 'authenticated', 'noor@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Noor Dental Studio"}'::jsonb, now() - interval '13824000 seconds', now() - interval '6912000 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000050', '11111111-1111-4111-8111-000000000050', '11111111-1111-4111-8111-000000000050',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000050', 'email', 'noor@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000051', 'authenticated', 'authenticated', 'olive@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Olive Tree Sweets"}'::jsonb, now() - interval '12096000 seconds', now() - interval '6048000 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000051', '11111111-1111-4111-8111-000000000051', '11111111-1111-4111-8111-000000000051',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000051', 'email', 'olive@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000052', 'authenticated', 'authenticated', 'iqra@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Iqra Weekend School"}'::jsonb, now() - interval '25920000 seconds', now() - interval '12960000 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000052', '11111111-1111-4111-8111-000000000052', '11111111-1111-4111-8111-000000000052',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000052', 'email', 'iqra@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000053', 'authenticated', 'authenticated', 'shifa@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Shifa Family Clinic"}'::jsonb, now() - interval '18144000 seconds', now() - interval '9072000 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000053', '11111111-1111-4111-8111-000000000053', '11111111-1111-4111-8111-000000000053',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000053', 'email', 'shifa@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000054', 'authenticated', 'authenticated', 'tayyib@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Tayyib Halal Food Truck"}'::jsonb, now() - interval '7776000 seconds', now() - interval '3888000 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000054', '11111111-1111-4111-8111-000000000054', '11111111-1111-4111-8111-000000000054',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000054', 'email', 'tayyib@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000055', 'authenticated', 'authenticated', 'iman@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Iman Modest Boutique"}'::jsonb, now() - interval '14688000 seconds', now() - interval '7344000 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000055', '11111111-1111-4111-8111-000000000055', '11111111-1111-4111-8111-000000000055',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000055', 'email', 'iman@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000056', 'authenticated', 'authenticated', 'sunnah@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Sunnah Cuts Barbershop"}'::jsonb, now() - interval '11232000 seconds', now() - interval '5616000 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000056', '11111111-1111-4111-8111-000000000056', '11111111-1111-4111-8111-000000000056',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000056', 'email', 'sunnah@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000057', 'authenticated', 'authenticated', 'hikmah@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Hikmah Law Group"}'::jsonb, now() - interval '16416000 seconds', now() - interval '8208000 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000057', '11111111-1111-4111-8111-000000000057', '11111111-1111-4111-8111-000000000057',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000057', 'email', 'hikmah@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000058', 'authenticated', 'authenticated', 'brookside@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Brookside Masjid"}'::jsonb, now() - interval '22464000 seconds', now() - interval '11232000 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000058', '11111111-1111-4111-8111-000000000058', '11111111-1111-4111-8111-000000000058',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000058', 'email', 'brookside@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000059', 'authenticated', 'authenticated', 'millstone@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Millstone Community Masjid"}'::jsonb, now() - interval '24192000 seconds', now() - interval '12096000 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000059', '11111111-1111-4111-8111-000000000059', '11111111-1111-4111-8111-000000000059',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000059', 'email', 'millstone@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000060', 'authenticated', 'authenticated', 'amanah@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Amanah Movers"}'::jsonb, now() - interval '9936000 seconds', now() - interval '4924800 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000060', '11111111-1111-4111-8111-000000000060', '11111111-1111-4111-8111-000000000060',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000060', 'email', 'amanah@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000061', 'authenticated', 'authenticated', 'rihla@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Rihla Travel"}'::jsonb, now() - interval '19872000 seconds', now() - interval '9936000 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000061', '11111111-1111-4111-8111-000000000061', '11111111-1111-4111-8111-000000000061',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000061', 'email', 'rihla@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000062', 'authenticated', 'authenticated', 'spice@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Spice Route Kitchen"}'::jsonb, now() - interval '21600000 seconds', now() - interval '10800000 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000062', '11111111-1111-4111-8111-000000000062', '11111111-1111-4111-8111-000000000062',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000062', 'email', 'spice@example.test', 'email_verified', true),
+  'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change, email_change_token_new, email_change_token_current,
+  phone_change, phone_change_token, reauthentication_token)
+values ('00000000-0000-0000-0000-000000000000', '11111111-1111-4111-8111-000000000063', 'authenticated', 'authenticated', 'sidra@example.test',
+  extensions.crypt('community-demo-2026', extensions.gen_salt('bf')), now(),
+  '{"provider":"email","providers":["email"]}'::jsonb, '{"display_name":"Sidra Coworking"}'::jsonb, now() - interval '8208000 seconds', now() - interval '4060800 seconds',
+  '', '', '', '', '', '', '', '');
+insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
+values ('11111111-1111-4111-8111-000000000063', '11111111-1111-4111-8111-000000000063', '11111111-1111-4111-8111-000000000063',
+  jsonb_build_object('sub', '11111111-1111-4111-8111-000000000063', 'email', 'sidra@example.test', 'email_verified', true),
+  'email', now(), now(), now());
 
 -- Profiles and private settings.
 update public.profiles set
@@ -307,6 +919,669 @@ update public.profile_settings set
   goals = '[{"type":"business","role":"offering","subjects":["IT support"]},{"type":"internship","role":"offering","subjects":["Software engineering","Robotics"]},{"type":"job","role":"offering","subjects":["Software engineering"]}]'::jsonb,
   personalization_enabled = true, onboarding_complete = true
 where id = '11111111-1111-4111-8111-000000000012';
+update public.profiles set
+  display_name = 'Tariq Abdullah', headline = 'Licensed plumber with 15 years of residential work',
+  skills = array['Plumbing', 'Water heaters', 'Home repair']::text[], interests = array['Trades education', 'Small business']::text[],
+  offering_summary = 'Plumbing repairs, water heater installs, and an apprenticeship.', seeking_summary = 'A dependable plumbing apprentice.',
+  area_id = 'old-bridge', open_to_remote = false,
+  community_affiliation = 'Attends a masjid in Old Bridge', linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '7776000 seconds'
+where id = '11111111-1111-4111-8111-000000000013';
+update public.profile_settings set
+  goals = '[{"type":"service","role":"offering","subjects":["Plumbing"]},{"type":"job","role":"offering","subjects":["Plumbing"]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000013';
+update public.profiles set
+  display_name = 'Rashid Malik', headline = 'HVAC technician: heating, cooling and installs',
+  skills = array['HVAC', 'Air conditioning', 'Furnace repair']::text[], interests = array['Seniors outreach']::text[],
+  offering_summary = 'AC and furnace repair, seasonal tune-ups, and on-the-job training.', seeking_summary = 'A full-time HVAC helper.',
+  area_id = 'woodbridge', open_to_remote = false,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '6480000 seconds'
+where id = '11111111-1111-4111-8111-000000000014';
+update public.profile_settings set
+  goals = '[{"type":"service","role":"offering","subjects":["HVAC"]},{"type":"job","role":"offering","subjects":["HVAC"]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000014';
+update public.profiles set
+  display_name = 'Samir Qureshi', headline = 'Handyman and renovation contractor',
+  skills = array['Home repair', 'Carpentry', 'Tile', 'Drywall']::text[], interests = '{}'::text[],
+  offering_summary = 'Small repairs, kitchen and bathroom renovations.', seeking_summary = '',
+  area_id = 'north-brunswick', open_to_remote = false,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '4320000 seconds'
+where id = '11111111-1111-4111-8111-000000000015';
+update public.profile_settings set
+  goals = '[{"type":"service","role":"offering","subjects":["Home repair"]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000015';
+update public.profiles set
+  display_name = 'Nadia Farouk', headline = 'Private equity associate who mentors finance students',
+  skills = array['Private equity', 'Financial modeling', 'Finance']::text[], interests = array['Women in finance', 'Investing']::text[],
+  offering_summary = 'Mentorship on breaking into private equity and investment banking.', seeking_summary = 'Students who want to practice LBO modeling together.',
+  area_id = 'princeton', open_to_remote = true,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '3456000 seconds'
+where id = '11111111-1111-4111-8111-000000000016';
+update public.profile_settings set
+  goals = '[{"type":"mentorship","role":"offering","subjects":["Private equity","Finance"]},{"type":"collaboration","role":"seeking","subjects":["Finance"]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000016';
+update public.profiles set
+  display_name = 'Imran Sheikh', headline = 'Venture investor and startup advisor',
+  skills = array['Venture capital', 'Fundraising', 'Small business']::text[], interests = array['Startups', 'Halal investing']::text[],
+  offering_summary = 'Pitch deck reviews and fundraising advice for founders.', seeking_summary = 'A spring analyst intern.',
+  area_id = 'princeton', open_to_remote = true,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '3024000 seconds'
+where id = '11111111-1111-4111-8111-000000000017';
+update public.profile_settings set
+  goals = '[{"type":"mentorship","role":"offering","subjects":["Venture capital","Small business"]},{"type":"internship","role":"offering","subjects":["Finance"]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000017';
+update public.profiles set
+  display_name = 'Layla Hamdan', headline = 'Product manager at a fintech startup',
+  skills = array['Product management', 'Career advice', 'Leadership']::text[], interests = array['Women in tech', 'Finance']::text[],
+  offering_summary = 'Product management mentorship and women-in-tech coffee chats.', seeking_summary = 'A part-time QA tester.',
+  area_id = 'plainsboro', open_to_remote = true,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '5184000 seconds'
+where id = '11111111-1111-4111-8111-000000000018';
+update public.profile_settings set
+  goals = '[{"type":"mentorship","role":"offering","subjects":["Product management","Career advice"]},{"type":"job","role":"offering","subjects":["Software testing"]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000018';
+update public.profiles set
+  display_name = 'Mustafa Osman', headline = 'Data scientist working on language models',
+  skills = array['Python', 'Data analysis', 'Machine learning', 'SQL']::text[], interests = array['Arabic', 'Youth programs']::text[],
+  offering_summary = 'Data science mentorship and free machine learning workshops.', seeking_summary = 'A co-author for an Arabic language research project.',
+  area_id = 'edison', open_to_remote = true,
+  community_affiliation = 'Attends a masjid in Edison', linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '5184000 seconds'
+where id = '11111111-1111-4111-8111-000000000019';
+update public.profile_settings set
+  goals = '[{"type":"mentorship","role":"offering","subjects":["Data analysis","Machine learning"]},{"type":"collaboration","role":"seeking","subjects":["Machine learning"]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000019';
+update public.profiles set
+  display_name = 'Aisha Bakr', headline = 'Arabic and Islamic studies teacher',
+  skills = array['Arabic', 'Islamic studies', 'Quran', 'Teaching']::text[], interests = '{}'::text[],
+  offering_summary = 'Arabic lessons for adults and an Islamic studies class for teens.', seeking_summary = '',
+  area_id = 'somerset', open_to_remote = true,
+  community_affiliation = 'Teaches at a masjid in Somerset', linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '10368000 seconds'
+where id = '11111111-1111-4111-8111-000000000020';
+update public.profile_settings set
+  goals = '[{"type":"service","role":"offering","subjects":["Arabic","Islamic studies"]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000020';
+update public.profiles set
+  display_name = 'Kareem Yassin', headline = 'Programs coordinator at a New Brunswick masjid',
+  skills = array['Event planning', 'Quran', 'Leadership']::text[], interests = array['Interfaith', 'Youth programs']::text[],
+  offering_summary = 'A kids hifz program and monthly interfaith open houses.', seeking_summary = 'Volunteers, and a designer for our newsletter.',
+  area_id = 'new-brunswick', open_to_remote = false,
+  community_affiliation = 'Programs coordinator at a masjid in New Brunswick', linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '8640000 seconds'
+where id = '11111111-1111-4111-8111-000000000021';
+update public.profile_settings set
+  goals = '[{"type":"volunteer","role":"offering","subjects":["Event planning"]},{"type":"service","role":"seeking","subjects":["Graphic design"]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000021';
+update public.profiles set
+  display_name = 'Ruqayyah Jamal', headline = 'Pediatric nurse who mentors nursing students',
+  skills = array['Nursing', 'Healthcare', 'Public health']::text[], interests = array['Health fairs', 'Pre-med']::text[],
+  offering_summary = 'Mentorship for nursing and pre-med students.', seeking_summary = 'Volunteer nurses for a community health fair.',
+  area_id = 'hamilton', open_to_remote = true,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '5184000 seconds'
+where id = '11111111-1111-4111-8111-000000000022';
+update public.profile_settings set
+  goals = '[{"type":"mentorship","role":"offering","subjects":["Pre-med"]},{"type":"volunteer","role":"offering","subjects":["Healthcare"]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000022';
+update public.profiles set
+  display_name = 'Idris Mohammed', headline = 'Cybersecurity engineer',
+  skills = array['Cybersecurity', 'IT support', 'Networking']::text[], interests = array['Nonprofits', 'Tech meetups']::text[],
+  offering_summary = 'Cybersecurity career mentorship and free check-ups for masjids.', seeking_summary = 'A co-organizer for a Muslim tech meetup.',
+  area_id = 'piscataway', open_to_remote = true,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '5184000 seconds'
+where id = '11111111-1111-4111-8111-000000000023';
+update public.profile_settings set
+  goals = '[{"type":"mentorship","role":"offering","subjects":["Cybersecurity"]},{"type":"volunteer","role":"seeking","subjects":["Cybersecurity"]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000023';
+update public.profiles set
+  display_name = 'Safiya Khan', headline = 'Real estate agent and first-time buyer educator',
+  skills = array['Real estate', 'Negotiation']::text[], interests = array['Personal finance']::text[],
+  offering_summary = 'Free first-time homebuyer workshops.', seeking_summary = 'A plumber, and an SAT tutor for my daughter.',
+  area_id = 'monroe', open_to_remote = true,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '5184000 seconds'
+where id = '11111111-1111-4111-8111-000000000024';
+update public.profile_settings set
+  goals = '[{"type":"service","role":"offering","subjects":["Real estate"]},{"type":"service","role":"seeking","subjects":["Plumbing"]},{"type":"service","role":"seeking","subjects":["SAT prep"]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000024';
+update public.profiles set
+  display_name = 'Ahmed Saleh', headline = 'Auto mechanic and shop owner',
+  skills = array['Auto repair', 'Diagnostics']::text[], interests = '{}'::text[],
+  offering_summary = 'Honest car repairs and an apprentice spot.', seeking_summary = '',
+  area_id = 'sayreville', open_to_remote = false,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '6912000 seconds'
+where id = '11111111-1111-4111-8111-000000000025';
+update public.profile_settings set
+  goals = '[{"type":"service","role":"offering","subjects":["Auto repair"]},{"type":"job","role":"offering","subjects":["Auto repair"]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000025';
+update public.profiles set
+  display_name = 'Zainab Okafor', headline = 'Directs a refugee family support nonprofit',
+  skills = array['Nonprofit management', 'Grant writing', 'Leadership']::text[], interests = array['Refugee support', 'Community service']::text[],
+  offering_summary = 'Volunteer roles supporting newly arrived families.', seeking_summary = 'Drivers, tutors, and a grant writer.',
+  area_id = 'trenton', open_to_remote = true,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '9504000 seconds'
+where id = '11111111-1111-4111-8111-000000000026';
+update public.profile_settings set
+  goals = '[{"type":"volunteer","role":"offering","subjects":["Community service"]},{"type":"service","role":"seeking","subjects":["Writing"]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000026';
+update public.profiles set
+  display_name = 'Usman Ghani', headline = 'Chemistry grad student and SAT tutor',
+  skills = array['Chemistry', 'SAT prep', 'Tutoring']::text[], interests = array['STEM education']::text[],
+  offering_summary = 'SAT, ACT and chemistry tutoring.', seeking_summary = 'Weekend STEM volunteering.',
+  area_id = 'new-brunswick', open_to_remote = true,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '5184000 seconds'
+where id = '11111111-1111-4111-8111-000000000027';
+update public.profile_settings set
+  goals = '[{"type":"service","role":"offering","subjects":["SAT prep","Chemistry"]},{"type":"volunteer","role":"seeking","subjects":["STEM education"]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000027';
+update public.profiles set
+  display_name = 'Huda Nasser', headline = 'Licensed family therapist',
+  skills = array['Counseling', 'Mental health']::text[], interests = array['Parenting', 'Youth programs']::text[],
+  offering_summary = 'Counseling for individuals, couples and families.', seeking_summary = 'A babysitter two evenings a week.',
+  area_id = 'princeton', open_to_remote = true,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '5184000 seconds'
+where id = '11111111-1111-4111-8111-000000000028';
+update public.profile_settings set
+  goals = '[{"type":"service","role":"offering","subjects":["Counseling"]},{"type":"job","role":"offering","subjects":["Childcare"]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000028';
+update public.profiles set
+  display_name = 'Faisal Darwish', headline = 'Wedding photographer and videographer',
+  skills = array['Photography', 'Video editing']::text[], interests = '{}'::text[],
+  offering_summary = 'Wedding and event photography and video.', seeking_summary = 'A second shooter for the wedding season.',
+  area_id = 'edison', open_to_remote = false,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '5184000 seconds'
+where id = '11111111-1111-4111-8111-000000000029';
+update public.profile_settings set
+  goals = '[{"type":"service","role":"offering","subjects":["Photography","Video editing"]},{"type":"job","role":"offering","subjects":["Photography"]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000029';
+update public.profiles set
+  display_name = 'Asma Sadiq', headline = 'Certified personal trainer for sisters',
+  skills = array['Fitness', 'Nutrition']::text[], interests = array['Wellness']::text[],
+  offering_summary = 'Sisters-only fitness classes and personal training.', seeking_summary = 'A nutritionist to co-host wellness workshops.',
+  area_id = 'east-brunswick', open_to_remote = false,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '5184000 seconds'
+where id = '11111111-1111-4111-8111-000000000030';
+update public.profile_settings set
+  goals = '[{"type":"service","role":"offering","subjects":["Fitness"]},{"type":"collaboration","role":"seeking","subjects":["Nutrition"]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000030';
+update public.profiles set
+  display_name = 'Noah Sulaiman', headline = 'Civil engineer (PE) at a transportation firm',
+  skills = array['Civil engineering', 'Engineering', 'Project management']::text[], interests = array['Infrastructure']::text[],
+  offering_summary = 'PE exam mentorship and a summer internship.', seeking_summary = 'A reading tutor for my son.',
+  area_id = 'bridgewater', open_to_remote = true,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '5184000 seconds'
+where id = '11111111-1111-4111-8111-000000000031';
+update public.profile_settings set
+  goals = '[{"type":"mentorship","role":"offering","subjects":["Civil engineering"]},{"type":"internship","role":"offering","subjects":["Civil engineering"]},{"type":"service","role":"seeking","subjects":["Tutoring"]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000031';
+update public.profiles set
+  display_name = 'Sumaya Aziz', headline = 'Law student interested in immigration law',
+  skills = array['Legal research', 'Urdu', 'Translation']::text[], interests = array['Immigration', 'Community service']::text[],
+  offering_summary = 'Urdu tutoring for kids and know-your-rights clinics.', seeking_summary = 'A mentor in immigration law.',
+  area_id = 'piscataway', open_to_remote = true,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '5184000 seconds'
+where id = '11111111-1111-4111-8111-000000000032';
+update public.profile_settings set
+  goals = '[{"type":"mentorship","role":"seeking","subjects":["Law"]},{"type":"service","role":"offering","subjects":["Urdu"]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000032';
+update public.profiles set
+  display_name = 'Dawud Ellis', headline = 'Carpenter and cabinet maker',
+  skills = array['Carpentry', 'Woodworking']::text[], interests = array['Youth programs']::text[],
+  offering_summary = 'Custom shelving and cabinets, and mentoring teens in woodworking.', seeking_summary = '',
+  area_id = 'lawrenceville', open_to_remote = false,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '6048000 seconds'
+where id = '11111111-1111-4111-8111-000000000033';
+update public.profile_settings set
+  goals = '[{"type":"service","role":"offering","subjects":["Carpentry"]},{"type":"mentorship","role":"offering","subjects":["Carpentry"]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000033';
+update public.profiles set
+  display_name = 'Amir Tehrani', headline = 'Founder of a halal meal-kit startup',
+  skills = array['Small business', 'Operations', 'Cooking']::text[], interests = array['Startups', 'Halal food']::text[],
+  offering_summary = 'Paid recipe development work for home chefs.', seeking_summary = 'An operations co-founder and a mentor who has raised a seed round.',
+  area_id = 'plainsboro', open_to_remote = true,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '1728000 seconds'
+where id = '11111111-1111-4111-8111-000000000034';
+update public.profile_settings set
+  goals = '[{"type":"collaboration","role":"seeking","subjects":["Small business"]},{"type":"mentorship","role":"seeking","subjects":["Venture capital"]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000034';
+update public.profiles set
+  display_name = 'Jamila Wright', headline = 'Runs a painting and cleaning business',
+  skills = array['Painting', 'Cleaning']::text[], interests = array['Seniors outreach']::text[],
+  offering_summary = 'Interior painting and move-out cleaning.', seeking_summary = 'Volunteers to deliver groceries to seniors.',
+  area_id = 'hamilton', open_to_remote = false,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '5184000 seconds'
+where id = '11111111-1111-4111-8111-000000000035';
+update public.profile_settings set
+  goals = '[{"type":"service","role":"offering","subjects":["Cleaning","Painting"]},{"type":"volunteer","role":"offering","subjects":[]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000035';
+update public.profiles set
+  display_name = 'Yasmin Ezz', headline = 'UX designer looking for her next role',
+  skills = array['UX design', 'Figma', 'Graphic design']::text[], interests = array['Accessibility']::text[],
+  offering_summary = 'UX design, app prototypes and portfolio reviews.', seeking_summary = 'A full-time UX design role.',
+  area_id = 'highland-park', open_to_remote = true,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '5184000 seconds'
+where id = '11111111-1111-4111-8111-000000000036';
+update public.profile_settings set
+  goals = '[{"type":"service","role":"offering","subjects":["UX design"]},{"type":"job","role":"seeking","subjects":["UX design"]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000036';
+update public.profiles set
+  display_name = 'Hamid Rahimi', headline = 'Retired banker teaching Islamic finance',
+  skills = array['Finance', 'Islamic finance', 'Budgeting']::text[], interests = array['Financial literacy']::text[],
+  offering_summary = 'Halal investing basics and personal finance coaching.', seeking_summary = 'An HVAC technician, and a place to teach financial literacy.',
+  area_id = 'west-windsor', open_to_remote = true,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '12960000 seconds'
+where id = '11111111-1111-4111-8111-000000000037';
+update public.profile_settings set
+  goals = '[{"type":"mentorship","role":"offering","subjects":["Islamic finance","Finance"]},{"type":"service","role":"seeking","subjects":["HVAC"]},{"type":"volunteer","role":"seeking","subjects":["Finance"]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000037';
+update public.profiles set
+  display_name = 'Salma Begum', headline = 'Licensed home daycare provider',
+  skills = array['Childcare', 'Early education']::text[], interests = '{}'::text[],
+  offering_summary = 'Daycare for toddlers in a warm, halal-friendly home.', seeking_summary = '',
+  area_id = 'south-brunswick', open_to_remote = false,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '5184000 seconds'
+where id = '11111111-1111-4111-8111-000000000038';
+update public.profile_settings set
+  goals = '[{"type":"service","role":"offering","subjects":["Childcare"]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000038';
+update public.profiles set
+  display_name = 'Khalid Mahmoud', headline = 'Masjid board treasurer',
+  skills = array['Bookkeeping', 'Fundraising', 'Nonprofit management']::text[], interests = array['Masjid expansion']::text[],
+  offering_summary = 'Mentoring masjid boards on nonprofit bookkeeping.', seeking_summary = 'An accountant to audit our books and fundraising volunteers.',
+  area_id = 'edison', open_to_remote = true,
+  community_affiliation = 'Board treasurer at a masjid in Edison', linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '11232000 seconds'
+where id = '11111111-1111-4111-8111-000000000039';
+update public.profile_settings set
+  goals = '[{"type":"mentorship","role":"offering","subjects":["Bookkeeping"]},{"type":"service","role":"seeking","subjects":["Accounting"]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000039';
+update public.profiles set
+  display_name = 'Rania Abbas', headline = 'High school biology teacher',
+  skills = array['Biology', 'Tutoring', 'Teaching']::text[], interests = array['Youth programs', 'STEM education']::text[],
+  offering_summary = 'Biology tutoring and a free homework help club.', seeking_summary = 'Coding classes for my students.',
+  area_id = 'metuchen', open_to_remote = true,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '5184000 seconds'
+where id = '11111111-1111-4111-8111-000000000040';
+update public.profile_settings set
+  goals = '[{"type":"service","role":"offering","subjects":["Biology"]},{"type":"service","role":"seeking","subjects":["Python"]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000040';
+update public.profiles set
+  display_name = 'Ismail Diallo', headline = 'Landscaping and snow removal',
+  skills = array['Landscaping', 'Snow removal']::text[], interests = '{}'::text[],
+  offering_summary = 'Lawn care, landscaping and snow plowing.', seeking_summary = 'A seasonal crew.',
+  area_id = 'somerset', open_to_remote = false,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '5184000 seconds'
+where id = '11111111-1111-4111-8111-000000000041';
+update public.profile_settings set
+  goals = '[{"type":"service","role":"offering","subjects":["Landscaping"]},{"type":"job","role":"offering","subjects":["Landscaping"]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000041';
+update public.profiles set
+  display_name = 'Lina Saeed', headline = 'Marketing student at Rutgers',
+  skills = '{}'::text[], interests = array['Marketing', 'Social media', 'Event planning']::text[],
+  offering_summary = 'Social media help and weekend volunteering.', seeking_summary = 'A part-time job and a spring marketing internship.',
+  area_id = 'new-brunswick', open_to_remote = true,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '1296000 seconds'
+where id = '11111111-1111-4111-8111-000000000042';
+update public.profile_settings set
+  goals = '[{"type":"job","role":"seeking","subjects":["Marketing"]},{"type":"internship","role":"seeking","subjects":["Marketing"]},{"type":"volunteer","role":"seeking","subjects":[]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000042';
+update public.profiles set
+  display_name = 'Bashir Ahmadi', headline = 'Real estate investor and property manager',
+  skills = array['Real estate', 'Investing', 'Property management']::text[], interests = '{}'::text[],
+  offering_summary = 'Real estate investing mentorship.', seeking_summary = 'Partners for a small multifamily purchase.',
+  area_id = 'bridgewater', open_to_remote = true,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '5184000 seconds'
+where id = '11111111-1111-4111-8111-000000000043';
+update public.profile_settings set
+  goals = '[{"type":"mentorship","role":"offering","subjects":["Real estate"]},{"type":"collaboration","role":"seeking","subjects":["Real estate"]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000043';
+update public.profiles set
+  display_name = 'Noura Al-Amin', headline = 'Community pharmacist',
+  skills = array['Pharmacy', 'Healthcare']::text[], interests = '{}'::text[],
+  offering_summary = 'An internship for pre-pharmacy students.', seeking_summary = 'A handyman for a few small jobs.',
+  area_id = 'east-brunswick', open_to_remote = false,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '5184000 seconds'
+where id = '11111111-1111-4111-8111-000000000044';
+update public.profile_settings set
+  goals = '[{"type":"internship","role":"offering","subjects":["Pharmacy"]},{"type":"service","role":"seeking","subjects":["Home repair"]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000044';
+update public.profiles set
+  display_name = 'Sami Kassem', headline = 'MSA president and hackathon organizer',
+  skills = array['Event planning', 'JavaScript', 'Leadership']::text[], interests = array['Hackathons', 'Podcasts']::text[],
+  offering_summary = 'Volunteer roles at our student hackathon.', seeking_summary = 'Hackathon teammates, alumni mentors and a video editor.',
+  area_id = 'new-brunswick', open_to_remote = true,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '2160000 seconds'
+where id = '11111111-1111-4111-8111-000000000045';
+update public.profile_settings set
+  goals = '[{"type":"collaboration","role":"seeking","subjects":["Hackathons"]},{"type":"mentorship","role":"seeking","subjects":["Career advice"]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000045';
+update public.profiles set
+  display_name = 'Cardamom & Co. Coffee House', headline = 'Specialty coffee and Yemeni chai in New Brunswick',
+  skills = array['Coffee', 'Baking']::text[], interests = '{}'::text[],
+  offering_summary = 'A study-friendly coffee house open late.', seeking_summary = 'Baristas and a part-time social media manager.',
+  area_id = 'new-brunswick', open_to_remote = false,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '17280000 seconds'
+where id = '11111111-1111-4111-8111-000000000046';
+update public.profile_settings set
+  goals = '[{"type":"business","role":"offering","subjects":["Coffee"]},{"type":"job","role":"offering","subjects":[]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000046';
+update public.profiles set
+  display_name = 'Zaytoon Mediterranean Grill', headline = 'Halal Mediterranean restaurant and catering',
+  skills = array['Halal food', 'Catering']::text[], interests = '{}'::text[],
+  offering_summary = 'Dine-in, takeout and catering for community events.', seeking_summary = 'A full-time line cook.',
+  area_id = 'edison', open_to_remote = false,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '19008000 seconds'
+where id = '11111111-1111-4111-8111-000000000047';
+update public.profile_settings set
+  goals = '[{"type":"business","role":"offering","subjects":["Halal food","Catering"]},{"type":"job","role":"offering","subjects":["Cooking"]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000047';
+update public.profiles set
+  display_name = 'Barakah Halal Market', headline = 'Halal grocery and butcher',
+  skills = array['Halal food']::text[], interests = '{}'::text[],
+  offering_summary = 'Zabiha meat, groceries and fresh produce.', seeking_summary = 'Weekend cashiers.',
+  area_id = 'piscataway', open_to_remote = false,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '20736000 seconds'
+where id = '11111111-1111-4111-8111-000000000048';
+update public.profile_settings set
+  goals = '[{"type":"business","role":"offering","subjects":["Halal food"]},{"type":"job","role":"offering","subjects":[]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000048';
+update public.profiles set
+  display_name = 'Medina Books & Gifts', headline = 'Islamic bookstore and gift shop',
+  skills = '{}'::text[], interests = '{}'::text[],
+  offering_summary = 'Books, Qurans, prayer rugs and Eid gifts.', seeking_summary = 'Someone to build our online store.',
+  area_id = 'somerset', open_to_remote = false,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '15552000 seconds'
+where id = '11111111-1111-4111-8111-000000000049';
+update public.profile_settings set
+  goals = '[{"type":"business","role":"offering","subjects":[]},{"type":"service","role":"seeking","subjects":["Web development"]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000049';
+update public.profiles set
+  display_name = 'Noor Dental Studio', headline = 'Family and cosmetic dentistry',
+  skills = '{}'::text[], interests = '{}'::text[],
+  offering_summary = 'Cleanings, fillings, braces consults and emergency visits.', seeking_summary = 'A front desk coordinator.',
+  area_id = 'princeton', open_to_remote = false,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '13824000 seconds'
+where id = '11111111-1111-4111-8111-000000000050';
+update public.profile_settings set
+  goals = '[{"type":"business","role":"offering","subjects":["Dentistry"]},{"type":"job","role":"offering","subjects":[]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000050';
+update public.profiles set
+  display_name = 'Olive Tree Sweets', headline = 'Kunafa, baklava and custom cakes',
+  skills = array['Baking']::text[], interests = '{}'::text[],
+  offering_summary = 'Middle Eastern desserts and custom cakes for any occasion.', seeking_summary = 'A photographer for our menu.',
+  area_id = 'woodbridge', open_to_remote = false,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '12096000 seconds'
+where id = '11111111-1111-4111-8111-000000000051';
+update public.profile_settings set
+  goals = '[{"type":"business","role":"offering","subjects":["Baking"]},{"type":"service","role":"seeking","subjects":["Photography"]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000051';
+update public.profiles set
+  display_name = 'Iqra Weekend School', headline = 'Weekend Quran, Arabic and Islamic studies school',
+  skills = array['Quran', 'Arabic', 'Islamic studies']::text[], interests = '{}'::text[],
+  offering_summary = 'Weekend classes for kids ages 5 to 15.', seeking_summary = 'Teacher aides and a part-time Arabic teacher.',
+  area_id = 'south-brunswick', open_to_remote = false,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '25920000 seconds'
+where id = '11111111-1111-4111-8111-000000000052';
+update public.profile_settings set
+  goals = '[{"type":"business","role":"offering","subjects":["Quran","Arabic"]},{"type":"volunteer","role":"offering","subjects":[]},{"type":"job","role":"offering","subjects":["Arabic"]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000052';
+update public.profiles set
+  display_name = 'Shifa Family Clinic', headline = 'Primary care for all ages',
+  skills = '{}'::text[], interests = '{}'::text[],
+  offering_summary = 'Primary care, and clinical shadowing for pre-med students.', seeking_summary = 'A full-time medical assistant.',
+  area_id = 'hamilton', open_to_remote = false,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '18144000 seconds'
+where id = '11111111-1111-4111-8111-000000000053';
+update public.profile_settings set
+  goals = '[{"type":"business","role":"offering","subjects":["Healthcare"]},{"type":"internship","role":"offering","subjects":["Pre-med"]},{"type":"job","role":"offering","subjects":["Healthcare"]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000053';
+update public.profiles set
+  display_name = 'Tayyib Halal Food Truck', headline = 'Halal street food around Trenton',
+  skills = array['Halal food', 'Cooking']::text[], interests = '{}'::text[],
+  offering_summary = 'Platters, wraps and event bookings.', seeking_summary = 'Crew for summer festivals.',
+  area_id = 'trenton', open_to_remote = false,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '7776000 seconds'
+where id = '11111111-1111-4111-8111-000000000054';
+update public.profile_settings set
+  goals = '[{"type":"business","role":"offering","subjects":["Halal food"]},{"type":"job","role":"offering","subjects":[]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000054';
+update public.profiles set
+  display_name = 'Iman Modest Boutique', headline = 'Abayas, hijabs and Eid outfits',
+  skills = '{}'::text[], interests = '{}'::text[],
+  offering_summary = 'Modest fashion for women and girls.', seeking_summary = 'Seasonal sales associates.',
+  area_id = 'edison', open_to_remote = false,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '14688000 seconds'
+where id = '11111111-1111-4111-8111-000000000055';
+update public.profile_settings set
+  goals = '[{"type":"business","role":"offering","subjects":[]},{"type":"job","role":"offering","subjects":[]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000055';
+update public.profiles set
+  display_name = 'Sunnah Cuts Barbershop', headline = 'Barbershop for men and boys',
+  skills = '{}'::text[], interests = '{}'::text[],
+  offering_summary = 'Haircuts, beard trims and kids cuts.', seeking_summary = 'An apprentice barber.',
+  area_id = 'metuchen', open_to_remote = false,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '11232000 seconds'
+where id = '11111111-1111-4111-8111-000000000056';
+update public.profile_settings set
+  goals = '[{"type":"business","role":"offering","subjects":[]},{"type":"job","role":"offering","subjects":[]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000056';
+update public.profiles set
+  display_name = 'Hikmah Law Group', headline = 'Immigration, wills and estate planning',
+  skills = array['Law', 'Immigration', 'Estate planning']::text[], interests = '{}'::text[],
+  offering_summary = 'Legal consultations and a paid law clerk internship.', seeking_summary = '',
+  area_id = 'princeton', open_to_remote = true,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '16416000 seconds'
+where id = '11111111-1111-4111-8111-000000000057';
+update public.profile_settings set
+  goals = '[{"type":"business","role":"offering","subjects":["Law"]},{"type":"internship","role":"offering","subjects":["Law"]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000057';
+update public.profiles set
+  display_name = 'Brookside Masjid', headline = 'Masjid and community center in Monroe',
+  skills = '{}'::text[], interests = array['Youth programs', 'Event planning', 'Community service']::text[],
+  offering_summary = 'Family nights, youth halaqas and volunteer roles.', seeking_summary = 'Volunteers, a part-time administrator and an electrician.',
+  area_id = 'monroe', open_to_remote = false,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '22464000 seconds'
+where id = '11111111-1111-4111-8111-000000000058';
+update public.profile_settings set
+  goals = '[{"type":"volunteer","role":"offering","subjects":["Youth programs","Event planning"]},{"type":"job","role":"offering","subjects":[]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000058';
+update public.profiles set
+  display_name = 'Millstone Community Masjid', headline = 'Masjid serving Bridgewater and nearby towns',
+  skills = '{}'::text[], interests = array['Event planning', 'Community service']::text[],
+  offering_summary = 'Sisters halaqas, Ramadan iftars and an Eid festival.', seeking_summary = 'Iftar and Eid volunteers, and a photographer.',
+  area_id = 'bridgewater', open_to_remote = false,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '24192000 seconds'
+where id = '11111111-1111-4111-8111-000000000059';
+update public.profile_settings set
+  goals = '[{"type":"volunteer","role":"offering","subjects":["Event planning"]},{"type":"service","role":"seeking","subjects":["Photography"]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000059';
+update public.profiles set
+  display_name = 'Amanah Movers', headline = 'Local moving and junk removal',
+  skills = '{}'::text[], interests = '{}'::text[],
+  offering_summary = 'Apartment and house moves across Central Jersey.', seeking_summary = 'Weekend movers.',
+  area_id = 'edison', open_to_remote = false,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '9936000 seconds'
+where id = '11111111-1111-4111-8111-000000000060';
+update public.profile_settings set
+  goals = '[{"type":"business","role":"offering","subjects":["Moving"]},{"type":"job","role":"offering","subjects":[]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000060';
+update public.profiles set
+  display_name = 'Rihla Travel', headline = 'Hajj, Umrah and family travel',
+  skills = '{}'::text[], interests = '{}'::text[],
+  offering_summary = 'Group Umrah trips, Hajj packages and info nights.', seeking_summary = '',
+  area_id = 'piscataway', open_to_remote = true,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '19872000 seconds'
+where id = '11111111-1111-4111-8111-000000000061';
+update public.profile_settings set
+  goals = '[{"type":"business","role":"offering","subjects":["Travel"]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000061';
+update public.profiles set
+  display_name = 'Spice Route Kitchen', headline = 'Pakistani and Indian restaurant in Iselin',
+  skills = array['Halal food', 'Catering']::text[], interests = '{}'::text[],
+  offering_summary = 'Dine-in, catering, and free Friday meals for families in need.', seeking_summary = 'Part-time servers.',
+  area_id = 'woodbridge', open_to_remote = false,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '21600000 seconds'
+where id = '11111111-1111-4111-8111-000000000062';
+update public.profile_settings set
+  goals = '[{"type":"business","role":"offering","subjects":["Halal food"]},{"type":"job","role":"offering","subjects":[]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000062';
+update public.profiles set
+  display_name = 'Sidra Coworking', headline = 'Coworking space for founders and freelancers',
+  skills = '{}'::text[], interests = array['Small business', 'Startups']::text[],
+  offering_summary = 'Desks, meeting rooms and a monthly founders breakfast.', seeking_summary = '',
+  area_id = 'new-brunswick', open_to_remote = false,
+  community_affiliation = null, linkedin_url = null,
+  directory_visible = true, is_sample = true,
+  created_at = now() - interval '8208000 seconds'
+where id = '11111111-1111-4111-8111-000000000063';
+update public.profile_settings set
+  goals = '[{"type":"business","role":"offering","subjects":["Small business"]}]'::jsonb,
+  personalization_enabled = true, onboarding_complete = true
+where id = '11111111-1111-4111-8111-000000000063';
 
 -- Listings.
 insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
@@ -479,8 +1754,700 @@ insert into public.listings (id, owner_id, title, description, listing_type, dir
 values ('22222222-2222-4222-8222-000000000034', '11111111-1111-4111-8111-000000000012', 'IT support and automation for small businesses', 'Computer setup, networking, backups and simple automation for offices and shops.', 'business', 'offer',
   'technology', array['it support', 'networking', 'automation']::text[], 'edison', true, null,
   null, 'active', true, now() - interval '2440800 seconds', now() - interval '2440800 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000035', '11111111-1111-4111-8111-000000000013', 'Licensed plumbing repairs and water heater installs', 'Leaks, clogs, running toilets, garbage disposals and water heater replacements. Licensed and insured, with 15 years of residential experience. Same-week appointments for most jobs.', 'service', 'offer',
+  'home', array['plumbing', 'plumber', 'water heater', 'leaks', 'home repair']::text[], 'old-bridge', false, 'paid',
+  'Free estimates', 'active', true, now() - interval '172800 seconds', now() - interval '172800 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000036', '11111111-1111-4111-8111-000000000013', 'Plumbing apprentice wanted', 'Learn the trade on real residential jobs and work toward your license. No experience needed, just reliability, a driver''s license and a willingness to learn.', 'job', 'offer',
+  'home', array['plumbing', 'apprentice', 'trades', 'full-time']::text[], 'old-bridge', false, 'paid',
+  '$18–22/hr', 'active', true, now() - interval '781200 seconds', now() - interval '781200 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000037', '11111111-1111-4111-8111-000000000014', 'HVAC tune-ups, AC service and furnace installs', 'Heating and cooling service for homes and small offices: seasonal tune-ups, AC repair, furnace and heat pump installs, and duct cleaning. Evening appointments available.', 'service', 'offer',
+  'home', array['hvac', 'air conditioning', 'furnace', 'heating', 'heat pump']::text[], 'woodbridge', false, 'paid',
+  'Tune-ups from $89', 'active', true, now() - interval '93600 seconds', now() - interval '93600 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000038', '11111111-1111-4111-8111-000000000014', 'HVAC helper (full-time, will train)', 'Ride along on service calls and installs, carry equipment and learn HVAC from the ground up. We will help you get your EPA certification.', 'job', 'offer',
+  'home', array['hvac', 'trades', 'full-time', 'training']::text[], 'woodbridge', false, 'paid',
+  '$20/hr to start', 'active', true, now() - interval '529200 seconds', now() - interval '529200 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000039', '11111111-1111-4111-8111-000000000014', 'Free furnace safety checks for seniors', 'Every November I check furnaces and carbon monoxide detectors for seniors in the community at no charge. Message me to book a 30-minute visit.', 'service', 'offer',
+  'home', array['hvac', 'furnace', 'seniors', 'safety']::text[], 'woodbridge', false, 'free',
+  null, 'active', true, now() - interval '1051200 seconds', now() - interval '1051200 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000040', '11111111-1111-4111-8111-000000000015', 'Handyman: drywall, doors, shelves and small fixes', 'Drywall patches, sticking doors, shelves, TV mounting, furniture assembly and the rest of your to-do list. Tools and materials included.', 'service', 'offer',
+  'home', array['handyman', 'home repair', 'drywall', 'tv mounting']::text[], 'north-brunswick', false, 'paid',
+  '$60/hr, one hour minimum', 'active', true, now() - interval '363600 seconds', now() - interval '363600 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000041', '11111111-1111-4111-8111-000000000015', 'Kitchen and bathroom renovations', 'Full kitchen and bathroom remodels: tile, vanities, cabinets, lighting and plumbing fixtures. Permits handled. Photos of past work on request.', 'service', 'offer',
+  'home', array['renovation', 'kitchen', 'bathroom', 'tile']::text[], 'north-brunswick', false, 'negotiable',
+  'Free quote', 'active', true, now() - interval '1749600 seconds', now() - interval '1749600 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000042', '11111111-1111-4111-8111-000000000033', 'Custom bookshelves, cabinets and built-ins', 'Handmade bookshelves, cabinets, closet systems and wooden Quran stands, built to fit your space. I also restore old furniture.', 'service', 'offer',
+  'home', array['carpentry', 'woodworking', 'cabinets', 'furniture']::text[], 'lawrenceville', false, 'paid',
+  'Project-based', 'active', true, now() - interval '950400 seconds', now() - interval '950400 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000043', '11111111-1111-4111-8111-000000000033', 'Woodworking mentorship for teens', 'Saturday mornings in my shop for teens who like building things. We cover tool safety, measuring and finish a small project together each month.', 'mentorship', 'offer',
+  'home', array['woodworking', 'carpentry', 'teens', 'trades']::text[], 'lawrenceville', false, 'free',
+  null, 'active', true, now() - interval '1299600 seconds', now() - interval '1299600 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000044', '11111111-1111-4111-8111-000000000035', 'Interior painting and move-out cleaning', 'Room and whole-house interior painting, plus deep cleaning for move-outs and move-ins. Sisters-only crew available on request.', 'service', 'offer',
+  'home', array['painting', 'cleaning', 'house cleaning', 'move-out']::text[], 'hamilton', false, 'paid',
+  null, 'active', true, now() - interval '612000 seconds', now() - interval '612000 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000045', '11111111-1111-4111-8111-000000000041', 'Lawn care, landscaping and snow removal', 'Weekly mowing, spring and fall cleanups, mulching, hedge trimming and winter snow plowing for driveways and small lots.', 'service', 'offer',
+  'home', array['landscaping', 'lawn care', 'snow removal']::text[], 'somerset', false, 'paid',
+  'Seasonal plans', 'active', true, now() - interval '270000 seconds', now() - interval '270000 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000046', '11111111-1111-4111-8111-000000000041', 'Seasonal landscaping crew (spring to fall)', 'Join a small, friendly crew mowing, planting and doing cleanups. Early mornings, Monday through Friday. Students welcome for summer.', 'job', 'offer',
+  'home', array['landscaping', 'seasonal', 'outdoors']::text[], 'somerset', false, 'paid',
+  '$19/hr', 'active', true, now() - interval '1137600 seconds', now() - interval '1137600 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000047', '11111111-1111-4111-8111-000000000025', 'Honest auto repair: brakes, oil changes and diagnostics', 'Brakes, oil changes, check-engine diagnostics, batteries and pre-purchase inspections. I explain every repair before I start and never upsell.', 'service', 'offer',
+  'other', array['auto repair', 'mechanic', 'car repair', 'oil change']::text[], 'sayreville', false, 'paid',
+  null, 'active', true, now() - interval '882000 seconds', now() - interval '882000 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000048', '11111111-1111-4111-8111-000000000024', 'Need a plumber for a leaking basement pipe', 'A pipe in our unfinished basement is dripping near the water heater. Looking for a licensed plumber who can come this week.', 'service', 'request',
+  'home', array['plumbing', 'plumber', 'leaks']::text[], 'monroe', false, 'paid',
+  'Quote requested', 'active', true, now() - interval '21600 seconds', now() - interval '21600 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000049', '11111111-1111-4111-8111-000000000037', 'Looking for an HVAC tech to replace an old AC unit', 'Our central air is 20 years old and struggling. I would like two or three quotes for a replacement before next summer.', 'service', 'request',
+  'home', array['hvac', 'air conditioning']::text[], 'west-windsor', false, 'paid',
+  'Quote requested', 'active', true, now() - interval '86400 seconds', now() - interval '86400 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000050', '11111111-1111-4111-8111-000000000028', 'Babysitter for two kids, Tuesday and Thursday evenings', 'Looking for a kind, reliable babysitter for our two children (ages 4 and 7) from 5 to 8 pm on Tuesdays and Thursdays. References please.', 'job', 'offer',
+  'home', array['babysitting', 'childcare', 'part-time']::text[], 'princeton', false, 'paid',
+  '$20/hr', 'active', true, now() - interval '262800 seconds', now() - interval '262800 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000051', '11111111-1111-4111-8111-000000000038', 'Home daycare openings for toddlers', 'Two openings for children 18 months to 4 years in a licensed home daycare. Halal meals, Arabic and English songs, and plenty of outdoor play.', 'service', 'offer',
+  'home', array['childcare', 'daycare', 'toddlers']::text[], 'south-brunswick', false, 'paid',
+  'Weekly rate', 'active', true, now() - interval '698400 seconds', now() - interval '698400 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000052', '11111111-1111-4111-8111-000000000044', 'Handyman to mount TVs and assemble furniture', 'Need help mounting two TVs, hanging shelves and assembling a bed frame. Should take half a day.', 'service', 'request',
+  'home', array['handyman', 'tv mounting', 'furniture']::text[], 'east-brunswick', false, 'paid',
+  null, 'active', true, now() - interval '183600 seconds', now() - interval '183600 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000053', '11111111-1111-4111-8111-000000000058', 'Electrician needed for masjid parking lot lighting', 'We would like to add four LED pole lights to our parking lot so families feel safe after Isha. Looking for a licensed electrician to quote the job.', 'service', 'request',
+  'home', array['electrical', 'electrician', 'masjid', 'lighting']::text[], 'monroe', false, 'paid',
+  'Quote requested', 'active', true, now() - interval '446400 seconds', now() - interval '446400 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000054', '11111111-1111-4111-8111-000000000016', 'Breaking into private equity: mentorship for students', 'I work at a middle-market private equity fund. I mentor college students and young analysts on recruiting, networking, technical interviews and what the job is really like.', 'mentorship', 'offer',
+  'business', array['private equity', 'finance', 'investment banking', 'careers', 'interviews']::text[], 'princeton', true, 'free',
+  null, 'active', true, now() - interval '190800 seconds', now() - interval '190800 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000055', '11111111-1111-4111-8111-000000000016', 'Private equity 101: free evening workshop', 'A two-hour introduction to how private equity works: fund structure, how deals are sourced, leveraged buyouts and how firms create value. Open to anyone curious.', 'service', 'offer',
+  'business', array['private equity', 'investing', 'workshop', 'finance']::text[], 'princeton', true, 'free',
+  null, 'active', true, now() - interval '540000 seconds', now() - interval '540000 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000056', '11111111-1111-4111-8111-000000000016', 'Study group: LBO and financial modeling', 'Weekly online study group working through LBO and three-statement models together. Bring Excel and questions.', 'collaboration', 'request',
+  'business', array['financial modeling', 'private equity', 'excel', 'study group']::text[], null, true, 'free',
+  null, 'active', true, now() - interval '777600 seconds', now() - interval '777600 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000057', '11111111-1111-4111-8111-000000000017', 'Startup pitch deck reviews and fundraising advice', 'I have invested in more than 20 early-stage companies. Send me your deck and we will spend 45 minutes on your story, metrics and how to approach investors.', 'mentorship', 'offer',
+  'business', array['startup', 'fundraising', 'venture capital', 'pitch deck']::text[], 'princeton', true, 'free',
+  null, 'active', true, now() - interval '349200 seconds', now() - interval '349200 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000058', '11111111-1111-4111-8111-000000000017', 'Venture capital analyst internship (spring)', 'Part-time spring internship researching markets, screening startups and writing investment memos. Good fit for business, economics or engineering students.', 'internship', 'offer',
+  'business', array['venture capital', 'finance', 'startup', 'research']::text[], 'princeton', true, 'stipend',
+  'Monthly stipend', 'active', true, now() - interval '1216800 seconds', now() - interval '1216800 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000059', '11111111-1111-4111-8111-000000000037', 'Islamic finance and halal investing basics', 'One-on-one sessions on halal investing: screening stocks, sukuk, avoiding riba in mortgages and retirement accounts, and calculating zakat on investments.', 'mentorship', 'offer',
+  'business', array['islamic finance', 'halal investing', 'zakat', 'investing']::text[], 'west-windsor', true, 'free',
+  null, 'active', true, now() - interval '442800 seconds', now() - interval '442800 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000060', '11111111-1111-4111-8111-000000000037', 'Personal finance coaching for young families', 'Budgeting, emergency funds, paying down debt and saving for college. Thirty years in banking, now retired and happy to help families get organized.', 'service', 'offer',
+  'business', array['budgeting', 'personal finance', 'families']::text[], 'west-windsor', true, 'free',
+  null, 'active', true, now() - interval '1569600 seconds', now() - interval '1569600 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000061', '11111111-1111-4111-8111-000000000043', 'Real estate investing mentorship', 'Learn how to evaluate rental properties, finance a first purchase, screen tenants and manage repairs. I own and manage 14 units in Somerset County.', 'mentorship', 'offer',
+  'business', array['real estate', 'investing', 'rental property']::text[], 'bridgewater', true, 'free',
+  null, 'active', true, now() - interval '622800 seconds', now() - interval '622800 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000062', '11111111-1111-4111-8111-000000000043', 'Seeking partners for a small multifamily purchase', 'Looking for two or three partners to buy a fourplex together, structured without interest-bearing debt. Serious inquiries only.', 'collaboration', 'request',
+  'business', array['real estate', 'investing', 'partnership']::text[], 'bridgewater', false, 'negotiable',
+  null, 'active', true, now() - interval '1404000 seconds', now() - interval '1404000 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000063', '11111111-1111-4111-8111-000000000024', 'Free first-time homebuyer workshop', 'Monthly workshop covering budgets, credit, halal financing options, inspections and closing costs. Light refreshments provided.', 'service', 'offer',
+  'business', array['real estate', 'homebuyer', 'workshop', 'personal finance']::text[], 'monroe', true, 'free',
+  null, 'active', true, now() - interval '864000 seconds', now() - interval '864000 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000064', '11111111-1111-4111-8111-000000000034', 'Operations co-founder for a halal meal-kit startup', 'We have a working prototype and 200 waitlist sign-ups for weekly halal meal kits. Looking for a co-founder to own sourcing, logistics and delivery.', 'collaboration', 'request',
+  'business', array['startup', 'halal', 'operations', 'co-founder']::text[], 'plainsboro', true, 'negotiable',
+  'Equity', 'active', true, now() - interval '262800 seconds', now() - interval '262800 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000065', '11111111-1111-4111-8111-000000000034', 'Looking for a mentor who has raised a seed round', 'First-time founder preparing to raise a pre-seed round. I would love monthly advice from someone who has been through it.', 'mentorship', 'request',
+  'business', array['startup', 'fundraising', 'venture capital']::text[], null, true, null,
+  null, 'active', true, now() - interval '698400 seconds', now() - interval '698400 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000066', '11111111-1111-4111-8111-000000000018', 'Product management mentorship', 'For engineers, designers and analysts curious about product management: how to make the switch, what PM interviews look like, and how to build a portfolio.', 'mentorship', 'offer',
+  'careers', array['product management', 'career', 'tech']::text[], 'plainsboro', true, 'free',
+  null, 'active', true, now() - interval '961200 seconds', now() - interval '961200 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000067', '11111111-1111-4111-8111-000000000042', 'Marketing student looking for part-time work', 'Junior studying marketing, available 15 hours a week. Experience running Instagram and TikTok for a campus club and working retail.', 'job', 'request',
+  'business', array['marketing', 'social media', 'part-time']::text[], 'new-brunswick', true, null,
+  null, 'active', true, now() - interval '187200 seconds', now() - interval '187200 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000068', '11111111-1111-4111-8111-000000000042', 'Seeking a spring marketing internship', 'Looking for a spring internship in marketing, brand or social media at a small business or nonprofit.', 'internship', 'request',
+  'business', array['marketing', 'social media', 'spring']::text[], 'new-brunswick', false, null,
+  null, 'active', true, now() - interval '450000 seconds', now() - interval '450000 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000069', '11111111-1111-4111-8111-000000000039', 'Nonprofit bookkeeping mentorship for masjid boards', 'New treasurers and board members: I can walk you through fund accounting, donation receipts, budgets and preparing for an annual audit.', 'mentorship', 'offer',
+  'business', array['bookkeeping', 'nonprofit', 'masjid', 'accounting']::text[], 'edison', true, 'free',
+  null, 'active', true, now() - interval '1922400 seconds', now() - interval '1922400 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000070', '11111111-1111-4111-8111-000000000057', 'Hikmah Law Group: immigration, wills and estate planning', 'Family immigration, citizenship, Islamic wills and estate plans, and small-business formation. Consultations in English, Arabic and Urdu.', 'business', 'offer',
+  'other', array['law', 'immigration', 'wills', 'estate planning']::text[], 'princeton', true, 'paid',
+  'Free 20-minute consult', 'active', true, now() - interval '2592000 seconds', now() - interval '2592000 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000071', '11111111-1111-4111-8111-000000000057', 'Law clerk internship', 'Paid internship for pre-law or law students: legal research, drafting and client intake for our immigration practice. Spanish, Arabic or Urdu a plus.', 'internship', 'offer',
+  'careers', array['law', 'immigration', 'pre-law', 'research']::text[], 'princeton', false, 'paid',
+  '$20/hr', 'active', true, now() - interval '1040400 seconds', now() - interval '1040400 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000072', '11111111-1111-4111-8111-000000000063', 'Sidra Coworking: desks and meeting rooms', 'Quiet desks, private phone booths, meeting rooms and a prayer room, two blocks from the train station. Day passes and monthly memberships.', 'business', 'offer',
+  'business', array['coworking', 'office space', 'small business']::text[], 'new-brunswick', false, 'paid',
+  'Day passes $20', 'active', true, now() - interval '2167200 seconds', now() - interval '2167200 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000073', '11111111-1111-4111-8111-000000000063', 'Monthly founders breakfast', 'First Saturday of every month: coffee, a short talk from a local founder and open networking. Free for anyone building a business.', 'service', 'offer',
+  'business', array['entrepreneurship', 'networking', 'event', 'startup']::text[], 'new-brunswick', false, 'free',
+  null, 'active', true, now() - interval '356400 seconds', now() - interval '356400 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000074', '11111111-1111-4111-8111-000000000032', 'Seeking a mentor in immigration law', 'Second-year law student hoping to practice immigration law. I would love guidance on clinics, summer positions and building experience.', 'mentorship', 'request',
+  'careers', array['law', 'immigration', 'career']::text[], 'piscataway', true, null,
+  null, 'active', true, now() - interval '532800 seconds', now() - interval '532800 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000075', '11111111-1111-4111-8111-000000000019', 'Data science mentorship: Python, SQL and your first project', 'For students and career changers: we pick a real dataset, build a project you can show employers and practice data science interview questions.', 'mentorship', 'offer',
+  'technology', array['data science', 'python', 'sql', 'machine learning']::text[], 'edison', true, 'free',
+  null, 'active', true, now() - interval '277200 seconds', now() - interval '277200 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000076', '11111111-1111-4111-8111-000000000019', 'Free intro to machine learning workshop for teens', 'A hands-on Saturday workshop where teens train their first image classifier. Laptops provided. No experience required.', 'service', 'offer',
+  'technology', array['machine learning', 'ai', 'python', 'teens', 'workshop']::text[], 'edison', false, 'free',
+  null, 'active', true, now() - interval '799200 seconds', now() - interval '799200 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000077', '11111111-1111-4111-8111-000000000023', 'Cybersecurity career mentorship', 'How to get into security: certifications worth getting, home labs, capture-the-flag practice and landing a first SOC analyst role.', 'mentorship', 'offer',
+  'technology', array['cybersecurity', 'career', 'it']::text[], 'piscataway', true, 'free',
+  null, 'active', true, now() - interval '432000 seconds', now() - interval '432000 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000078', '11111111-1111-4111-8111-000000000023', 'Volunteering free cybersecurity check-ups for nonprofits', 'I would like to volunteer a few hours a month reviewing Wi-Fi, passwords, backups and donation systems for masjids and small nonprofits.', 'volunteer', 'request',
+  'technology', array['cybersecurity', 'nonprofit', 'masjid']::text[], null, true, null,
+  null, 'active', true, now() - interval '1126800 seconds', now() - interval '1126800 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000079', '11111111-1111-4111-8111-000000000036', 'UX design and clickable app prototypes', 'User research, wireframes and polished Figma prototypes for apps and websites. Ideal for founders preparing to pitch or hand off to developers.', 'service', 'offer',
+  'creative', array['ux design', 'figma', 'prototypes', 'mobile apps']::text[], 'highland-park', true, 'paid',
+  'Project-based', 'active', true, now() - interval '525600 seconds', now() - interval '525600 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000080', '11111111-1111-4111-8111-000000000036', 'Portfolio reviews for aspiring UX designers', 'Thirty-minute video calls reviewing your UX portfolio and case studies, with honest, practical feedback.', 'mentorship', 'offer',
+  'creative', array['ux design', 'portfolio', 'career']::text[], null, true, 'free',
+  null, 'active', true, now() - interval '1479600 seconds', now() - interval '1479600 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000081', '11111111-1111-4111-8111-000000000045', 'Teammates for a community app at the spring hackathon', 'Building an app to help masjids share volunteer shifts. Looking for a designer and a backend developer for the 36-hour event.', 'collaboration', 'request',
+  'technology', array['hackathon', 'mobile apps', 'masjid', 'design']::text[], 'new-brunswick', false, null,
+  null, 'active', true, now() - interval '100800 seconds', now() - interval '100800 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000082', '11111111-1111-4111-8111-000000000045', 'Volunteers and judges for a student hackathon', 'Our MSA is hosting a 200-student hackathon. We need volunteer mentors, judges and people to help with check-in and meals.', 'volunteer', 'offer',
+  'community', array['hackathon', 'students', 'technology', 'event']::text[], 'new-brunswick', false, 'volunteer',
+  null, 'active', true, now() - interval '622800 seconds', now() - interval '622800 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000083', '11111111-1111-4111-8111-000000000018', 'Part-time QA tester for a fintech app', 'Test new releases of our budgeting app on iPhone and Android, write clear bug reports and help improve our test checklist. About 15 hours a week.', 'job', 'offer',
+  'technology', array['qa', 'software testing', 'mobile apps', 'part-time']::text[], null, true, 'paid',
+  '$25/hr', 'active', true, now() - interval '885600 seconds', now() - interval '885600 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000084', '11111111-1111-4111-8111-000000000049', 'Need someone to build our online store', 'We would like to sell books and gifts online with local pickup and shipping. Looking for a developer who has built Shopify or WooCommerce stores.', 'service', 'request',
+  'technology', array['website', 'ecommerce', 'web development', 'small business']::text[], 'somerset', true, 'paid',
+  'Budget around $1,500', 'active', true, now() - interval '345600 seconds', now() - interval '345600 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000085', '11111111-1111-4111-8111-000000000046', 'Part-time social media manager for a coffee house', 'Plan and post three times a week, photograph new drinks and reply to messages. Ideal for a student who loves coffee and Instagram.', 'job', 'offer',
+  'creative', array['social media', 'instagram', 'marketing', 'part-time']::text[], 'new-brunswick', false, 'paid',
+  '$18/hr', 'active', true, now() - interval '262800 seconds', now() - interval '262800 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000086', '11111111-1111-4111-8111-000000000019', 'Co-author for an Arabic language AI research project', 'Studying how well language models handle dialectal Arabic. Looking for someone with Arabic fluency and some Python to co-author a short paper.', 'collaboration', 'request',
+  'technology', array['machine learning', 'arabic', 'research', 'python']::text[], null, true, null,
+  null, 'active', true, now() - interval '1648800 seconds', now() - interval '1648800 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000087', '11111111-1111-4111-8111-000000000020', 'Arabic lessons for adults (beginner to intermediate)', 'Small-group and one-on-one Arabic lessons focused on reading, grammar and understanding the Quran. Evening classes online or in Somerset.', 'service', 'offer',
+  'education', array['arabic', 'adults', 'quran']::text[], 'somerset', true, 'paid',
+  '$25/session', 'active', true, now() - interval '356400 seconds', now() - interval '356400 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000088', '11111111-1111-4111-8111-000000000020', 'Weekend Islamic studies class for teens', 'Seerah, fiqh of daily life and open discussion for teens ages 13 to 17, Sundays after Dhuhr.', 'service', 'offer',
+  'education', array['islamic studies', 'teens', 'seerah']::text[], 'somerset', false, 'free',
+  null, 'active', true, now() - interval '1224000 seconds', now() - interval '1224000 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000089', '11111111-1111-4111-8111-000000000027', 'SAT and ACT prep tutoring', 'Structured test prep with practice exams, reading strategies and math review. Students average a 150-point SAT improvement.', 'service', 'offer',
+  'education', array['sat prep', 'act prep', 'test prep', 'tutoring']::text[], 'new-brunswick', true, 'paid',
+  '$40/hr', 'active', true, now() - interval '190800 seconds', now() - interval '190800 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000090', '11111111-1111-4111-8111-000000000027', 'Chemistry tutoring (high school and AP)', 'Chemistry tutoring from a chemistry PhD student: stoichiometry, equilibrium, lab reports and AP exam prep.', 'service', 'offer',
+  'education', array['chemistry', 'tutoring', 'ap']::text[], 'new-brunswick', true, 'paid',
+  '$35/hr', 'active', true, now() - interval '712800 seconds', now() - interval '712800 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000091', '11111111-1111-4111-8111-000000000040', 'Biology and AP Bio tutoring', 'Ten years teaching high school biology. I help students with AP Biology, honors biology and study habits.', 'service', 'offer',
+  'education', array['biology', 'tutoring', 'ap']::text[], 'metuchen', true, 'paid',
+  '$35/hr', 'active', true, now() - interval '432000 seconds', now() - interval '432000 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000092', '11111111-1111-4111-8111-000000000040', 'Volunteers for a free homework help club', 'Tuesday and Thursday afternoons at the library, helping middle schoolers with homework. High school and college volunteers welcome.', 'volunteer', 'offer',
+  'community', array['homework help', 'kids', 'volunteer', 'education']::text[], 'metuchen', false, 'volunteer',
+  null, 'active', true, now() - interval '954000 seconds', now() - interval '954000 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000093', '11111111-1111-4111-8111-000000000024', 'SAT tutor needed for my daughter', 'My daughter is a junior aiming for the March SAT. Looking for weekly sessions, online or in Monroe.', 'service', 'request',
+  'education', array['sat prep', 'tutoring']::text[], 'monroe', true, 'paid',
+  null, 'active', true, now() - interval '93600 seconds', now() - interval '93600 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000094', '11111111-1111-4111-8111-000000000052', 'Iqra Weekend School: Quran, Arabic and Islamic studies', 'Saturday and Sunday classes for kids ages 5 to 15: Quran reading, hifz track, Arabic and Islamic studies. Registration open for the spring semester.', 'business', 'offer',
+  'education', array['quran', 'arabic', 'islamic studies', 'kids', 'weekend school']::text[], 'south-brunswick', false, 'paid',
+  'Semester tuition', 'active', true, now() - interval '3466800 seconds', now() - interval '3466800 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000095', '11111111-1111-4111-8111-000000000052', 'Volunteer teacher aides for weekend school', 'Help our teachers in classrooms of 5 to 10 year olds on Sunday mornings. Great for high school students needing service hours.', 'volunteer', 'offer',
+  'community', array['kids', 'volunteer', 'weekend school', 'service hours']::text[], 'south-brunswick', false, 'volunteer',
+  null, 'active', true, now() - interval '532800 seconds', now() - interval '532800 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000096', '11111111-1111-4111-8111-000000000052', 'Part-time Arabic teacher', 'Teach two weekend Arabic classes for kids ages 8 to 12. Curriculum provided. Teaching experience preferred.', 'job', 'offer',
+  'education', array['arabic', 'teaching', 'part-time', 'kids']::text[], 'south-brunswick', false, 'paid',
+  null, 'active', true, now() - interval '795600 seconds', now() - interval '795600 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000097', '11111111-1111-4111-8111-000000000031', 'Reading and writing tutor for a fourth grader', 'Our son needs help with reading comprehension and writing. Looking for a patient tutor once or twice a week.', 'service', 'request',
+  'education', array['tutoring', 'reading', 'writing', 'kids']::text[], 'bridgewater', false, 'paid',
+  null, 'active', true, now() - interval '280800 seconds', now() - interval '280800 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000098', '11111111-1111-4111-8111-000000000026', 'English conversation partners for refugee families', 'Meet weekly with a newly arrived family to practice everyday English. Training provided. One evening a week for three months.', 'volunteer', 'offer',
+  'community', array['english', 'refugees', 'volunteer', 'tutoring']::text[], 'trenton', false, 'volunteer',
+  null, 'active', true, now() - interval '345600 seconds', now() - interval '345600 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000099', '11111111-1111-4111-8111-000000000021', 'Evening hifz program for kids', 'Quran memorization program for kids ages 7 to 14, Monday to Thursday after Maghrib, with qualified teachers and progress reports.', 'service', 'offer',
+  'education', array['quran', 'hifz', 'kids']::text[], 'new-brunswick', false, 'negotiable',
+  'Sliding scale', 'active', true, now() - interval '1818000 seconds', now() - interval '1818000 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000100', '11111111-1111-4111-8111-000000000001', 'Intro to Python for high schoolers', 'Free beginner Python sessions for high school students: variables, loops and a small game by the end. Online or at the New Brunswick library.', 'service', 'offer',
+  'education', array['python', 'coding', 'teens']::text[], 'new-brunswick', true, 'free',
+  null, 'active', true, now() - interval '525600 seconds', now() - interval '525600 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000101', '11111111-1111-4111-8111-000000000032', 'Urdu reading and speaking lessons for kids', 'Fun Urdu lessons for kids ages 6 to 12: reading, writing and conversation with stories and games.', 'service', 'offer',
+  'education', array['urdu', 'kids', 'language']::text[], 'piscataway', true, 'paid',
+  '$20/hr', 'active', true, now() - interval '1306800 seconds', now() - interval '1306800 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000102', '11111111-1111-4111-8111-000000000022', 'Mentorship for nursing and pre-med students', 'Pediatric nurse for 12 years. I mentor students on nursing school, pre-med requirements, clinical hours and choosing a specialty.', 'mentorship', 'offer',
+  'health', array['nursing', 'pre-med', 'healthcare', 'students']::text[], 'hamilton', true, 'free',
+  null, 'active', true, now() - interval '273600 seconds', now() - interval '273600 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000103', '11111111-1111-4111-8111-000000000022', 'Volunteer nurses for a free community health fair', 'We need nurses, doctors and health students for blood pressure checks, glucose screenings and flu shot sign-ups at our spring health fair.', 'volunteer', 'offer',
+  'health', array['healthcare', 'health fair', 'nursing', 'volunteer']::text[], 'hamilton', false, 'volunteer',
+  null, 'active', true, now() - interval '709200 seconds', now() - interval '709200 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000104', '11111111-1111-4111-8111-000000000028', 'Counseling for individuals, couples and families', 'Faith-sensitive therapy for anxiety, marriage, parenting and life transitions. In person in Princeton or by video.', 'service', 'offer',
+  'health', array['counseling', 'mental health', 'marriage', 'family']::text[], 'princeton', true, 'paid',
+  'Sliding scale available', 'active', true, now() - interval '885600 seconds', now() - interval '885600 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000105', '11111111-1111-4111-8111-000000000028', 'Free parents'' workshop on teen mental health', 'An evening workshop for parents on spotting stress and anxiety in teens and how to start difficult conversations.', 'service', 'offer',
+  'health', array['mental health', 'parenting', 'teens', 'workshop']::text[], 'princeton', false, 'free',
+  null, 'active', true, now() - interval '432000 seconds', now() - interval '432000 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000106', '11111111-1111-4111-8111-000000000030', 'Sisters-only fitness classes', 'Strength and cardio classes for women in a private studio, three evenings a week. All fitness levels welcome. Personal training also available.', 'service', 'offer',
+  'health', array['fitness', 'sisters', 'personal trainer', 'workout']::text[], 'east-brunswick', false, 'paid',
+  '$10/class', 'active', true, now() - interval '176400 seconds', now() - interval '176400 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000107', '11111111-1111-4111-8111-000000000044', 'Pharmacy internship for pre-pharmacy students', 'Spend a few afternoons a week learning how a community pharmacy runs: dispensing, insurance and patient counseling.', 'internship', 'offer',
+  'health', array['pharmacy', 'healthcare', 'students']::text[], 'east-brunswick', false, 'unpaid',
+  null, 'active', true, now() - interval '1044000 seconds', now() - interval '1044000 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000108', '11111111-1111-4111-8111-000000000053', 'Shifa Family Clinic: primary care for all ages', 'Primary care, physicals, vaccinations and women''s health, with female physicians available. Arabic, Urdu and Bengali spoken.', 'business', 'offer',
+  'health', array['healthcare', 'doctor', 'primary care', 'clinic']::text[], 'hamilton', false, 'paid',
+  'Most insurance accepted', 'active', true, now() - interval '3898800 seconds', now() - interval '3898800 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000109', '11111111-1111-4111-8111-000000000053', 'Medical assistant (full-time)', 'Room patients, take vitals, assist providers and help with scheduling. Certification preferred; we will train the right person.', 'job', 'offer',
+  'health', array['medical assistant', 'healthcare', 'full-time']::text[], 'hamilton', false, 'paid',
+  null, 'active', true, now() - interval '619200 seconds', now() - interval '619200 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000110', '11111111-1111-4111-8111-000000000053', 'Clinical shadowing for pre-med students', 'Shadow our physicians for a few half-days a month and see primary care up close. Open to high school seniors and college students.', 'internship', 'offer',
+  'health', array['pre-med', 'shadowing', 'healthcare', 'students']::text[], 'hamilton', false, 'unpaid',
+  null, 'active', true, now() - interval '363600 seconds', now() - interval '363600 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000111', '11111111-1111-4111-8111-000000000050', 'Noor Dental Studio: family and cosmetic dentistry', 'Cleanings, fillings, whitening, Invisalign and emergency visits for the whole family. Evening and Saturday appointments.', 'business', 'offer',
+  'health', array['dentist', 'dental', 'family']::text[], 'princeton', false, 'paid',
+  null, 'active', true, now() - interval '2872800 seconds', now() - interval '2872800 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000112', '11111111-1111-4111-8111-000000000050', 'Dental front desk coordinator', 'Greet patients, schedule appointments and handle insurance. Friendly, organized and comfortable on the phone.', 'job', 'offer',
+  'health', array['front desk', 'administrative', 'scheduling', 'full-time']::text[], 'princeton', false, 'paid',
+  '$21/hr', 'active', true, now() - interval '950400 seconds', now() - interval '950400 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000113', '11111111-1111-4111-8111-000000000046', 'Cardamom & Co. Coffee House', 'Specialty coffee, Yemeni chai, cardamom lattes and fresh pastries. Open until midnight with plenty of outlets for studying and a quiet back room.', 'business', 'offer',
+  'food', array['coffee', 'cafe', 'chai', 'study spot']::text[], 'new-brunswick', false, 'paid',
+  null, 'active', true, now() - interval '3286800 seconds', now() - interval '3286800 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000114', '11111111-1111-4111-8111-000000000046', 'Baristas wanted (evenings and weekends)', 'Make drinks, keep the shop welcoming and learn specialty coffee. Flexible schedules for students.', 'job', 'offer',
+  'food', array['barista', 'coffee', 'part-time', 'customer service']::text[], 'new-brunswick', false, 'paid',
+  '$16/hr plus tips', 'active', true, now() - interval '180000 seconds', now() - interval '180000 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000115', '11111111-1111-4111-8111-000000000046', 'Open mic and poetry night co-hosts', 'We host a monthly open mic for poetry, nasheeds and storytelling. Looking for co-hosts to help curate and emcee.', 'collaboration', 'request',
+  'creative', array['poetry', 'open mic', 'event', 'writing']::text[], 'new-brunswick', false, null,
+  null, 'active', true, now() - interval '788400 seconds', now() - interval '788400 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000116', '11111111-1111-4111-8111-000000000047', 'Zaytoon Mediterranean Grill', 'Halal shawarma, kebabs, falafel and fresh salads, with family platters and a kids menu. Dine-in, takeout and delivery.', 'business', 'offer',
+  'food', array['halal', 'restaurant', 'mediterranean', 'shawarma']::text[], 'edison', false, 'paid',
+  null, 'active', true, now() - interval '4334400 seconds', now() - interval '4334400 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000117', '11111111-1111-4111-8111-000000000047', 'Line cook (full-time)', 'Grill, prep and plate in a busy kitchen. Experience with Middle Eastern food is a plus. Paid breaks for prayer.', 'job', 'offer',
+  'food', array['cook', 'restaurant', 'full-time']::text[], 'edison', false, 'paid',
+  '$19–23/hr', 'active', true, now() - interval '450000 seconds', now() - interval '450000 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000118', '11111111-1111-4111-8111-000000000047', 'Catering for masjid iftars and community events', 'Halal catering trays for iftars, aqiqahs, graduations and conferences, from 20 to 500 guests. Setup and serving staff available.', 'service', 'offer',
+  'food', array['catering', 'halal', 'iftar', 'events']::text[], 'edison', false, 'paid',
+  'Per tray', 'active', true, now() - interval '1231200 seconds', now() - interval '1231200 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000119', '11111111-1111-4111-8111-000000000048', 'Barakah Halal Market', 'Zabiha meat cut to order, fresh produce, spices, dates and imported groceries. Order ahead for Eid and large events.', 'business', 'offer',
+  'food', array['halal', 'grocery', 'butcher', 'zabiha']::text[], 'piscataway', false, 'paid',
+  null, 'active', true, now() - interval '5184000 seconds', now() - interval '5184000 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000120', '11111111-1111-4111-8111-000000000048', 'Weekend cashier and stock associate', 'Ring up customers, stock shelves and help keep the store organized on Saturdays and Sundays.', 'job', 'offer',
+  'food', array['cashier', 'retail', 'part-time', 'grocery']::text[], 'piscataway', false, 'paid',
+  '$16/hr', 'active', true, now() - interval '349200 seconds', now() - interval '349200 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000121', '11111111-1111-4111-8111-000000000051', 'Olive Tree Sweets: kunafa, baklava and custom cakes', 'Fresh kunafa, baklava, maamoul and custom cakes for weddings, Eid and birthdays. Dessert tables for events.', 'business', 'offer',
+  'food', array['desserts', 'bakery', 'cakes', 'kunafa']::text[], 'woodbridge', false, 'paid',
+  null, 'active', true, now() - interval '2340000 seconds', now() - interval '2340000 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000122', '11111111-1111-4111-8111-000000000051', 'Photographer for our dessert menu', 'We need bright, appetizing photos of about 30 desserts for our new menu and Instagram.', 'service', 'request',
+  'creative', array['photography', 'food photography', 'instagram']::text[], 'woodbridge', false, 'paid',
+  'Small budget', 'active', true, now() - interval '270000 seconds', now() - interval '270000 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000123', '11111111-1111-4111-8111-000000000054', 'Tayyib Halal Food Truck', 'Chicken over rice, lamb gyros and loaded fries around Trenton on weekdays. Book us for weddings, school events and masjid fundraisers.', 'business', 'offer',
+  'food', array['halal', 'food truck', 'events']::text[], 'trenton', false, 'paid',
+  null, 'active', true, now() - interval '1915200 seconds', now() - interval '1915200 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000124', '11111111-1111-4111-8111-000000000054', 'Food truck crew for summer festivals', 'Take orders, prep and serve at weekend festivals from May to September. Fast-paced and fun.', 'job', 'offer',
+  'food', array['food truck', 'seasonal', 'customer service']::text[], 'trenton', false, 'paid',
+  '$17/hr', 'active', true, now() - interval '882000 seconds', now() - interval '882000 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000125', '11111111-1111-4111-8111-000000000062', 'Spice Route Kitchen: Pakistani and Indian cuisine', 'Biryani, nihari, karahi and fresh naan from the tandoor. Family dining, takeout and catering in Iselin.', 'business', 'offer',
+  'food', array['halal', 'restaurant', 'pakistani', 'catering']::text[], 'woodbridge', false, 'paid',
+  null, 'active', true, now() - interval '3823200 seconds', now() - interval '3823200 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000126', '11111111-1111-4111-8111-000000000062', 'Restaurant server (part-time)', 'Serve tables on evenings and weekends in a busy family restaurant. Experience helpful but not required.', 'job', 'offer',
+  'food', array['server', 'restaurant', 'part-time']::text[], 'woodbridge', false, 'paid',
+  '$14/hr plus tips', 'active', true, now() - interval '518400 seconds', now() - interval '518400 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000127', '11111111-1111-4111-8111-000000000062', 'Volunteers for free Friday meals', 'Every Friday we serve free meals to families in need. Help us pack and hand out plates from 5 to 7 pm.', 'volunteer', 'offer',
+  'community', array['food pantry', 'community service', 'volunteer']::text[], 'woodbridge', false, 'volunteer',
+  null, 'active', true, now() - interval '1040400 seconds', now() - interval '1040400 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000128', '11111111-1111-4111-8111-000000000034', 'Home chefs to develop halal meal-kit recipes', 'Paid recipe development for our meal-kit pilot. Send us two family recipes you love and we will test them together.', 'job', 'offer',
+  'food', array['cooking', 'chef', 'halal', 'recipes']::text[], 'plainsboro', false, 'paid',
+  'Per recipe', 'active', true, now() - interval '525600 seconds', now() - interval '525600 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000129', '11111111-1111-4111-8111-000000000049', 'Medina Books & Gifts', 'Islamic books for all ages, Qurans, prayer rugs, attar and Eid gifts. Story time for kids on Saturday mornings.', 'business', 'offer',
+  'other', array['books', 'gifts', 'bookstore']::text[], 'somerset', false, 'paid',
+  null, 'active', true, now() - interval '4762800 seconds', now() - interval '4762800 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000130', '11111111-1111-4111-8111-000000000055', 'Iman Modest Boutique: abayas, hijabs and Eid outfits', 'Abayas, hijabs, modest dresses and Eid outfits for women and girls. Alterations available.', 'business', 'offer',
+  'other', array['modest fashion', 'clothing', 'hijab', 'boutique']::text[], 'edison', false, 'paid',
+  null, 'active', true, now() - interval '3124800 seconds', now() - interval '3124800 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000131', '11111111-1111-4111-8111-000000000055', 'Sales associate for Eid season', 'Help customers, manage the fitting room and restock during our busiest season. Sisters preferred.', 'job', 'offer',
+  'other', array['retail', 'sales', 'seasonal']::text[], 'edison', false, 'paid',
+  '$16/hr', 'active', true, now() - interval '709200 seconds', now() - interval '709200 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000132', '11111111-1111-4111-8111-000000000056', 'Sunnah Cuts Barbershop', 'Fades, beard trims and lineups for men and boys. Walk-ins welcome; closed for Jumuah.', 'business', 'offer',
+  'other', array['barber', 'haircut', 'grooming']::text[], 'metuchen', false, 'paid',
+  null, 'active', true, now() - interval '2527200 seconds', now() - interval '2527200 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000133', '11111111-1111-4111-8111-000000000056', 'Apprentice barber', 'Learn to cut hair from experienced barbers while working toward your license. Chair rental not required.', 'job', 'offer',
+  'other', array['barber', 'apprentice', 'trades']::text[], 'metuchen', false, 'paid',
+  null, 'active', true, now() - interval '1209600 seconds', now() - interval '1209600 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000134', '11111111-1111-4111-8111-000000000060', 'Amanah Movers: local moves and junk removal', 'Apartment and house moves, packing, furniture assembly and junk hauling across Central Jersey. Fully insured.', 'business', 'offer',
+  'home', array['movers', 'moving', 'junk removal']::text[], 'edison', false, 'paid',
+  'Free estimates', 'active', true, now() - interval '3546000 seconds', now() - interval '3546000 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000135', '11111111-1111-4111-8111-000000000060', 'Movers wanted (weekends)', 'Strong, careful and on time? Join our weekend moving crew. Same-day pay.', 'job', 'offer',
+  'home', array['movers', 'part-time', 'weekends']::text[], 'edison', false, 'paid',
+  '$20/hr', 'active', true, now() - interval '266400 seconds', now() - interval '266400 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000136', '11111111-1111-4111-8111-000000000061', 'Rihla Travel: Hajj, Umrah and family trips', 'Guided group Umrah trips, Hajj packages and family vacations, with scholars traveling with every group.', 'business', 'offer',
+  'other', array['travel', 'umrah', 'hajj']::text[], 'piscataway', true, 'paid',
+  null, 'active', true, now() - interval '4158000 seconds', now() - interval '4158000 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000137', '11111111-1111-4111-8111-000000000061', 'Umrah information night', 'Free evening session on planning a first Umrah: visas, budgets, what to pack and the rites step by step.', 'service', 'offer',
+  'community', array['umrah', 'travel', 'event']::text[], 'piscataway', false, 'free',
+  null, 'active', true, now() - interval '446400 seconds', now() - interval '446400 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000138', '11111111-1111-4111-8111-000000000025', 'Auto mechanic apprentice', 'Learn brakes, suspension and diagnostics in a small, honest shop. Some experience or trade school preferred.', 'job', 'offer',
+  'other', array['mechanic', 'auto repair', 'apprentice', 'trades']::text[], 'sayreville', false, 'paid',
+  null, 'active', true, now() - interval '1486800 seconds', now() - interval '1486800 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000139', '11111111-1111-4111-8111-000000000029', 'Wedding photography and videography', 'Nikkah, walima and mehndi coverage with separate sisters-only photography available. Highlight films and printed albums.', 'service', 'offer',
+  'creative', array['photography', 'videography', 'weddings']::text[], 'edison', false, 'paid',
+  'Packages from $1,200', 'active', true, now() - interval '540000 seconds', now() - interval '540000 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000140', '11111111-1111-4111-8111-000000000029', 'Second shooter for the wedding season', 'Looking for a photographer with your own camera to second-shoot weddings on weekends. Portfolio required.', 'job', 'offer',
+  'creative', array['photography', 'weddings', 'part-time']::text[], 'edison', false, 'paid',
+  'Per event', 'active', true, now() - interval '1123200 seconds', now() - interval '1123200 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000141', '11111111-1111-4111-8111-000000000058', 'Volunteers for Jumuah parking and setup', 'Help direct parking, lay out prayer rugs and welcome guests on Fridays from 12:30 to 2 pm.', 'volunteer', 'offer',
+  'community', array['masjid', 'jumuah', 'volunteer']::text[], 'monroe', false, 'volunteer',
+  null, 'active', true, now() - interval '176400 seconds', now() - interval '176400 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000142', '11111111-1111-4111-8111-000000000058', 'Family game night at the masjid', 'Board games, a kids corner, pizza and chai on the last Saturday of the month after Maghrib. Everyone is welcome.', 'service', 'offer',
+  'community', array['event', 'family', 'masjid', 'kids']::text[], 'monroe', false, 'free',
+  null, 'active', true, now() - interval '352800 seconds', now() - interval '352800 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000143', '11111111-1111-4111-8111-000000000058', 'Youth halaqa leaders for teens', 'Lead a weekly Friday-night halaqa for teens ages 13 to 17. We provide topics and training; you bring energy and good character.', 'volunteer', 'offer',
+  'community', array['youth', 'halaqa', 'teens', 'masjid']::text[], 'monroe', false, 'volunteer',
+  null, 'active', true, now() - interval '788400 seconds', now() - interval '788400 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000144', '11111111-1111-4111-8111-000000000058', 'Masjid office administrator (part-time)', 'Answer calls and email, manage the calendar, coordinate room bookings and help with donor records, about 20 hours a week.', 'job', 'offer',
+  'business', array['administrative', 'masjid', 'part-time']::text[], 'monroe', false, 'paid',
+  '$20/hr', 'active', true, now() - interval '964800 seconds', now() - interval '964800 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000145', '11111111-1111-4111-8111-000000000059', 'Ramadan iftar volunteers', 'Help set up, serve and clean up community iftars for 300 guests. Sign up for one night or the whole month.', 'volunteer', 'offer',
+  'community', array['ramadan', 'iftar', 'masjid', 'volunteer']::text[], 'bridgewater', false, 'volunteer',
+  null, 'active', true, now() - interval '536400 seconds', now() - interval '536400 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000146', '11111111-1111-4111-8111-000000000059', 'Sisters halaqa and coffee morning', 'Tuesday mornings: a short tafsir reflection, coffee and conversation. Childcare available in the next room.', 'service', 'offer',
+  'community', array['sisters', 'halaqa', 'masjid', 'event']::text[], 'bridgewater', false, 'free',
+  null, 'active', true, now() - interval '280800 seconds', now() - interval '280800 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000147', '11111111-1111-4111-8111-000000000059', 'Photographer for our annual fundraising dinner', 'Looking for a photographer to cover our fundraising dinner (about 400 guests) and provide edited photos within a week.', 'service', 'request',
+  'creative', array['photography', 'event', 'masjid', 'fundraiser']::text[], 'bridgewater', false, 'negotiable',
+  null, 'active', true, now() - interval '432000 seconds', now() - interval '432000 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000148', '11111111-1111-4111-8111-000000000059', 'Eid festival volunteers: games, food and setup', 'Our Eid festival needs help with bounce houses, face painting, food stalls and cleanup. Teens and families welcome.', 'volunteer', 'offer',
+  'community', array['eid', 'event', 'volunteer', 'kids']::text[], 'bridgewater', false, 'volunteer',
+  null, 'active', true, now() - interval '90000 seconds', now() - interval '90000 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000149', '11111111-1111-4111-8111-000000000021', 'Helpers for a monthly interfaith open house', 'Greet guests, give short masjid tours and serve refreshments when neighbors and church groups visit on the second Sunday of each month.', 'volunteer', 'offer',
+  'community', array['interfaith', 'masjid', 'event', 'volunteer']::text[], 'new-brunswick', false, 'volunteer',
+  null, 'active', true, now() - interval '612000 seconds', now() - interval '612000 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000150', '11111111-1111-4111-8111-000000000021', 'Designer for the masjid monthly newsletter', 'Looking for a designer to lay out a two-page monthly newsletter with our events, classes and announcements.', 'service', 'request',
+  'creative', array['graphic design', 'newsletter', 'masjid']::text[], 'new-brunswick', true, 'unpaid',
+  null, 'active', true, now() - interval '1306800 seconds', now() - interval '1306800 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000151', '11111111-1111-4111-8111-000000000039', 'Fundraising committee for a masjid expansion', 'Join the committee planning our expansion campaign: events, donor outreach and online fundraising. Meets twice a month.', 'volunteer', 'offer',
+  'community', array['fundraising', 'masjid', 'committee']::text[], 'edison', false, 'volunteer',
+  null, 'active', true, now() - interval '878400 seconds', now() - interval '878400 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000152', '11111111-1111-4111-8111-000000000039', 'Accountant to review masjid finances', 'Seeking a CPA or experienced accountant to review our annual financial statements. Pro bono or a reduced rate appreciated.', 'service', 'request',
+  'business', array['accounting', 'audit', 'nonprofit', 'masjid']::text[], 'edison', true, 'negotiable',
+  'Pro bono or reduced rate', 'active', true, now() - interval '1573200 seconds', now() - interval '1573200 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000153', '11111111-1111-4111-8111-000000000026', 'Furniture drive volunteers for newly arrived families', 'Pick up donated furniture with our team and set up apartments for families arriving next month. Trucks provided.', 'volunteer', 'offer',
+  'community', array['refugees', 'furniture drive', 'volunteer']::text[], 'trenton', false, 'volunteer',
+  null, 'active', true, now() - interval '194400 seconds', now() - interval '194400 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000154', '11111111-1111-4111-8111-000000000026', 'Drivers for refugee families'' appointments', 'Drive families to doctor visits, school registration and grocery runs. Flexible weekday hours; mileage reimbursed.', 'volunteer', 'offer',
+  'community', array['refugees', 'driving', 'volunteer']::text[], 'trenton', false, 'volunteer',
+  null, 'active', true, now() - interval '518400 seconds', now() - interval '518400 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000155', '11111111-1111-4111-8111-000000000026', 'Grant writer for a refugee support nonprofit', 'Contract grant writer to help with three foundation applications this winter. Nonprofit experience preferred.', 'service', 'request',
+  'creative', array['grant writing', 'writing', 'nonprofit']::text[], null, true, 'paid',
+  'Contract', 'active', true, now() - interval '1040400 seconds', now() - interval '1040400 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000156', '11111111-1111-4111-8111-000000000032', 'Know-your-rights clinic volunteers', 'Law students and Arabic, Urdu or Spanish speakers needed to help at monthly know-your-rights clinics, supervised by attorneys.', 'volunteer', 'offer',
+  'community', array['law', 'immigration', 'volunteer', 'translation']::text[], 'piscataway', false, 'volunteer',
+  null, 'active', true, now() - interval '784800 seconds', now() - interval '784800 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000157', '11111111-1111-4111-8111-000000000045', 'Students looking for alumni mentors', 'Our MSA is pairing students with alumni in any field for one coffee chat a month. Engineers, doctors, lawyers and founders all welcome.', 'mentorship', 'request',
+  'careers', array['students', 'alumni', 'career']::text[], 'new-brunswick', true, null,
+  null, 'active', true, now() - interval '356400 seconds', now() - interval '356400 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000158', '11111111-1111-4111-8111-000000000042', 'Want to help with masjid events', 'College student with weekend availability. I can help with event setup, social media and welcoming guests.', 'volunteer', 'request',
+  'community', array['events', 'masjid', 'social media']::text[], 'new-brunswick', false, null,
+  null, 'active', true, now() - interval '273600 seconds', now() - interval '273600 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000159', '11111111-1111-4111-8111-000000000027', 'Grad student who wants to volunteer at STEM events', 'Happy to run chemistry demos or help at science fairs and STEM days on weekends.', 'volunteer', 'request',
+  'education', array['stem', 'chemistry', 'volunteer']::text[], 'new-brunswick', false, null,
+  null, 'active', true, now() - interval '709200 seconds', now() - interval '709200 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000160', '11111111-1111-4111-8111-000000000035', 'Grocery delivery volunteers for seniors', 'Deliver groceries to homebound seniors on Saturday mornings. Routes take about an hour.', 'volunteer', 'offer',
+  'community', array['seniors', 'delivery', 'volunteer']::text[], 'hamilton', false, 'volunteer',
+  null, 'active', true, now() - interval '453600 seconds', now() - interval '453600 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000161', '11111111-1111-4111-8111-000000000031', 'Civil engineering and PE exam mentorship', 'Guidance for civil engineering students and EITs: choosing a specialty, preparing for the FE and PE exams, and working in transportation design.', 'mentorship', 'offer',
+  'engineering', array['civil engineering', 'pe exam', 'career']::text[], 'bridgewater', true, 'free',
+  null, 'active', true, now() - interval '604800 seconds', now() - interval '604800 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000162', '11111111-1111-4111-8111-000000000031', 'Civil engineering intern (summer)', 'Support our transportation design team with drafting, site visits and traffic counts. Rising juniors and seniors in civil engineering.', 'internship', 'offer',
+  'engineering', array['civil engineering', 'summer', 'transportation']::text[], 'bridgewater', false, 'paid',
+  '$20/hr', 'active', true, now() - interval '1386000 seconds', now() - interval '1386000 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000163', '11111111-1111-4111-8111-000000000018', 'Women in tech coffee chats', 'An informal monthly meetup for Muslim women in tech and those curious about it. Share wins, ask questions and meet peers.', 'service', 'offer',
+  'careers', array['women in tech', 'networking', 'career', 'event']::text[], 'plainsboro', false, 'free',
+  null, 'active', true, now() - interval '1130400 seconds', now() - interval '1130400 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000164', '11111111-1111-4111-8111-000000000023', 'Co-organizer for a Muslim tech meetup', 'Starting a quarterly meetup for Muslim engineers, designers and founders in Central Jersey. Looking for a co-organizer to help with venues and speakers.', 'collaboration', 'request',
+  'technology', array['meetup', 'networking', 'tech', 'event']::text[], 'piscataway', false, null,
+  null, 'active', true, now() - interval '874800 seconds', now() - interval '874800 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000165', '11111111-1111-4111-8111-000000000045', 'Video editor for an MSA podcast', 'We record a biweekly podcast with students and scholars. Looking for someone to edit episodes and cut short clips.', 'service', 'request',
+  'creative', array['video editing', 'podcast', 'students']::text[], null, true, 'unpaid',
+  null, 'active', true, now() - interval '532800 seconds', now() - interval '532800 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000166', '11111111-1111-4111-8111-000000000030', 'Nutritionist to co-host wellness workshops', 'Planning a four-week wellness series for sisters. Looking for a nutritionist or dietitian to lead the nutrition sessions.', 'collaboration', 'request',
+  'health', array['nutrition', 'wellness', 'sisters', 'workshop']::text[], 'east-brunswick', false, null,
+  null, 'active', true, now() - interval '795600 seconds', now() - interval '795600 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000167', '11111111-1111-4111-8111-000000000037', 'Retired banker wants to teach financial literacy', 'I would like to volunteer teaching budgeting and saving to teens or new immigrants at a masjid, school or nonprofit.', 'volunteer', 'request',
+  'business', array['financial literacy', 'budgeting', 'volunteer']::text[], 'west-windsor', false, null,
+  null, 'active', true, now() - interval '1749600 seconds', now() - interval '1749600 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000168', '11111111-1111-4111-8111-000000000036', 'UX designer looking for a full-time role', 'Five years designing mobile apps and dashboards. Open to full-time product or UX design roles, remote or hybrid.', 'job', 'request',
+  'creative', array['ux design', 'figma', 'full-time']::text[], null, true, null,
+  null, 'active', true, now() - interval '345600 seconds', now() - interval '345600 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000169', '11111111-1111-4111-8111-000000000046', 'Holiday pop-up staff', 'Temporary staff for our winter pop-up market. This position has been filled.', 'job', 'offer',
+  'food', array['seasonal', 'retail']::text[], 'new-brunswick', false, 'paid',
+  null, 'closed', true, now() - interval '3891600 seconds', now() - interval '3891600 seconds', now() - interval '1900800 seconds');
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000170', '11111111-1111-4111-8111-000000000014', 'AC installer helper (summer)', 'Summer helper for AC installs. Paused until next season.', 'job', 'offer',
+  'home', array['hvac', 'seasonal']::text[], 'woodbridge', false, 'paid',
+  null, 'paused', true, now() - interval '3031200 seconds', now() - interval '3031200 seconds', null);
+insert into public.listings (id, owner_id, title, description, listing_type, direction, category, tags,
+  area_id, remote_available, compensation_type, compensation_details, status, is_sample, created_at, updated_at, closed_at)
+values ('22222222-2222-4222-8222-000000000171', '11111111-1111-4111-8111-000000000016', 'Teammates for a private equity case competition', 'Looking for teammates for a university private equity case competition. Our team is now complete.', 'collaboration', 'request',
+  'business', array['private equity', 'case competition']::text[], null, true, null,
+  null, 'closed', true, now() - interval '4330800 seconds', now() - interval '4330800 seconds', now() - interval '2160000 seconds');
 
 -- Saved listings.
+insert into public.saved_listings (user_id, listing_id, saved_at) values ('11111111-1111-4111-8111-000000000001', '22222222-2222-4222-8222-000000000081', now() - interval '72000 seconds');
+insert into public.saved_listings (user_id, listing_id, saved_at) values ('11111111-1111-4111-8111-000000000001', '22222222-2222-4222-8222-000000000075', now() - interval '111600 seconds');
+insert into public.saved_listings (user_id, listing_id, saved_at) values ('11111111-1111-4111-8111-000000000001', '22222222-2222-4222-8222-000000000113', now() - interval '180000 seconds');
+insert into public.saved_listings (user_id, listing_id, saved_at) values ('11111111-1111-4111-8111-000000000010', '22222222-2222-4222-8222-000000000110', now() - interval '273600 seconds');
+insert into public.saved_listings (user_id, listing_id, saved_at) values ('11111111-1111-4111-8111-000000000010', '22222222-2222-4222-8222-000000000102', now() - interval '54000 seconds');
+insert into public.saved_listings (user_id, listing_id, saved_at) values ('11111111-1111-4111-8111-000000000042', '22222222-2222-4222-8222-000000000085', now() - interval '176400 seconds');
+insert into public.saved_listings (user_id, listing_id, saved_at) values ('11111111-1111-4111-8111-000000000024', '22222222-2222-4222-8222-000000000035', now() - interval '39600 seconds');
 insert into public.saved_listings (user_id, listing_id, saved_at) values ('11111111-1111-4111-8111-000000000001', '22222222-2222-4222-8222-000000000001', now() - interval '183600 seconds');
 insert into public.saved_listings (user_id, listing_id, saved_at) values ('11111111-1111-4111-8111-000000000001', '22222222-2222-4222-8222-000000000011', now() - interval '86400 seconds');
 insert into public.saved_listings (user_id, listing_id, saved_at) values ('11111111-1111-4111-8111-000000000010', '22222222-2222-4222-8222-000000000021', now() - interval '93600 seconds');
@@ -501,6 +2468,45 @@ values ('33333333-3333-4333-8333-000000000004', '11111111-1111-4111-8111-0000000
 insert into public.connection_requests (id, sender_id, recipient_id, kind, listing_id, listing_title, message, status, created_at, responded_at)
 values ('33333333-3333-4333-8333-000000000005', '11111111-1111-4111-8111-000000000005', '11111111-1111-4111-8111-000000000006', 'listing',
   '22222222-2222-4222-8222-000000000025', 'Websites and mobile apps for small businesses', 'Hi Bilal, I''d like a simple website for my practice. Could you send a rough quote?', 'accepted', now() - interval '432000 seconds', now() - interval '417600 seconds');
+insert into public.connection_requests (id, sender_id, recipient_id, kind, listing_id, listing_title, message, status, created_at, responded_at)
+values ('33333333-3333-4333-8333-000000000006', '11111111-1111-4111-8111-000000000045', '11111111-1111-4111-8111-000000000001', 'listing',
+  '22222222-2222-4222-8222-000000000032', 'Teammates for a renewable energy hackathon', 'Salaam Amina! I''ve built two solar dashboards at past hackathons and I''d love to join your team. I can handle the frontend.', 'pending', now() - interval '18000 seconds', null);
+insert into public.connection_requests (id, sender_id, recipient_id, kind, listing_id, listing_title, message, status, created_at, responded_at)
+values ('33333333-3333-4333-8333-000000000007', '11111111-1111-4111-8111-000000000040', '11111111-1111-4111-8111-000000000001', 'listing',
+  '22222222-2222-4222-8222-000000000100', 'Intro to Python for high schoolers', 'I teach biology in Metuchen and a few of my students are eager to learn Python. Could they join your sessions?', 'pending', now() - interval '108000 seconds', null);
+insert into public.connection_requests (id, sender_id, recipient_id, kind, listing_id, listing_title, message, status, created_at, responded_at)
+values ('33333333-3333-4333-8333-000000000008', '11111111-1111-4111-8111-000000000001', '11111111-1111-4111-8111-000000000012', 'listing',
+  '22222222-2222-4222-8222-000000000012', 'Engineering internship: automation and robotics (summer)', 'Assalamu alaikum, I''m a junior in mechanical engineering with CAD and Python experience. I''d love to be considered for the automation internship.', 'accepted', now() - interval '259200 seconds', now() - interval '244800 seconds');
+insert into public.connection_requests (id, sender_id, recipient_id, kind, listing_id, listing_title, message, status, created_at, responded_at)
+values ('33333333-3333-4333-8333-000000000009', '11111111-1111-4111-8111-000000000001', '11111111-1111-4111-8111-000000000019', 'listing',
+  '22222222-2222-4222-8222-000000000075', 'Data science mentorship: Python, SQL and your first project', 'I''d like to build a data project on solar panel output for my portfolio. Would you be open to mentoring me?', 'pending', now() - interval '108000 seconds', null);
+insert into public.connection_requests (id, sender_id, recipient_id, kind, listing_id, listing_title, message, status, created_at, responded_at)
+values ('33333333-3333-4333-8333-000000000010', '11111111-1111-4111-8111-000000000010', '11111111-1111-4111-8111-000000000053', 'listing',
+  '22222222-2222-4222-8222-000000000110', 'Clinical shadowing for pre-med students', 'I''m a high school senior interested in medicine. I''d be grateful for a chance to shadow at your clinic.', 'accepted', now() - interval '273600 seconds', now() - interval '201600 seconds');
+insert into public.connection_requests (id, sender_id, recipient_id, kind, listing_id, listing_title, message, status, created_at, responded_at)
+values ('33333333-3333-4333-8333-000000000011', '11111111-1111-4111-8111-000000000010', '11111111-1111-4111-8111-000000000022', 'listing',
+  '22222222-2222-4222-8222-000000000102', 'Mentorship for nursing and pre-med students', 'Salaam! I''m deciding between pre-med and nursing and would really value your perspective.', 'pending', now() - interval '50400 seconds', null);
+insert into public.connection_requests (id, sender_id, recipient_id, kind, listing_id, listing_title, message, status, created_at, responded_at)
+values ('33333333-3333-4333-8333-000000000012', '11111111-1111-4111-8111-000000000024', '11111111-1111-4111-8111-000000000013', 'listing',
+  '22222222-2222-4222-8222-000000000035', 'Licensed plumbing repairs and water heater installs', 'Salaam, we have a leaking pipe near our water heater in Monroe. Are you available this week?', 'accepted', now() - interval '36000 seconds', now() - interval '32400 seconds');
+insert into public.connection_requests (id, sender_id, recipient_id, kind, listing_id, listing_title, message, status, created_at, responded_at)
+values ('33333333-3333-4333-8333-000000000013', '11111111-1111-4111-8111-000000000042', '11111111-1111-4111-8111-000000000046', 'listing',
+  '22222222-2222-4222-8222-000000000085', 'Part-time social media manager for a coffee house', 'Hi! I run Instagram and TikTok for my campus club and I''m at Cardamom most evenings anyway. I''d love to apply.', 'accepted', now() - interval '172800 seconds', now() - interval '151200 seconds');
+insert into public.connection_requests (id, sender_id, recipient_id, kind, listing_id, listing_title, message, status, created_at, responded_at)
+values ('33333333-3333-4333-8333-000000000014', '11111111-1111-4111-8111-000000000034', '11111111-1111-4111-8111-000000000017', 'listing',
+  '22222222-2222-4222-8222-000000000057', 'Startup pitch deck reviews and fundraising advice', 'Assalamu alaikum Imran, I''m raising a pre-seed round for a halal meal-kit startup. Could you look at our deck?', 'accepted', now() - interval '345600 seconds', now() - interval '338400 seconds');
+insert into public.connection_requests (id, sender_id, recipient_id, kind, listing_id, listing_title, message, status, created_at, responded_at)
+values ('33333333-3333-4333-8333-000000000015', '11111111-1111-4111-8111-000000000021', '11111111-1111-4111-8111-000000000009', 'listing',
+  '22222222-2222-4222-8222-000000000026', 'Logos, flyers and event photography', 'Salaam Maryam, our masjid needs a refreshed logo and a newsletter template. Could we talk about a quote?', 'pending', now() - interval '97200 seconds', null);
+insert into public.connection_requests (id, sender_id, recipient_id, kind, listing_id, listing_title, message, status, created_at, responded_at)
+values ('33333333-3333-4333-8333-000000000016', '11111111-1111-4111-8111-000000000006', '11111111-1111-4111-8111-000000000034', 'listing',
+  '22222222-2222-4222-8222-000000000064', 'Operations co-founder for a halal meal-kit startup', 'I''ve been working on a halal food delivery idea too. Maybe we should join forces?', 'pending', now() - interval '190800 seconds', null);
+insert into public.connection_requests (id, sender_id, recipient_id, kind, listing_id, listing_title, message, status, created_at, responded_at)
+values ('33333333-3333-4333-8333-000000000017', '11111111-1111-4111-8111-000000000037', '11111111-1111-4111-8111-000000000005', 'introduction',
+  null, null, 'Salaam Sarah, I teach halal investing basics and many of my clients ask about taxes. Could we refer people to each other?', 'pending', now() - interval '118800 seconds', null);
+insert into public.connection_requests (id, sender_id, recipient_id, kind, listing_id, listing_title, message, status, created_at, responded_at)
+values ('33333333-3333-4333-8333-000000000018', '11111111-1111-4111-8111-000000000036', '11111111-1111-4111-8111-000000000018', 'listing',
+  '22222222-2222-4222-8222-000000000083', 'Part-time QA tester for a fintech app', 'I''m a UX designer between roles and have done a lot of usability testing. Happy to help part time.', 'declined', now() - interval '518400 seconds', now() - interval '432000 seconds');
 
 -- Conversations and messages.
 insert into public.conversations (id, request_id, participant_a, participant_b, listing_id, listing_title, created_at)
@@ -509,6 +2515,21 @@ values ('44444444-4444-4444-8444-000000000001', '33333333-3333-4333-8333-0000000
 insert into public.conversations (id, request_id, participant_a, participant_b, listing_id, listing_title, created_at)
 values ('44444444-4444-4444-8444-000000000002', '33333333-3333-4333-8333-000000000005', '11111111-1111-4111-8111-000000000005', '11111111-1111-4111-8111-000000000006', '22222222-2222-4222-8222-000000000025',
   'Websites and mobile apps for small businesses', now() - interval '417600 seconds');
+insert into public.conversations (id, request_id, participant_a, participant_b, listing_id, listing_title, created_at)
+values ('44444444-4444-4444-8444-000000000003', '33333333-3333-4333-8333-000000000008', '11111111-1111-4111-8111-000000000001', '11111111-1111-4111-8111-000000000012', '22222222-2222-4222-8222-000000000012',
+  'Engineering internship: automation and robotics (summer)', now() - interval '244800 seconds');
+insert into public.conversations (id, request_id, participant_a, participant_b, listing_id, listing_title, created_at)
+values ('44444444-4444-4444-8444-000000000004', '33333333-3333-4333-8333-000000000010', '11111111-1111-4111-8111-000000000010', '11111111-1111-4111-8111-000000000053', '22222222-2222-4222-8222-000000000110',
+  'Clinical shadowing for pre-med students', now() - interval '201600 seconds');
+insert into public.conversations (id, request_id, participant_a, participant_b, listing_id, listing_title, created_at)
+values ('44444444-4444-4444-8444-000000000005', '33333333-3333-4333-8333-000000000012', '11111111-1111-4111-8111-000000000024', '11111111-1111-4111-8111-000000000013', '22222222-2222-4222-8222-000000000035',
+  'Licensed plumbing repairs and water heater installs', now() - interval '32400 seconds');
+insert into public.conversations (id, request_id, participant_a, participant_b, listing_id, listing_title, created_at)
+values ('44444444-4444-4444-8444-000000000006', '33333333-3333-4333-8333-000000000013', '11111111-1111-4111-8111-000000000042', '11111111-1111-4111-8111-000000000046', '22222222-2222-4222-8222-000000000085',
+  'Part-time social media manager for a coffee house', now() - interval '151200 seconds');
+insert into public.conversations (id, request_id, participant_a, participant_b, listing_id, listing_title, created_at)
+values ('44444444-4444-4444-8444-000000000007', '33333333-3333-4333-8333-000000000014', '11111111-1111-4111-8111-000000000034', '11111111-1111-4111-8111-000000000017', '22222222-2222-4222-8222-000000000057',
+  'Startup pitch deck reviews and fundraising advice', now() - interval '338400 seconds');
 insert into public.messages (id, conversation_id, sender_id, body, client_id, created_at)
 values ('55555555-5555-4555-8555-000000000001', '44444444-4444-4444-8444-000000000001', '11111111-1111-4111-8111-000000000002', 'Wa alaikum assalam, Amina. Happy to help. Could you share the CAD files before we meet?', '55555555-5555-4555-8555-000000000001', now() - interval '165600 seconds');
 insert into public.messages (id, conversation_id, sender_id, body, client_id, created_at)
@@ -517,8 +2538,57 @@ insert into public.messages (id, conversation_id, sender_id, body, client_id, cr
 values ('55555555-5555-4555-8555-000000000003', '44444444-4444-4444-8444-000000000001', '11111111-1111-4111-8111-000000000002', 'Thursday at 7 works. Talk then!', '55555555-5555-4555-8555-000000000003', now() - interval '158400 seconds');
 insert into public.messages (id, conversation_id, sender_id, body, client_id, created_at)
 values ('55555555-5555-4555-8555-000000000004', '44444444-4444-4444-8444-000000000002', '11111111-1111-4111-8111-000000000006', 'Thanks Sarah! I''ll put a quote together this week. Do you already have a logo?', '55555555-5555-4555-8555-000000000004', now() - interval '410400 seconds');
+insert into public.messages (id, conversation_id, sender_id, body, client_id, created_at)
+values ('55555555-5555-4555-8555-000000000005', '44444444-4444-4444-8444-000000000003', '11111111-1111-4111-8111-000000000012', 'Wa alaikum assalam Amina, thanks for reaching out. Your sorting robot project is exactly the kind of work we do.', '55555555-5555-4555-8555-000000000005', now() - interval '241200 seconds');
+insert into public.messages (id, conversation_id, sender_id, body, client_id, created_at)
+values ('55555555-5555-4555-8555-000000000006', '44444444-4444-4444-8444-000000000003', '11111111-1111-4111-8111-000000000001', 'JazakAllah khair! Should I send my resume and a few CAD screenshots?', '55555555-5555-4555-8555-000000000006', now() - interval '237600 seconds');
+insert into public.messages (id, conversation_id, sender_id, body, client_id, created_at)
+values ('55555555-5555-4555-8555-000000000007', '44444444-4444-4444-8444-000000000003', '11111111-1111-4111-8111-000000000012', 'Yes please. Could you come by the New Brunswick office next Wednesday at 4 for a short chat?', '55555555-5555-4555-8555-000000000007', now() - interval '234000 seconds');
+insert into public.messages (id, conversation_id, sender_id, body, client_id, created_at)
+values ('55555555-5555-4555-8555-000000000008', '44444444-4444-4444-8444-000000000003', '11111111-1111-4111-8111-000000000001', 'Wednesday at 4 works. I''ll bring my laptop to show the gripper prototype.', '55555555-5555-4555-8555-000000000008', now() - interval '230400 seconds');
+insert into public.messages (id, conversation_id, sender_id, body, client_id, created_at)
+values ('55555555-5555-4555-8555-000000000009', '44444444-4444-4444-8444-000000000004', '11111111-1111-4111-8111-000000000053', 'Hi Zaid, we''d be happy to have you shadow. Our physicians host students on Tuesday and Thursday afternoons.', '55555555-5555-4555-8555-000000000009', now() - interval '198000 seconds');
+insert into public.messages (id, conversation_id, sender_id, body, client_id, created_at)
+values ('55555555-5555-4555-8555-000000000010', '44444444-4444-4444-8444-000000000004', '11111111-1111-4111-8111-000000000010', 'Thank you so much! Thursdays work best after school. Is there anything I should prepare?', '55555555-5555-4555-8555-000000000010', now() - interval '190800 seconds');
+insert into public.messages (id, conversation_id, sender_id, body, client_id, created_at)
+values ('55555555-5555-4555-8555-000000000011', '44444444-4444-4444-8444-000000000004', '11111111-1111-4111-8111-000000000053', 'Just a signed form from a parent and your vaccination record. We will email both to you.', '55555555-5555-4555-8555-000000000011', now() - interval '169200 seconds');
+insert into public.messages (id, conversation_id, sender_id, body, client_id, created_at)
+values ('55555555-5555-4555-8555-000000000012', '44444444-4444-4444-8444-000000000005', '11111111-1111-4111-8111-000000000013', 'Wa alaikum assalam. I can come tomorrow between 9 and 11. Please turn off the water to the heater if it gets worse.', '55555555-5555-4555-8555-000000000012', now() - interval '28800 seconds');
+insert into public.messages (id, conversation_id, sender_id, body, client_id, created_at)
+values ('55555555-5555-4555-8555-000000000013', '44444444-4444-4444-8444-000000000005', '11111111-1111-4111-8111-000000000024', 'JazakAllah khair, tomorrow at 9 is perfect. Address is in Monroe near the high school.', '55555555-5555-4555-8555-000000000013', now() - interval '25200 seconds');
+insert into public.messages (id, conversation_id, sender_id, body, client_id, created_at)
+values ('55555555-5555-4555-8555-000000000014', '44444444-4444-4444-8444-000000000006', '11111111-1111-4111-8111-000000000046', 'Hi Lina! We loved your campus club''s page. Can you stop by Saturday at 11 to meet the owner?', '55555555-5555-4555-8555-000000000014', now() - interval '147600 seconds');
+insert into public.messages (id, conversation_id, sender_id, body, client_id, created_at)
+values ('55555555-5555-4555-8555-000000000015', '44444444-4444-4444-8444-000000000006', '11111111-1111-4111-8111-000000000042', 'Definitely, see you Saturday!', '55555555-5555-4555-8555-000000000015', now() - interval '144000 seconds');
+insert into public.messages (id, conversation_id, sender_id, body, client_id, created_at)
+values ('55555555-5555-4555-8555-000000000016', '44444444-4444-4444-8444-000000000007', '11111111-1111-4111-8111-000000000017', 'Wa alaikum assalam Amir. Happy to. Send the deck and your latest waitlist numbers.', '55555555-5555-4555-8555-000000000016', now() - interval '334800 seconds');
+insert into public.messages (id, conversation_id, sender_id, body, client_id, created_at)
+values ('55555555-5555-4555-8555-000000000017', '44444444-4444-4444-8444-000000000007', '11111111-1111-4111-8111-000000000034', 'Sent! We are at 200 sign-ups and running a two-week pilot with 15 families.', '55555555-5555-4555-8555-000000000017', now() - interval '331200 seconds');
+insert into public.messages (id, conversation_id, sender_id, body, client_id, created_at)
+values ('55555555-5555-4555-8555-000000000018', '44444444-4444-4444-8444-000000000007', '11111111-1111-4111-8111-000000000017', 'Nice traction. Your market slide needs work, but the pilot story is strong. Call on Monday?', '55555555-5555-4555-8555-000000000018', now() - interval '180000 seconds');
 
 -- Recommendation feedback events.
+insert into public.recommendation_events (id, user_id, listing_id, event_type, listing_type, category, tags, created_at)
+values ('66666666-6666-4666-8666-000000000007', '11111111-1111-4111-8111-000000000001', '22222222-2222-4222-8222-000000000081', 'saved', 'collaboration', 'technology',
+  array['hackathon', 'mobile apps', 'masjid', 'design']::text[], now() - interval '72000 seconds');
+insert into public.recommendation_events (id, user_id, listing_id, event_type, listing_type, category, tags, created_at)
+values ('66666666-6666-4666-8666-000000000008', '11111111-1111-4111-8111-000000000001', '22222222-2222-4222-8222-000000000075', 'saved', 'mentorship', 'technology',
+  array['data science', 'python', 'sql', 'machine learning']::text[], now() - interval '111600 seconds');
+insert into public.recommendation_events (id, user_id, listing_id, event_type, listing_type, category, tags, created_at)
+values ('66666666-6666-4666-8666-000000000009', '11111111-1111-4111-8111-000000000001', '22222222-2222-4222-8222-000000000075', 'contact_requested', 'mentorship', 'technology',
+  array['data science', 'python', 'sql', 'machine learning']::text[], now() - interval '108000 seconds');
+insert into public.recommendation_events (id, user_id, listing_id, event_type, listing_type, category, tags, created_at)
+values ('66666666-6666-4666-8666-000000000010', '11111111-1111-4111-8111-000000000001', '22222222-2222-4222-8222-000000000012', 'contact_requested', 'internship', 'engineering',
+  array['robotics', 'automation', 'engineering', 'summer']::text[], now() - interval '259200 seconds');
+insert into public.recommendation_events (id, user_id, listing_id, event_type, listing_type, category, tags, created_at)
+values ('66666666-6666-4666-8666-000000000011', '11111111-1111-4111-8111-000000000001', '22222222-2222-4222-8222-000000000113', 'viewed', 'business', 'food',
+  array['coffee', 'cafe', 'chai', 'study spot']::text[], now() - interval '183600 seconds');
+insert into public.recommendation_events (id, user_id, listing_id, event_type, listing_type, category, tags, created_at)
+values ('66666666-6666-4666-8666-000000000012', '11111111-1111-4111-8111-000000000010', '22222222-2222-4222-8222-000000000110', 'contact_requested', 'internship', 'health',
+  array['pre-med', 'shadowing', 'healthcare', 'students']::text[], now() - interval '259200 seconds');
+insert into public.recommendation_events (id, user_id, listing_id, event_type, listing_type, category, tags, created_at)
+values ('66666666-6666-4666-8666-000000000013', '11111111-1111-4111-8111-000000000010', '22222222-2222-4222-8222-000000000102', 'saved', 'mentorship', 'health',
+  array['nursing', 'pre-med', 'healthcare', 'students']::text[], now() - interval '54000 seconds');
 insert into public.recommendation_events (id, user_id, listing_id, event_type, listing_type, category, tags, created_at)
 values ('66666666-6666-4666-8666-000000000001', '11111111-1111-4111-8111-000000000001', '22222222-2222-4222-8222-000000000001', 'viewed', 'mentorship', 'engineering',
   array['robotics', 'cad', 'mechanical engineering', 'students']::text[], now() - interval '187200 seconds');

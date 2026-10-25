@@ -214,6 +214,33 @@ abstract final class Lexicon {
       'budgeting',
       'investing',
     ], ListingCategory.business),
+    LexiconTerm('Private equity', [
+      'private equity',
+      'leveraged buyout',
+      'lbo',
+      'buyout',
+    ], ListingCategory.business),
+    LexiconTerm('Venture capital', [
+      'venture capital',
+      'venture capitalist',
+      'angel investor',
+      'fundraising',
+      'pitch deck',
+      'seed round',
+    ], ListingCategory.business),
+    LexiconTerm('Islamic finance', [
+      'islamic finance',
+      'halal investing',
+      'zakat',
+      'sukuk',
+    ], ListingCategory.business),
+    LexiconTerm('Real estate', [
+      'real estate',
+      'realtor',
+      'homebuyer',
+      'rental property',
+      'rental properties',
+    ], ListingCategory.business),
     LexiconTerm('Marketing', [
       'marketing',
       'digital marketing',
@@ -324,6 +351,32 @@ abstract final class Lexicon {
       'outlets',
     ], ListingCategory.home),
     LexiconTerm('Plumbing', ['plumbing', 'plumber'], ListingCategory.home),
+    LexiconTerm('HVAC', [
+      'hvac',
+      'ac',
+      'air conditioning',
+      'air conditioner',
+      'furnace',
+      'heating',
+      'heat pump',
+    ], ListingCategory.home),
+    LexiconTerm('Landscaping', [
+      'landscaping',
+      'landscaper',
+      'lawn care',
+      'snow removal',
+    ], ListingCategory.home),
+    LexiconTerm('Moving', [
+      'movers',
+      'moving company',
+      'junk removal',
+    ], ListingCategory.home),
+    LexiconTerm('Auto repair', [
+      'auto repair',
+      'car repair',
+      'mechanic',
+      'oil change',
+    ], ListingCategory.other),
     LexiconTerm('Carpentry', [
       'carpentry',
       'carpenter',
@@ -369,6 +422,18 @@ abstract final class Lexicon {
       'meal prep',
     ], ListingCategory.food),
     LexiconTerm('Halal food', ['halal'], ListingCategory.food),
+    LexiconTerm('Coffee', [
+      'coffee',
+      'coffee shop',
+      'coffee house',
+      'cafe',
+      'barista',
+    ], ListingCategory.food),
+    LexiconTerm('Restaurant', [
+      'restaurant',
+      'restaurants',
+      'food truck',
+    ], ListingCategory.food),
     // Community
     LexiconTerm('Youth programs', [
       'youth',

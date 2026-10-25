@@ -25,7 +25,7 @@ class DemoDatabase {
        messages = messages ?? [],
        events = events ?? [];
 
-  static const schemaVersion = 1;
+  static const schemaVersion = 2;
 
   factory DemoDatabase.seeded(DateTime now) {
     final s = SeedData.build(now);

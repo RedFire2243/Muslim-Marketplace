@@ -965,6 +965,9 @@ class DeterministicParser {
     'chef',
     'realtor',
     'lawyer',
+    'technician',
+    'landscaper',
+    'mover',
   };
 
   /// Raw (unstemmed) words naming a service activity.
@@ -991,6 +994,11 @@ class DeterministicParser {
     'videography',
     'consulting',
     'taxes',
+    'fix',
+    'fixed',
+    'broken',
+    'install',
+    'installation',
   };
 
   /// Seeking a counterpart ("interns", "volunteers") means offering the

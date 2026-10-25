@@ -5,6 +5,8 @@ import '../../domain/listing.dart';
 import '../../domain/profile.dart';
 import '../../domain/taxonomy.dart';
 
+part 'seed_catalog.dart';
+
 /// Fictional sample content for the demo and for local backend seeding.
 ///
 /// Every person, group, business and message here is invented. None is a
@@ -409,6 +411,7 @@ abstract final class SeedData {
         area: 'edison',
         affiliation: 'Attends a masjid in Edison',
       ),
+      ..._catalogProfiles(p),
     ];
 
     Listing l(
@@ -955,9 +958,24 @@ abstract final class SeedData {
         remote: true,
         daysAgo: 28,
       ),
+      ..._catalogListings(l),
     ];
 
     final saved = <SavedListing>[
+      for (final (user, listing, hours) in [
+        (SeedIds.amina, 81, 20),
+        (SeedIds.amina, 75, 31),
+        (SeedIds.amina, 113, 50),
+        (SeedIds.zaid, 110, 76),
+        (SeedIds.zaid, 102, 15),
+        (_C.lina, 85, 49),
+        (_C.safiya, 35, 11),
+      ])
+        SavedListing(
+          userId: user,
+          listingId: SeedIds.listing(listing),
+          savedAt: ago(hours: hours),
+        ),
       SavedListing(
         userId: SeedIds.amina,
         listingId: SeedIds.listing(1),
@@ -1032,6 +1050,153 @@ abstract final class SeedData {
         respondedAt: ago(days: 4, hours: 20),
         conversationId: SeedIds.conversation(2),
       ),
+      ConnectionRequest(
+        id: SeedIds.request(6),
+        senderId: _C.sami,
+        recipientId: SeedIds.amina,
+        listingId: SeedIds.listing(32),
+        listingTitle: 'Teammates for a renewable energy hackathon',
+        message:
+            "Salaam Amina! I've built two solar dashboards at past hackathons and I'd love to join your team. I can handle the frontend.",
+        createdAt: ago(hours: 5),
+      ),
+      ConnectionRequest(
+        id: SeedIds.request(7),
+        senderId: _C.rania,
+        recipientId: SeedIds.amina,
+        listingId: SeedIds.listing(100),
+        listingTitle: 'Intro to Python for high schoolers',
+        message:
+            'I teach biology in Metuchen and a few of my students are eager to learn Python. Could they join your sessions?',
+        createdAt: ago(days: 1, hours: 6),
+      ),
+      ConnectionRequest(
+        id: SeedIds.request(8),
+        senderId: SeedIds.amina,
+        recipientId: SeedIds.hassan,
+        listingId: SeedIds.listing(12),
+        listingTitle:
+            'Engineering internship: automation and robotics (summer)',
+        message:
+            "Assalamu alaikum, I'm a junior in mechanical engineering with CAD and Python experience. I'd love to be considered for the automation internship.",
+        status: RequestStatus.accepted,
+        createdAt: ago(days: 3),
+        respondedAt: ago(days: 2, hours: 20),
+        conversationId: SeedIds.conversation(3),
+      ),
+      ConnectionRequest(
+        id: SeedIds.request(9),
+        senderId: SeedIds.amina,
+        recipientId: _C.mustafa,
+        listingId: SeedIds.listing(75),
+        listingTitle:
+            'Data science mentorship: Python, SQL and your first project',
+        message:
+            "I'd like to build a data project on solar panel output for my portfolio. Would you be open to mentoring me?",
+        createdAt: ago(hours: 30),
+      ),
+      ConnectionRequest(
+        id: SeedIds.request(10),
+        senderId: SeedIds.zaid,
+        recipientId: _C.shifa,
+        listingId: SeedIds.listing(110),
+        listingTitle: 'Clinical shadowing for pre-med students',
+        message:
+            "I'm a high school senior interested in medicine. I'd be grateful for a chance to shadow at your clinic.",
+        status: RequestStatus.accepted,
+        createdAt: ago(days: 3, hours: 4),
+        respondedAt: ago(days: 2, hours: 8),
+        conversationId: SeedIds.conversation(4),
+      ),
+      ConnectionRequest(
+        id: SeedIds.request(11),
+        senderId: SeedIds.zaid,
+        recipientId: _C.ruqayyah,
+        listingId: SeedIds.listing(102),
+        listingTitle: 'Mentorship for nursing and pre-med students',
+        message:
+            "Salaam! I'm deciding between pre-med and nursing and would really value your perspective.",
+        createdAt: ago(hours: 14),
+      ),
+      ConnectionRequest(
+        id: SeedIds.request(12),
+        senderId: _C.safiya,
+        recipientId: _C.tariq,
+        listingId: SeedIds.listing(35),
+        listingTitle: 'Licensed plumbing repairs and water heater installs',
+        message:
+            'Salaam, we have a leaking pipe near our water heater in Monroe. Are you available this week?',
+        status: RequestStatus.accepted,
+        createdAt: ago(hours: 10),
+        respondedAt: ago(hours: 9),
+        conversationId: SeedIds.conversation(5),
+      ),
+      ConnectionRequest(
+        id: SeedIds.request(13),
+        senderId: _C.lina,
+        recipientId: _C.cardamom,
+        listingId: SeedIds.listing(85),
+        listingTitle: 'Part-time social media manager for a coffee house',
+        message:
+            "Hi! I run Instagram and TikTok for my campus club and I'm at Cardamom most evenings anyway. I'd love to apply.",
+        status: RequestStatus.accepted,
+        createdAt: ago(days: 2),
+        respondedAt: ago(days: 1, hours: 18),
+        conversationId: SeedIds.conversation(6),
+      ),
+      ConnectionRequest(
+        id: SeedIds.request(14),
+        senderId: _C.amir,
+        recipientId: _C.imran,
+        listingId: SeedIds.listing(57),
+        listingTitle: 'Startup pitch deck reviews and fundraising advice',
+        message:
+            "Assalamu alaikum Imran, I'm raising a pre-seed round for a halal meal-kit startup. Could you look at our deck?",
+        status: RequestStatus.accepted,
+        createdAt: ago(days: 4),
+        respondedAt: ago(days: 3, hours: 22),
+        conversationId: SeedIds.conversation(7),
+      ),
+      ConnectionRequest(
+        id: SeedIds.request(15),
+        senderId: _C.kareem,
+        recipientId: SeedIds.maryam,
+        listingId: SeedIds.listing(26),
+        listingTitle: 'Logos, flyers and event photography',
+        message:
+            'Salaam Maryam, our masjid needs a refreshed logo and a newsletter template. Could we talk about a quote?',
+        createdAt: ago(days: 1, hours: 3),
+      ),
+      ConnectionRequest(
+        id: SeedIds.request(16),
+        senderId: SeedIds.bilal,
+        recipientId: _C.amir,
+        listingId: SeedIds.listing(64),
+        listingTitle: 'Operations co-founder for a halal meal-kit startup',
+        message:
+            "I've been working on a halal food delivery idea too. Maybe we should join forces?",
+        createdAt: ago(days: 2, hours: 5),
+      ),
+      ConnectionRequest(
+        id: SeedIds.request(17),
+        senderId: _C.hamid,
+        recipientId: SeedIds.sarah,
+        message:
+            'Salaam Sarah, I teach halal investing basics and many of my clients ask about taxes. Could we refer people to each other?',
+        createdAt: ago(days: 1, hours: 9),
+      ),
+      ConnectionRequest(
+        id: SeedIds.request(18),
+        senderId: _C.yasmin,
+        recipientId: _C.layla,
+        listingId: SeedIds.listing(83),
+        listingTitle: 'Part-time QA tester for a fintech app',
+        message:
+            "I'm a UX designer between roles and have done a lot of usability testing. Happy to help part time.",
+        status: RequestStatus.declined,
+        createdAt: ago(days: 6),
+        respondedAt: ago(days: 5),
+      ),
     ];
 
     final messages = <Message>[
@@ -1070,6 +1235,96 @@ abstract final class SeedData {
         createdAt: ago(days: 4, hours: 18),
         clientId: SeedIds.message(4),
       ),
+      ...[
+        (
+          3,
+          SeedIds.hassan,
+          'Wa alaikum assalam Amina, thanks for reaching out. Your sorting robot project is exactly the kind of work we do.',
+          ago(days: 2, hours: 19),
+        ),
+        (
+          3,
+          SeedIds.amina,
+          'JazakAllah khair! Should I send my resume and a few CAD screenshots?',
+          ago(days: 2, hours: 18),
+        ),
+        (
+          3,
+          SeedIds.hassan,
+          'Yes please. Could you come by the New Brunswick office next Wednesday at 4 for a short chat?',
+          ago(days: 2, hours: 17),
+        ),
+        (
+          3,
+          SeedIds.amina,
+          "Wednesday at 4 works. I'll bring my laptop to show the gripper prototype.",
+          ago(days: 2, hours: 16),
+        ),
+        (
+          4,
+          _C.shifa,
+          "Hi Zaid, we'd be happy to have you shadow. Our physicians host students on Tuesday and Thursday afternoons.",
+          ago(days: 2, hours: 7),
+        ),
+        (
+          4,
+          SeedIds.zaid,
+          'Thank you so much! Thursdays work best after school. Is there anything I should prepare?',
+          ago(days: 2, hours: 5),
+        ),
+        (
+          4,
+          _C.shifa,
+          'Just a signed form from a parent and your vaccination record. We will email both to you.',
+          ago(days: 1, hours: 23),
+        ),
+        (
+          5,
+          _C.tariq,
+          'Wa alaikum assalam. I can come tomorrow between 9 and 11. Please turn off the water to the heater if it gets worse.',
+          ago(hours: 8),
+        ),
+        (
+          5,
+          _C.safiya,
+          'JazakAllah khair, tomorrow at 9 is perfect. Address is in Monroe near the high school.',
+          ago(hours: 7),
+        ),
+        (
+          6,
+          _C.cardamom,
+          "Hi Lina! We loved your campus club's page. Can you stop by Saturday at 11 to meet the owner?",
+          ago(days: 1, hours: 17),
+        ),
+        (6, _C.lina, 'Definitely, see you Saturday!', ago(days: 1, hours: 16)),
+        (
+          7,
+          _C.imran,
+          'Wa alaikum assalam Amir. Happy to. Send the deck and your latest waitlist numbers.',
+          ago(days: 3, hours: 21),
+        ),
+        (
+          7,
+          _C.amir,
+          'Sent! We are at 200 sign-ups and running a two-week pilot with 15 families.',
+          ago(days: 3, hours: 20),
+        ),
+        (
+          7,
+          _C.imran,
+          'Nice traction. Your market slide needs work, but the pilot story is strong. Call on Monday?',
+          ago(days: 2, hours: 2),
+        ),
+      ].indexed.map(
+        (e) => Message(
+          id: SeedIds.message(5 + e.$1),
+          conversationId: SeedIds.conversation(e.$2.$1),
+          senderId: e.$2.$2,
+          body: e.$2.$3,
+          createdAt: e.$2.$4,
+          clientId: SeedIds.message(5 + e.$1),
+        ),
+      ),
     ];
 
     Conversation conv(int n, ConnectionRequest req) {
@@ -1089,7 +1344,11 @@ abstract final class SeedData {
       return last.isEmpty ? base : base.withLastMessage(last.last);
     }
 
-    final conversations = [conv(1, requests[0]), conv(2, requests[4])];
+    final conversations = [
+      for (final req in requests)
+        if (req.conversationId case final id?)
+          conv(int.parse(id.split('-').last), req),
+    ];
 
     final byId = {for (final x in listings) x.id: x};
     ActivityEvent ev(
@@ -1113,6 +1372,13 @@ abstract final class SeedData {
     }
 
     final events = <ActivityEvent>[
+      ev(7, SeedIds.amina, 81, ActivityType.saved, ago(hours: 20)),
+      ev(8, SeedIds.amina, 75, ActivityType.saved, ago(hours: 31)),
+      ev(9, SeedIds.amina, 75, ActivityType.contactRequested, ago(hours: 30)),
+      ev(10, SeedIds.amina, 12, ActivityType.contactRequested, ago(days: 3)),
+      ev(11, SeedIds.amina, 113, ActivityType.viewed, ago(hours: 51)),
+      ev(12, SeedIds.zaid, 110, ActivityType.contactRequested, ago(days: 3)),
+      ev(13, SeedIds.zaid, 102, ActivityType.saved, ago(hours: 15)),
       ev(1, SeedIds.amina, 1, ActivityType.viewed, ago(days: 2, hours: 4)),
       ev(2, SeedIds.amina, 1, ActivityType.saved, ago(days: 2, hours: 3)),
       ev(

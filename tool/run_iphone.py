@@ -4,6 +4,7 @@
 import argparse
 import json
 import plistlib
+import re
 import shutil
 import subprocess
 import sys
@@ -56,6 +57,38 @@ def verify_bundle(bundle, voice_url):
         )
 
 
+def device_config(config, allow_direct=False):
+    """Keep direct credentials behind both the config and command-line opt-ins."""
+    if not isinstance(config, dict):
+        raise ValueError("The app config must be a JSON object.")
+    direct = config.get("GEMINI_DIRECT_TEST") in (True, "true")
+    if not direct:
+        return public_config(config)
+    if not allow_direct:
+        raise ValueError("A direct Gemini test requires --allow-direct-gemini-test.")
+    api_key = config.get("GEMINI_API_KEY", "")
+    model = config.get("GEMINI_MODEL", "gemini-3.8-flash")
+    if not isinstance(api_key, str) or not api_key.strip():
+        raise ValueError("The direct Gemini test needs a configured GEMINI_API_KEY.")
+    if not isinstance(model, str) or not re.fullmatch(r"[A-Za-z0-9._-]+", model):
+        raise ValueError("GEMINI_MODEL must be a model identifier.")
+    result = {key: value for key, value in config.items() if key in PUBLIC_CONFIG_KEYS}
+    result.update(GEMINI_DIRECT_TEST=True, GEMINI_API_KEY=api_key.strip(), GEMINI_MODEL=model)
+    if any(not isinstance(value, (str, bool)) for value in result.values()):
+        raise ValueError("App config values must be strings or booleans.")
+    return result
+
+
+def verify_device_bundle(bundle, config):
+    if not config.get("GEMINI_DIRECT_TEST"):
+        return verify_bundle(bundle, config["VOICE_SEARCH_URL"])
+    binary = Path(bundle) / "Frameworks/App.framework/App"
+    data = binary.read_bytes() if binary.is_file() else b""
+    if (config["GEMINI_API_KEY"].encode() not in data
+            or b"generativelanguage.googleapis.com" not in data):
+        raise ValueError("The app lacks its direct Gemini test configuration; nothing was installed.")
+
+
 def run(command, root):
     subprocess.run(command, cwd=root, check=True)
 
@@ -66,11 +99,13 @@ def main(argv=None):
     parser.add_argument("--config", required=True, type=Path,
                         help="JSON file with public connection settings")
     parser.add_argument("--build-number", help="Optional iOS build number")
+    parser.add_argument("--allow-direct-gemini-test", action="store_true",
+                        help="Explicitly allow the provider key in this private test app")
     args = parser.parse_args(argv)
     root = Path(__file__).resolve().parents[1]
     config_path = args.config if args.config.is_absolute() else root / args.config
     try:
-        config = public_config(json.loads(config_path.read_text()))
+        config = device_config(json.loads(config_path.read_text()), args.allow_direct_gemini_test)
         with tempfile.TemporaryDirectory(prefix="marketplace-iphone-") as temp:
             temp_root = Path(temp)
             build_config = temp_root / "public-config.json"
@@ -79,19 +114,20 @@ def main(argv=None):
                        f"--dart-define-from-file={build_config}"]
             if args.build_number is not None:
                 command.append(f"--build-number={args.build_number}")
-            print("Building iPhone app with public voice configuration…", flush=True)
+            print("Building private direct-Gemini test app…" if config.get("GEMINI_DIRECT_TEST")
+                  else "Building iPhone app with public voice configuration…", flush=True)
             run(command, root)
             # Install a private copy so another build cannot replace a
             # verified bundle between the check and the device installation.
             bundle = temp_root / "Runner.app"
             shutil.copytree(root / "build/ios/iphoneos/Runner.app", bundle,
                             symlinks=True)
-            verify_bundle(bundle, config["VOICE_SEARCH_URL"])
+            verify_device_bundle(bundle, config)
             with (bundle / "Info.plist").open("rb") as info:
                 bundle_id = plistlib.load(info).get("CFBundleIdentifier")
             if not isinstance(bundle_id, str) or not bundle_id:
                 raise ValueError("The built app has no bundle identifier; nothing was installed.")
-            print("Verified voice endpoint. Installing and launching…", flush=True)
+            print("Verified voice configuration. Installing and launching…", flush=True)
             run(["xcrun", "devicectl", "device", "install", "app",
                  "--device", args.device, str(bundle)], root)
             run(["xcrun", "devicectl", "device", "process", "launch",

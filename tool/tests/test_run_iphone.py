@@ -14,6 +14,24 @@ SPEC.loader.exec_module(runner)
 
 
 class PublicConfigTests(unittest.TestCase):
+    def test_direct_gemini_requires_explicit_command_line_opt_in(self):
+        config = {"GEMINI_DIRECT_TEST": True, "GEMINI_API_KEY": "private-test-key"}
+        with self.assertRaisesRegex(ValueError, "allow-direct-gemini-test"):
+            runner.device_config(config)
+        direct = runner.device_config(config, allow_direct=True)
+        self.assertEqual(direct["GEMINI_API_KEY"], "private-test-key")
+        self.assertTrue(direct["GEMINI_DIRECT_TEST"])
+        self.assertEqual(direct["GEMINI_MODEL"], "gemini-3.8-flash")
+
+    def test_direct_gemini_does_not_allow_other_provider_secrets(self):
+        config = runner.device_config({
+            "GEMINI_DIRECT_TEST": "true", "GEMINI_API_KEY": "private-test-key",
+            "ANTHROPIC_API_KEY": "must-not-ship", "SUPABASE_SERVICE_ROLE_KEY": "must-not-ship",
+        }, allow_direct=True)
+        self.assertNotIn("must-not-ship", json.dumps(config))
+        with self.assertRaises(ValueError):
+            runner.device_config({"GEMINI_DIRECT_TEST": True}, allow_direct=True)
+
     def test_only_public_keys_reach_the_build(self):
         config = runner.public_config({
             "VOICE_SEARCH_URL": "  http://mac.local:8765/transcribe-search  ",
@@ -44,6 +62,18 @@ class PublicConfigTests(unittest.TestCase):
 
 
 class BundleVerificationTests(unittest.TestCase):
+    def test_direct_bundle_has_both_key_and_google_endpoint(self):
+        with tempfile.TemporaryDirectory() as temp:
+            bundle = Path(temp) / "Runner.app"
+            binary = bundle / "Frameworks/App.framework/App"
+            binary.parent.mkdir(parents=True)
+            config = {"GEMINI_DIRECT_TEST": True, "GEMINI_API_KEY": "private-test-key"}
+            binary.write_bytes(b"private-test-key")
+            with self.assertRaises(ValueError):
+                runner.verify_device_bundle(bundle, config)
+            binary.write_bytes(b"private-test-key generativelanguage.googleapis.com")
+            runner.verify_device_bundle(bundle, config)
+
     def test_requires_full_endpoint_not_just_shared_hostname(self):
         with tempfile.TemporaryDirectory() as temp:
             bundle = Path(temp) / "Runner.app"

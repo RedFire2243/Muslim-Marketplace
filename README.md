@@ -164,9 +164,15 @@ The app treats the function's answer as untrusted: it checks the shape, keeps on
 
 The built-in parser recognises role phrases ("looking for", "I can", "hiring"), opportunity words (mentor, internship, volunteers, tutor and others), about 70 skills and subjects, 20 Central Jersey town names and remote preferences. It does not understand arbitrary phrasing, synonyms outside its vocabulary, or negation; anything it misses can be added on the review screen.
 
+### Demo build: Gemini called from the app
+
+For the demo, every build bundles a Gemini key (`lib/src/config/demo_keys.dart`) and calls Gemini directly from the app for voice transcription and search ranking, so `flutter run` needs no flags and no voice server. Anyone with the app can extract that key: rotate it after the demo and build with `GEMINI_DIRECT_TEST=false` to use the server described below. A build's own `GEMINI_API_KEY` and `GEMINI_MODEL` take precedence over the bundled ones.
+
+If tapping the microphone in a web build says it couldn't be started and the browser console shows `MissingPluginException` for `com.llfbandit.record`, Flutter reused a build cache from before the `record` plugin was added. Run `flutter clean`, then build again.
+
 ### Voice search through the server
 
-Discover centers on a large microphone with fading prompts. Tap it and say what you need, such as *"I need a robotics mentor near New Brunswick"*. Listening stops when you pause, tap again, or reach 15 seconds. The app sends the recording to your voice server, which calls Gemini and returns only the transcript. The existing matcher ranks the results for the whole request. The app contains no Gemini key or model configuration. Typing remains available, and prompts stay still with reduced motion enabled.
+Discover centers on a large microphone with fading prompts. Tap it and say what you need, such as *"I need a robotics mentor near New Brunswick"*. Listening stops when you pause, tap again, or reach 15 seconds. The app sends the recording to your voice server, which calls Gemini and returns only the transcript. The existing matcher ranks the results for the whole request. With `GEMINI_DIRECT_TEST=false` the app contains no Gemini key or model configuration. Typing remains available, and prompts stay still with reduced motion enabled.
 
 Set `VOICE_SEARCH_URL` to the full transcription endpoint in a **public-only app config**. Without an endpoint the microphone is unavailable and typing still works. In debug builds, Privacy and settings reports `voiceSearch=true` when an endpoint is configured.
 

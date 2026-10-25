@@ -100,6 +100,33 @@ void main() {
 
   final listening = find.textContaining('Listening');
 
+  testWidgets('explicit direct test enables Gemini without the LAN service', (
+    tester,
+  ) async {
+    final c = await pumpApp(
+      tester,
+      size: phone,
+      config: const AppConfig(
+        geminiDirectTest: true,
+        geminiApiKey: 'test-only-key',
+        voiceSearchUrl: 'http://unreachable.local:8765/transcribe-search',
+      ),
+    );
+    await enterAs(tester, c, SeedIds.zaid);
+    expect(c.read(appConfigProvider).hasDirectGemini, isTrue);
+    expect(c.read(speechTranscriberProvider), isA<DirectGeminiTranscriber>());
+    expect(
+      tester
+          .widget<IconButton>(
+            find.byKey(const ValueKey('discovery-voice-button')),
+          )
+          .onPressed,
+      isNotNull,
+    );
+    expect(find.text('Tap to speak'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
   testWidgets('a configured LAN endpoint enables the real voice provider', (
     tester,
   ) async {

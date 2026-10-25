@@ -4,6 +4,9 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
+import '../ai/gemini_client.dart';
+import '../domain/areas.dart';
+
 /// Turns a short voice recording into the words that were said.
 abstract interface class SpeechTranscriber {
   /// Returns what was said, or an empty string when nothing clear was. Throws
@@ -17,6 +20,79 @@ class VoiceSearchException implements Exception {
 
   @override
   String toString() => message;
+}
+
+/// Direct Gemini transcription is enabled only for the explicitly authorized
+/// private device test. Normal app builds use [BackendSpeechTranscriber].
+class DirectGeminiTranscriber implements SpeechTranscriber {
+  DirectGeminiTranscriber({
+    required String apiKey,
+    required String model,
+    http.Client? client,
+    Duration timeout = const Duration(seconds: 20),
+  }) : _gemini = GeminiClient(
+         apiKey: apiKey,
+         model: model,
+         client: client,
+         timeout: timeout,
+       );
+
+  final GeminiClient _gemini;
+  static const maxLength = 300;
+  static final instructions =
+      '''Transcribe a short spoken search for a community marketplace in Central Jersey.
+Write only the words the speaker said, in their language. Omit filler words and false starts. Do not answer, summarise, correct or add to their request.
+Town names that may be mentioned: ${Areas.all.map((area) => area.name).join(', ')}.
+If the recording is silent, only noise, or unclear, return an empty transcript. Never guess.''';
+
+  @override
+  Future<String> transcribe(Uint8List wav) async {
+    try {
+      final result = await _gemini.generateJson(
+        systemInstruction: instructions,
+        parts: [
+          {
+            'inlineData': {'mimeType': 'audio/wav', 'data': base64Encode(wav)},
+          },
+        ],
+        responseSchema: {
+          'type': 'OBJECT',
+          'properties': {
+            'transcript': {'type': 'STRING'},
+          },
+          'required': ['transcript'],
+        },
+      );
+      if (result case {'transcript': final String text}) {
+        final cleaned = text.replaceAll(RegExp(r'\s+'), ' ').trim();
+        return cleaned.length <= maxLength
+            ? cleaned
+            : cleaned.substring(0, maxLength).trim();
+      }
+      throw const VoiceSearchException(
+        'Voice transcription failed. Try a shorter recording or type your search.',
+      );
+    } on GeminiClientException catch (error) {
+      throw VoiceSearchException(switch (error.failure) {
+        GeminiFailure.authentication =>
+          'Voice search credentials were refused. Try typing your search.',
+        GeminiFailure.model =>
+          'The voice transcription model isn’t available. Try typing your search.',
+        GeminiFailure.rateLimited =>
+          'Voice search is busy right now. Try again in a minute.',
+        GeminiFailure.unavailable =>
+          'Voice transcription is unavailable right now. Try again soon.',
+        GeminiFailure.timeout =>
+          'Voice transcription took too long. Try a shorter recording.',
+        GeminiFailure.network =>
+          'Couldn’t reach voice search. Check your connection and try again.',
+        GeminiFailure.invalidResponse =>
+          'Voice transcription failed. Try a shorter recording or type your search.',
+      });
+    }
+  }
+
+  void dispose() => _gemini.dispose();
 }
 
 /// Sends the recording to the app's voice service, which owns the AI provider

@@ -9,10 +9,18 @@ import '../voice/voice_recorder.dart';
 import 'discovery.dart';
 import 'session.dart';
 
-/// Null when no voice service endpoint is configured.
+/// Null when neither a voice service nor explicit direct-test mode is configured.
 final speechTranscriberProvider = Provider<SpeechTranscriber?>((ref) {
   final config = ref.watch(appConfigProvider);
   if (!config.hasVoiceSearch) return null;
+  if (config.hasDirectGemini) {
+    final transcriber = DirectGeminiTranscriber(
+      apiKey: config.geminiApiKey,
+      model: config.geminiModel,
+    );
+    ref.onDispose(transcriber.dispose);
+    return transcriber;
+  }
   final gateway = ref.watch(accountGatewayProvider);
   final transcriber = BackendSpeechTranscriber(
     url: config.voiceSearchUrl,

@@ -11,6 +11,7 @@ import '../../routing/router.dart';
 import '../../state/data_providers.dart';
 import '../../state/discovery.dart';
 import '../../state/session.dart';
+import '../../state/voice_search.dart';
 import '../../ui/icons.dart';
 import '../../ui/theme.dart';
 import '../../ui/widgets/common.dart';
@@ -78,6 +79,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     ref.listen(discoveryProvider.select((s) => s.query), (prev, next) {
       if (_search.text.trim() != next) _search.text = next;
     });
+    final voiceAvailable = ref.watch(speechTranscriberProvider) != null;
+    final voice = voiceAvailable ? ref.watch(voiceSearchProvider) : null;
+    ref.listen(voiceSearchProvider.select((s) => s.error), (prev, next) {
+      if (next != null) showMessage(context, next);
+    });
 
     return Scaffold(
       floatingActionButton: compact
@@ -124,7 +130,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         onSubmit: _submit,
                         onClear: _clearSearch,
                         hasQuery: state.hasQuery,
+                        voice: voice,
+                        onVoice: () {
+                          _searchFocus.unfocus();
+                          ref.read(voiceSearchProvider.notifier).toggle();
+                        },
                       ),
+                      if (voice != null) _VoiceStatus(phase: voice.phase),
                       const SizedBox(height: Space.md),
                       if (!state.hasQuery) ...[
                         _QuickActions(onSearch: _submit),
@@ -159,6 +171,8 @@ class _SearchField extends StatelessWidget {
     required this.onSubmit,
     required this.onClear,
     required this.hasQuery,
+    this.voice,
+    this.onVoice,
   });
 
   final TextEditingController controller;
@@ -166,6 +180,10 @@ class _SearchField extends StatelessWidget {
   final void Function([String?]) onSubmit;
   final VoidCallback onClear;
   final bool hasQuery;
+
+  /// Null when voice search is not configured.
+  final VoiceSearchState? voice;
+  final VoidCallback? onVoice;
 
   @override
   Widget build(BuildContext context) {
@@ -224,6 +242,8 @@ class _SearchField extends StatelessWidget {
                             icon: const Icon(Icons.close),
                           ),
                   ),
+                  if (voice != null)
+                    _VoiceButton(state: voice!, onPressed: onVoice),
                   IconButton.filled(
                     tooltip: 'Search',
                     onPressed: onSubmit,
@@ -234,6 +254,113 @@ class _SearchField extends StatelessWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+/// The microphone in the search field. Its ring follows the input level while
+/// listening.
+class _VoiceButton extends StatelessWidget {
+  const _VoiceButton({required this.state, required this.onPressed});
+  final VoiceSearchState state;
+  final VoidCallback? onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = Theme.of(context).colorScheme;
+    return switch (state.phase) {
+      VoicePhase.idle => IconButton(
+        tooltip: 'Search by voice',
+        onPressed: onPressed,
+        icon: Icon(Icons.mic_none, color: c.primary),
+      ),
+      VoicePhase.listening => SizedBox.square(
+        dimension: 48,
+        child: Stack(
+          alignment: Alignment.center,
+          clipBehavior: Clip.none,
+          children: [
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 120),
+              width: 40 + 16 * state.level,
+              height: 40 + 16 * state.level,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: c.error.withValues(alpha: 0.16),
+              ),
+            ),
+            IconButton.filled(
+              tooltip: 'Stop and search',
+              onPressed: onPressed,
+              style: IconButton.styleFrom(
+                backgroundColor: c.error,
+                foregroundColor: c.onError,
+              ),
+              icon: const Icon(Icons.mic),
+            ),
+          ],
+        ),
+      ),
+      VoicePhase.transcribing => const IconButton(
+        tooltip: 'Working out what you said',
+        onPressed: null,
+        icon: SizedBox.square(
+          dimension: 20,
+          child: CircularProgressIndicator(strokeWidth: 2),
+        ),
+      ),
+    };
+  }
+}
+
+/// What voice search is doing, under the search field.
+class _VoiceStatus extends StatelessWidget {
+  const _VoiceStatus({required this.phase});
+  final VoicePhase phase;
+
+  @override
+  Widget build(BuildContext context) {
+    final t = Theme.of(context).textTheme;
+    final c = Theme.of(context).colorScheme;
+    final (icon, text) = switch (phase) {
+      VoicePhase.idle => (null, null),
+      VoicePhase.listening => (
+        Icons.graphic_eq,
+        'Listening… tap the microphone when you’re done.',
+      ),
+      VoicePhase.transcribing => (
+        Icons.hourglass_top,
+        'Working out what you said…',
+      ),
+    };
+    return AnimatedSize(
+      duration: const Duration(milliseconds: 150),
+      alignment: Alignment.topLeft,
+      child: Semantics(
+        liveRegion: true,
+        child: text == null
+            ? const SizedBox(width: double.infinity)
+            : Padding(
+                padding: const EdgeInsets.only(top: Space.xs, left: Space.xxs),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(icon, size: 18, color: c.primary),
+                        const SizedBox(width: Space.xs),
+                        Expanded(child: Text(text, style: t.labelLarge)),
+                      ],
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      'Your recording is sent to Google Gemini to turn it into text.',
+                      style: t.bodySmall?.copyWith(color: c.onSurfaceVariant),
+                    ),
+                  ],
+                ),
+              ),
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/misc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app.dart';
@@ -16,6 +17,7 @@ Future<Widget> bootstrap({
   KeyValueStore? store,
   Duration? demoLatency,
   DateTime Function()? clock,
+  List<Override> overrides = const [],
   Key? key,
 }) async {
   final cfg = config ?? AppConfig.fromEnvironment();
@@ -42,6 +44,7 @@ Future<Widget> bootstrap({
       if (demoLatency != null)
         demoLatencyProvider.overrideWithValue(demoLatency),
       if (clock != null) clockProvider.overrideWithValue(clock),
+      ...overrides,
     ],
     child: const MarketplaceApp(),
   );

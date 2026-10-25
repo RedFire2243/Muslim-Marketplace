@@ -130,6 +130,8 @@ Put the project URL and its publishable (or anon) key in `config/local.json` (or
 | `AI_EXTRACTION` | same | `true` to ask the `extract-profile` function for onboarding suggestions in connected mode. |
 | `ANTHROPIC_API_KEY` | Supabase function secret only | Never in the app or this repository. |
 | `EXTRACTION_MODEL` | Supabase function secret (optional) | Defaults to `claude-opus-5-5`. |
+| `GEMINI_API_KEY` | `config/local.json` or `--dart-define` | Turns on voice search. Compiled into the app, so keep it out of public builds (see below). |
+| `GEMINI_MODEL` | same (optional) | Model that transcribes voice searches. Defaults to `gemini-3.8-flash`. |
 
 `config/*.json` (except the example), `.env` files and `supabase/functions/.env` are ignored by git. No secrets are committed.
 
@@ -157,9 +159,33 @@ supabase functions deploy extract-profile
 
 Then set `"AI_EXTRACTION": "true"` in `config/local.json`. For local testing, put `ANTHROPIC_API_KEY=...` in `supabase/functions/.env` and run `supabase functions serve --env-file supabase/functions/.env`.
 
-The app treats the function's answer as untrusted: it checks the shape, keeps only skills, interests, subjects and places whose words appear in the member's answers, and merges the result with the built-in parser. If the function is not configured, times out (8 seconds), returns malformed data, declines, or fails, members still get suggestions from the built-in parser and can edit everything. Search never calls the AI.
+The app treats the function's answer as untrusted: it checks the shape, keeps only skills, interests, subjects and places whose words appear in the member's answers, and merges the result with the built-in parser. If the function is not configured, times out (8 seconds), returns malformed data, declines, or fails, members still get suggestions from the built-in parser and can edit everything. Typed search never calls the AI.
 
 The built-in parser recognises role phrases ("looking for", "I can", "hiring"), opportunity words (mentor, internship, volunteers, tutor and others), about 70 skills and subjects, 20 Central Jersey town names and remote preferences. It does not understand arbitrary phrasing, synonyms outside its vocabulary, or negation; anything it misses can be added on the review screen.
+
+### Optional voice search
+
+With a [Gemini API key](https://aistudio.google.com/apikey), the search box gets a microphone. Tap it and say what you're looking for, for example *"I need a robotics mentor near New Brunswick"*. Listening stops when you pause (or tap the microphone again, or after 15 seconds); Gemini turns the recording into text, which goes into the search box and runs as a normal search.
+
+Put the key in `config/local.json`:
+
+```json
+"GEMINI_API_KEY": "<your key>"
+```
+
+and run with the config file as usual:
+
+```bash
+flutter run -d chrome --dart-define-from-file=config/local.json
+```
+
+In debug builds, Settings → Privacy and settings shows `voiceSearch=true` when it is on. Without a key there is no microphone and nothing changes.
+
+How it works: the app records 16 kHz mono audio from the microphone (the `record` plugin, on web, iOS, Android and macOS), wraps it as WAV in memory and sends it inline to the Gemini `generateContent` endpoint with a short instruction to transcribe only what was said. Only the recording is sent, only after you tap the microphone, and the app says so while listening. Recordings with nothing louder than their own background (silence or steady noise) are never sent: in testing, Gemini invented whole searches from silence. The answer is used as search text (trimmed to 300 characters) and never acted on otherwise. If the microphone is refused, nothing is heard, or Gemini fails, the app says so and leaves your search as it was.
+
+**The key is compiled into the build.** Anyone who can load a build made with it can read it, so use it for local development. Before publishing a web build with voice search, restrict the key to your site in the Google Cloud console, or move the call behind a server function the way AI extraction works.
+
+Microphone permission is declared for iOS and macOS (`NSMicrophoneUsageDescription`, plus the audio-input entitlement on macOS) and Android (`RECORD_AUDIO`). Browsers only allow the microphone on `https` pages or `localhost`.
 
 ## How matching works
 
@@ -178,6 +204,7 @@ lib/
     bootstrap.dart          Builds the app; connected mode only when configured
     domain/                 Typed models, taxonomy, areas, status rules
     matching/               Parser, AI-output validation, ranking, preferences
+    voice/                  Microphone recording and Gemini transcription for voice search
     data/                   Repository interfaces, demo backend, Supabase backend, seed data
     state/                  Riverpod providers and controllers
     features/               Screens (welcome, auth, onboarding, home, listing, saved, inbox, profile, members)
@@ -266,6 +293,7 @@ Verified on October 24, 2026 with Flutter 3.44.4, Dart 3.12.2, Xcode 26.2 and Ch
 - LinkedIn is a link only; nothing is imported. Masjid affiliation is self-reported and never verified.
 - No moderation or organization administration tools, payments, or social graph.
 - The interface is English only and uses a light theme.
+- Voice search calls Gemini from the app, so its key ships with the build. Transcription was checked on October 25, 2026 against the live `gemini-3.8-flash` with synthesized speech (macOS `say`, three voices, about 2.5–3.5 seconds per request); microphone recording itself has only been exercised through tests, not on a real device.
 
 ## Planning documents
 

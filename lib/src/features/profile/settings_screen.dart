@@ -331,7 +331,7 @@ class _Diagnostics extends ConsumerWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(Space.md, 0, Space.md, Space.md),
       child: Text(
-        'Debug: mode=${mode.name}, backendConfigured=${config.hasBackend}, aiExtraction=${config.aiExtraction}',
+        'Debug: mode=${mode.name}, backendConfigured=${config.hasBackend}, aiExtraction=${config.aiExtraction}, voiceSearch=${config.hasVoiceSearch}',
         style: t.bodySmall?.copyWith(fontFamily: 'monospace'),
       ),
     );

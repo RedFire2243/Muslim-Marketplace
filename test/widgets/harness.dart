@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:muslim_marketplace/src/app.dart';
@@ -19,6 +20,8 @@ Future<ProviderContainer> pumpApp(
   Size size = phone,
   KeyValueStore? store,
   double textScale = 1,
+  AppConfig config = const AppConfig(),
+  List<Override> overrides = const [],
 }) async {
   tester.view.physicalSize = size * 2;
   tester.view.devicePixelRatio = 2;
@@ -28,7 +31,8 @@ Future<ProviderContainer> pumpApp(
   final app = await bootstrap(
     store: store ?? MemoryStore(),
     demoLatency: Duration.zero,
-    config: const AppConfig(),
+    config: config,
+    overrides: overrides,
   );
   await tester.pumpWidget(app);
   await tester.pumpAndSettle();

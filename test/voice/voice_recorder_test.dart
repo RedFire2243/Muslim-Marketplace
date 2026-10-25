@@ -56,6 +56,24 @@ void main() {
       }
     });
 
+    test('gives the same levels however the audio is split', () {
+      final clip = pcm(1, (i) => i < rate / 2 ? tone(i, -12) : noise(-40));
+      final whole = pcmLevels(clip, sampleRate: rate);
+      final meter = LevelMeter(sampleRate: rate);
+      final chunked = [
+        // Odd sizes split samples across chunks.
+        for (var i = 0; i < clip.length; i += 333)
+          ...meter.add(clip.sublist(i, math.min(i + 333, clip.length))),
+      ];
+      expect(whole, hasLength(10));
+      expect(chunked, hasLength(10));
+      for (var i = 0; i < 10; i++) {
+        expect(chunked[i], closeTo(whole[i], 1e-9));
+      }
+      expect(whole.first, closeTo(-12, 0.5));
+      expect(whole.last, closeTo(-40, 1));
+    });
+
     test('silence and steady noise are not speech', () {
       expect(hasSpeech(pcm(2, (_) => 0), sampleRate: rate), isFalse);
       expect(hasSpeech(pcm(2, (_) => noise(-45)), sampleRate: rate), isFalse);

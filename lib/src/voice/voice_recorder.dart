@@ -4,7 +4,7 @@ import 'dart:typed_data';
 
 import 'package:record/record.dart';
 
-/// How often the microphone level is read while listening.
+/// How much audio each loudness reading covers.
 const levelInterval = Duration(milliseconds: 100);
 
 /// One finished recording.
@@ -27,7 +27,8 @@ abstract interface class VoiceRecorder {
 
   Future<void> start();
 
-  /// Input loudness in dBFS (0 is the loudest), every [levelInterval].
+  /// Loudness in dBFS (0 is the loudest) of each [levelInterval] of audio
+  /// recorded so far.
   Stream<double> get levels;
 
   Future<VoiceClip> stop();
@@ -38,11 +39,17 @@ abstract interface class VoiceRecorder {
 /// Records from the device microphone with the `record` plugin. Audio is
 /// streamed as raw PCM on every platform (including the web) and wrapped as
 /// WAV, so nothing touches the file system.
+///
+/// Levels are measured from the audio itself rather than polled on a timer:
+/// browsers throttle timers in background or embedded pages, which would
+/// stall the end-of-speech detection while recording carries on.
 class MicRecorder implements VoiceRecorder {
   static const sampleRate = 16000;
 
   final _recorder = AudioRecorder();
   final _pcm = BytesBuilder(copy: false);
+  final _meter = LevelMeter(sampleRate: sampleRate);
+  final _levels = StreamController<double>.broadcast();
   final _done = Completer<void>();
   StreamSubscription<Uint8List>? _audio;
 
@@ -60,12 +67,16 @@ class MicRecorder implements VoiceRecorder {
         noiseSuppress: true,
       ),
     );
-    _audio = stream.listen(_pcm.add, onDone: _done.complete);
+    _audio = stream.listen(_onAudio, onDone: _done.complete);
+  }
+
+  void _onAudio(Uint8List chunk) {
+    _pcm.add(chunk);
+    _meter.add(chunk).forEach(_levels.add);
   }
 
   @override
-  Stream<double> get levels =>
-      _recorder.onAmplitudeChanged(levelInterval).map((a) => a.current);
+  Stream<double> get levels => _levels.stream;
 
   @override
   Future<VoiceClip> stop() async {
@@ -83,6 +94,7 @@ class MicRecorder implements VoiceRecorder {
   @override
   Future<void> dispose() async {
     await _audio?.cancel();
+    await _levels.close();
     await _recorder.dispose();
   }
 }
@@ -118,20 +130,49 @@ Uint8List wavFromPcm16(
     ..setAll(44, pcm);
 }
 
-/// Loudness in dBFS of each [levelInterval] of little-endian 16-bit mono PCM.
-Iterable<double> pcmLevels(Uint8List pcm, {required int sampleRate}) sync* {
-  final data = ByteData.sublistView(pcm);
-  final window = sampleRate * levelInterval.inMilliseconds ~/ 1000;
-  final count = pcm.length ~/ 2;
-  for (var start = 0; start + window <= count; start += window) {
-    var sum = 0.0;
-    for (var i = start; i < start + window; i++) {
-      final s = data.getInt16(i * 2, Endian.little) / 32768;
-      sum += s * s;
+/// Measures the loudness (RMS, in dBFS) of each [levelInterval] of
+/// little-endian 16-bit mono PCM that arrives in chunks of any size.
+class LevelMeter {
+  LevelMeter({required int sampleRate})
+    : _window = sampleRate * levelInterval.inMilliseconds ~/ 1000;
+
+  final int _window;
+  var _sum = 0.0;
+  var _count = 0;
+
+  /// Low byte of a sample split across two chunks.
+  int? _carry;
+
+  /// Levels of the windows that [chunk] completes.
+  List<double> add(Uint8List chunk) {
+    final levels = <double>[];
+    void sample(int low, int high) {
+      final s = (high << 8 | low).toSigned(16) / 32768;
+      _sum += s * s;
+      if (++_count == _window) {
+        levels.add(10 * math.log(_sum / _window) / math.ln10);
+        _sum = 0;
+        _count = 0;
+      }
     }
-    yield 20 * math.log(math.sqrt(sum / window)) / math.ln10;
+
+    var i = 0;
+    if (_carry case final low? when chunk.isNotEmpty) {
+      sample(low, chunk[0]);
+      _carry = null;
+      i = 1;
+    }
+    for (; i + 1 < chunk.length; i += 2) {
+      sample(chunk[i], chunk[i + 1]);
+    }
+    if (i < chunk.length) _carry = chunk[i];
+    return levels;
   }
 }
+
+/// Loudness in dBFS of each [levelInterval] of a whole recording.
+List<double> pcmLevels(Uint8List pcm, {required int sampleRate}) =>
+    LevelMeter(sampleRate: sampleRate).add(pcm);
 
 /// Whether any part of a recording is clearly louder than its own quietest
 /// part, which silence and steady background noise never are.
@@ -152,8 +193,8 @@ double _level(double dbfs) => dbfs.isNaN ? _quietest : dbfs.clamp(_quietest, 0);
 bool _isSpeech(double level, double floor) =>
     level > math.max(floor + _speechMargin, _minSpeech);
 
-/// Decides when a voice search is over from microphone levels read every
-/// [levelInterval]: after the speaker has said something and then paused, or
+/// Decides when a voice search is over from the loudness of each
+/// [levelInterval] of audio: after the speaker has said something and then paused, or
 /// when nothing that sounds like speech arrives at all.
 ///
 /// Speech is anything clearly louder than the quietest reading so far, so it

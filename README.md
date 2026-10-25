@@ -1,6 +1,6 @@
 # Muslim Marketplace
 
-A Flutter app that helps Muslims in Central Jersey discover services, jobs, internships, mentors, collaborators, volunteering and local businesses within their community. Members describe what they offer and what they need in plain words, review what the app picked up, and get listings ranked for them with the reasons each one fits. They can save listings, send a connection request, and continue privately in a conversation once it is accepted.
+A Flutter app that helps Muslims in Central Jersey discover services, jobs, internships, mentors, collaborators, volunteering and local businesses within their community. Members describe what they offer and what they need in plain words, review what the app picked up, and get listings ranked for them with the reasons each one fits. Discover centers on a large voice-search button and gently rotating prompts, with an optional typing field and no filter controls. Members can save listings, send a connection request, and continue privately in a conversation once it is accepted.
 
 One codebase runs on the web, iOS and Android. It has two clearly separated modes:
 
@@ -72,7 +72,7 @@ Demo data is stored in the browser's local storage (or the device's app preferen
 2. **Describe yourself (60 s).** Enter a name. For "offer" type *I can tutor high school math*. For "looking for" type *A robotics mentor and a summer engineering internship*. Add interests *robotics, soccer* and area *New Brunswick*. Choose **Review**.
 3. **Review (30 s).** The app shows what it picked up from your own words: goals such as *Looking for a mentor · Robotics* and *Looking for an internship · Engineering*, skills and interests, area. Nothing is invented; edit anything. The member directory is off until you turn it on. **Save and see matches**.
 4. **Recommendations (40 s).** The home page ranks listings for you, each with a reason, for example *Offers mentorship, which you're looking for · Mentions robotics*. A group that needs a volunteer mentor and another student seeking a mentor are not shown as matches for you.
-5. **Search with two intents (40 s).** Search *I'm an engineering student looking for a robotics mentor and a summer internship near New Brunswick.* The app shows both intents as chips with counts, plus "Near New Brunswick", and filters results by intent.
+5. **Search in your own words (40 s).** Tap the large microphone on Discover and say *I'm an engineering student looking for a robotics mentor and a summer internship near New Brunswick.* Or open the typing option and enter the same request. The app shows what it understood and ranks matches for the whole request together, without filter controls.
 6. **Inspect and save (30 s).** Open *Robotics mentorship for students*. "Why this might fit you" lists the reasons, and "How this was ranked" shows each factor. Choose **Save for later**, then **Request to connect** and **Send request**.
 7. **The other side (50 s).** Choose **Switch member → Yusuf Karim**. Open **Inbox → Requests**, **Accept**, and send a message. Switch back to your member and reply in **Inbox → Messages**.
 8. **Post (30 s).** Choose **Post an opportunity**, pick a type and whether you're offering or looking, fill in the short form and publish. Edit, pause, close or delete it from the listing page.
@@ -130,8 +130,9 @@ Put the project URL and its publishable (or anon) key in `config/local.json` (or
 | `AI_EXTRACTION` | same | `true` to ask the `extract-profile` function for onboarding suggestions in connected mode. |
 | `ANTHROPIC_API_KEY` | Supabase function secret only | Never in the app or this repository. |
 | `EXTRACTION_MODEL` | Supabase function secret (optional) | Defaults to `claude-opus-5-5`. |
-| `GEMINI_API_KEY` | `config/local.json` or `--dart-define` | Turns on voice search. Compiled into the app, so keep it out of public builds (see below). |
-| `GEMINI_MODEL` | same (optional) | Model that transcribes voice searches. Defaults to `gemini-3.8-flash`. |
+| `VOICE_SEARCH_URL` | App config or `--dart-define` | Public endpoint for voice transcription. No AI key is included in the app. |
+| `GEMINI_API_KEY` | Voice server environment only | Gemini credential; never pass it to a Flutter build. |
+| `GEMINI_MODEL` | Voice server environment (optional) | Transcription model; defaults to `gemini-3.8-flash`. |
 
 `config/*.json` (except the example), `.env` files and `supabase/functions/.env` are ignored by git. No secrets are committed.
 
@@ -163,29 +164,31 @@ The app treats the function's answer as untrusted: it checks the shape, keeps on
 
 The built-in parser recognises role phrases ("looking for", "I can", "hiring"), opportunity words (mentor, internship, volunteers, tutor and others), about 70 skills and subjects, 20 Central Jersey town names and remote preferences. It does not understand arbitrary phrasing, synonyms outside its vocabulary, or negation; anything it misses can be added on the review screen.
 
-### Optional voice search
+### Voice search through the server
 
-With a [Gemini API key](https://aistudio.google.com/apikey), the search box gets a microphone. Tap it and say what you're looking for, for example *"I need a robotics mentor near New Brunswick"*. Listening stops when you pause (or tap the microphone again, or after 15 seconds); Gemini turns the recording into text, which goes into the search box and runs as a normal search.
+Discover centers on a large microphone with fading prompts. Tap it and say what you need, such as *"I need a robotics mentor near New Brunswick"*. Listening stops when you pause, tap again, or reach 15 seconds. The app sends the recording to your voice server, which calls Gemini and returns only the transcript. The existing matcher ranks the results for the whole request. The app contains no Gemini key or model configuration. Typing remains available, and prompts stay still with reduced motion enabled.
 
-Put the key in `config/local.json`:
+Set `VOICE_SEARCH_URL` to the full transcription endpoint in a **public-only app config**. Without an endpoint the microphone is unavailable and typing still works. In debug builds, Privacy and settings reports `voiceSearch=true` when an endpoint is configured.
 
-```json
-"GEMINI_API_KEY": "<your key>"
-```
-
-and run with the config file as usual:
+For a local iPhone development run, the relay can read the existing ignored `config/local.json` **on the Mac only** (or use `GEMINI_API_KEY` and `GEMINI_MODEL` from the server environment):
 
 ```bash
-flutter run -d chrome --dart-define-from-file=config/local.json
+python3 tool/voice_search_server.py --config config/local.json --host <Mac-private-LAN-IP> --port 8765
 ```
 
-In debug builds, Settings → Privacy and settings shows `voiceSearch=true` when it is on. Without a key there is no microphone and nothing changes.
+The relay accepts only loopback/private LAN addresses and peers, bounds audio requests, and limits concurrency and request rates. It is a development service, not a public hosting server. Keep the Mac running and the iPhone on the same trusted Wi-Fi. Create a separate ignored `config/iphone.json` with only the Supabase public connection settings, a Mac-reachable `SUPABASE_URL`, and `VOICE_SEARCH_URL`, for example `http://<Mac-private-LAN-IP>:8765/transcribe-search`. Never copy `GEMINI_API_KEY` into that build config.
 
-How it works: the app records 16 kHz mono audio from the microphone (the `record` plugin, on web, iOS, Android and macOS), wraps it as WAV in memory and sends it inline to the Gemini `generateContent` endpoint with a short instruction to transcribe only what was said. Only the recording is sent, only after you tap the microphone, and the app says so while listening. Recordings with nothing louder than their own background (silence or steady noise) are never sent: in testing, Gemini invented whole searches from silence. The answer is used as search text (trimmed to 300 characters) and never acted on otherwise. If the microphone is refused, nothing is heard, or Gemini fails, the app says so and leaves your search as it was.
+```bash
+python3 tool/run_iphone.py --device <iPhone-device-id> --config config/iphone.json
+```
 
-**The key is compiled into the build.** Anyone who can load a build made with it can read it, so use it for local development. Before publishing a web build with voice search, restrict the key to your site in the Google Cloud console, or move the call behind a server function the way AI extraction works.
+The iPhone installer builds with only public config, verifies that the exact voice endpoint is present in the compiled app, then installs and launches that verified copy. It stops before installation if voice configuration was omitted or another build replaced it.
 
-Microphone permission is declared for iOS and macOS (`NSMicrophoneUsageDescription`, plus the audio-input entitlement on macOS) and Android (`RECORD_AUDIO`). Browsers only allow the microphone on `https` pages or `localhost`.
+For a hosted backend, deploy `supabase/functions/transcribe-search` and store the Gemini key as a Supabase function secret. The hosted endpoint requires a signed-in member and enforces audio and rate limits; the app sends the current member's access token. Point `VOICE_SEARCH_URL` to `https://<project-ref>.supabase.co/functions/v1/transcribe-search`. The local demo does not provide hosted account credentials.
+
+Recordings are 16 kHz mono PCM WAV. The service accepts `POST {"audio":"<base64 WAV>"}` and returns `{"transcript":"..."}`. Only a recording started by the member is sent; silence and steady noise are rejected in the app before transmission. The server asks Gemini to transcribe without inventing words. The app validates the response, trims it to 300 characters, and uses it only as search text. Permission, network and service failures preserve the previous search.
+
+Microphone permission is declared on iOS, macOS and Android. iOS also declares local network access for a local development server; allow it when testing with the Mac relay. Public production endpoints should use HTTPS. Browsers require an HTTPS page or localhost for microphone access.
 
 ## How matching works
 
@@ -204,7 +207,7 @@ lib/
     bootstrap.dart          Builds the app; connected mode only when configured
     domain/                 Typed models, taxonomy, areas, status rules
     matching/               Parser, AI-output validation, ranking, preferences
-    voice/                  Microphone recording and Gemini transcription for voice search
+    voice/                  Microphone recording and server-backed voice transcription
     data/                   Repository interfaces, demo backend, Supabase backend, seed data
     state/                  Riverpod providers and controllers
     features/               Screens (welcome, auth, onboarding, home, listing, saved, inbox, profile, members)
@@ -214,6 +217,7 @@ supabase/
   migrations/               Schema, row-level security, functions
   seed.sql                  Generated fictional data (tool/generate_seed_sql.dart)
   functions/extract-profile Optional AI extraction (Deno, Anthropic SDK)
+  functions/transcribe-search Server-side Gemini voice transcription
 test/                       Unit, widget and connected-backend tests
 integration_test/           End-to-end journeys
 docs/                       Planning documents (01–07), decisions (08), screenshots
@@ -293,7 +297,7 @@ Verified on October 24, 2026 with Flutter 3.44.4, Dart 3.12.2, Xcode 26.2 and Ch
 - LinkedIn is a link only; nothing is imported. Masjid affiliation is self-reported and never verified.
 - No moderation or organization administration tools, payments, or social graph.
 - The interface is English only and uses a light theme.
-- Voice search calls Gemini from the app, so its key ships with the build. Transcription was checked on October 25, 2026 against the live `gemini-3.8-flash` with synthesized speech (macOS `say`, three voices, about 2.5–3.5 seconds per request); microphone recording itself has only been exercised through tests, not on a real device.
+- Voice search needs a reachable transcription server. The Mac relay is for local development on the same Wi-Fi; a hosted deployment needs the authenticated Edge Function and server-side Gemini secret. Microphone permission must be allowed on the device.
 
 ## Planning documents
 

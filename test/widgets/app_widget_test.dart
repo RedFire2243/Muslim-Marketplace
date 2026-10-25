@@ -80,6 +80,12 @@ void main() {
     await tester.tap(find.text('Save and see matches'));
     await tester.pumpAndSettle();
     expect(find.text('Salaam, Test'), findsOneWidget);
+    await tester.scrollUntilVisible(
+      find.text('Recommended for you'),
+      240,
+      scrollable: find.byType(Scrollable).first,
+    );
+    await tester.pumpAndSettle();
     expect(find.text('Robotics mentorship for students'), findsWidgets);
   });
 
@@ -192,8 +198,9 @@ void main() {
   ) async {
     final c = await pumpApp(tester, size: desktop);
     await enterAs(tester, c, SeedIds.zaid);
+    await _showTypedSearch(tester);
     await tester.enterText(
-      find.byType(TextField).first,
+      find.byKey(const ValueKey('discovery-search-input')),
       'robotics mentor and a summer internship',
     );
     await tester.testTextInput.receiveAction(TextInputAction.search);
@@ -201,12 +208,18 @@ void main() {
     expect(find.text('We found 2 things you’re looking for'), findsOneWidget);
     expect(find.text('Robotics mentorship for students'), findsOneWidget);
     expect(
+      find.text('Engineering internship: automation and robotics (summer)'),
+      findsOneWidget,
+    );
+    expect(find.byType(ChoiceChip), findsNothing);
+    expect(find.byType(FilterChip), findsNothing);
+    expect(
       find.text('Seeking a robotics mentor for my senior design project'),
       findsNothing,
     );
 
     await tester.enterText(
-      find.byType(TextField).first,
+      find.byKey(const ValueKey('discovery-search-input')),
       'quantum basket weaving',
     );
     await tester.testTextInput.receiveAction(TextInputAction.search);
@@ -222,8 +235,9 @@ void main() {
     await enterAs(tester, c, SeedIds.zaid);
     Future<void> search() async {
       await goTo(tester, c, '/');
+      await _showTypedSearch(tester);
       await tester.enterText(
-        find.byType(TextField).first,
+        find.byKey(const ValueKey('discovery-search-input')),
         'looking for a robotics mentor',
       );
       await tester.testTextInput.receiveAction(TextInputAction.search);
@@ -287,5 +301,12 @@ void main() {
         expect(tester.takeException(), isNull, reason: location);
       }
     });
+  }
+}
+
+Future<void> _showTypedSearch(WidgetTester tester) async {
+  if (find.byKey(const ValueKey('discovery-search-input')).evaluate().isEmpty) {
+    await tester.tap(find.text('Type instead'));
+    await tester.pumpAndSettle();
   }
 }

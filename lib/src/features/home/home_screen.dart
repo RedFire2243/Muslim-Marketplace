@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 
 import '../../domain/areas.dart';
 import '../../domain/listing.dart';
-import '../../domain/taxonomy.dart';
 import '../../matching/intent_parser.dart';
 import '../../matching/matcher.dart';
 import '../../routing/router.dart';
@@ -12,13 +11,12 @@ import '../../state/data_providers.dart';
 import '../../state/discovery.dart';
 import '../../state/session.dart';
 import '../../state/voice_search.dart';
-import '../../ui/icons.dart';
 import '../../ui/theme.dart';
 import '../../ui/widgets/common.dart';
 import '../../ui/widgets/focusable_card.dart';
 import '../../ui/widgets/listing_card.dart';
 import '../listing/connected_listing_card.dart';
-import 'filter_bar.dart';
+import 'voice_search_hero.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -31,6 +29,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   final _search = TextEditingController();
   final _searchFocus = FocusNode();
   final _scroll = ScrollController();
+  final _searchPanelKey = GlobalKey();
+  var _revealScheduled = false;
 
   @override
   void initState() {
@@ -53,6 +53,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       ref.read(discoveryProvider.notifier).clearQuery();
     } else {
       ref.read(discoveryProvider.notifier).search(q);
+      _revealResults();
     }
     _searchFocus.unfocus();
   }
@@ -60,6 +61,36 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   void _clearSearch() {
     _search.clear();
     ref.read(discoveryProvider.notifier).clearQuery();
+    _scrollTo(0);
+  }
+
+  void _scrollTo(double offset) {
+    if (!_scroll.hasClients) return;
+    if (MediaQuery.disableAnimationsOf(context)) {
+      _scroll.jumpTo(offset);
+    } else {
+      _scroll.animateTo(
+        offset,
+        duration: const Duration(milliseconds: 400),
+        curve: Curves.easeOutCubic,
+      );
+    }
+  }
+
+  void _revealResults() {
+    if (_revealScheduled) return;
+    _revealScheduled = true;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _revealScheduled = false;
+      if (!mounted || !_scroll.hasClients) return;
+      final panel = _searchPanelKey.currentContext?.findRenderObject();
+      if (panel is! RenderBox || !panel.hasSize) return;
+      final offset = (panel.size.height - Space.lg).clamp(
+        0.0,
+        _scroll.position.maxScrollExtent,
+      );
+      _scrollTo(offset);
+    });
   }
 
   Future<void> _refresh() async {
@@ -78,11 +109,19 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
     ref.listen(discoveryProvider.select((s) => s.query), (prev, next) {
       if (_search.text.trim() != next) _search.text = next;
+      if (next.isNotEmpty && prev != next) _revealResults();
     });
     final voiceAvailable = ref.watch(speechTranscriberProvider) != null;
     final voice = voiceAvailable ? ref.watch(voiceSearchProvider) : null;
-    ref.listen(voiceSearchProvider.select((s) => s.error), (prev, next) {
-      if (next != null) showMessage(context, next);
+    ref.listen(voiceSearchProvider, (prev, next) {
+      if (next.error != null && next.error != prev?.error) {
+        showMessage(context, next.error!);
+      }
+      if (prev?.phase == VoicePhase.transcribing &&
+          next.phase == VoicePhase.idle &&
+          next.error == null) {
+        _revealResults();
+      }
     });
 
     return Scaffold(
@@ -103,47 +142,46 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             SliverToBoxAdapter(
               child: ContentWidth(
                 child: Padding(
+                  key: _searchPanelKey,
                   padding: const EdgeInsets.only(top: Space.lg),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Semantics(
-                        header: true,
-                        child: Text(
-                          profile == null
-                              ? 'Discover'
-                              : 'Salaam, ${profile.firstName}',
-                          style: t.headlineMedium,
-                        ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Semantics(
+                              header: true,
+                              child: Text(
+                                profile == null
+                                    ? 'Discover'
+                                    : 'Salaam, ${profile.firstName}',
+                                style: t.titleLarge,
+                              ),
+                            ),
+                          ),
+                          Text(
+                            'Discover',
+                            style: t.labelMedium?.copyWith(
+                              color: c.onSurfaceVariant,
+                            ),
+                          ),
+                        ],
                       ),
-                      const SizedBox(height: Space.xs),
-                      Text(
-                        'What are you looking for in your community?',
-                        style: t.titleMedium?.copyWith(
-                          color: c.onSurfaceVariant,
-                        ),
-                      ),
-                      const SizedBox(height: Space.sm),
-                      _SearchField(
+                      const SizedBox(height: Space.lg),
+                      VoiceSearchHero(
+                        voice: voice,
+                        hasQuery: state.hasQuery,
                         controller: _search,
                         focusNode: _searchFocus,
                         onSubmit: _submit,
                         onClear: _clearSearch,
-                        hasQuery: state.hasQuery,
-                        voice: voice,
                         onVoice: () {
                           _searchFocus.unfocus();
                           ref.read(voiceSearchProvider.notifier).toggle();
                         },
                       ),
-                      if (voice != null) _VoiceStatus(phase: voice.phase),
-                      const SizedBox(height: Space.md),
-                      if (!state.hasQuery) ...[
-                        _QuickActions(onSearch: _submit),
-                        const SizedBox(height: Space.lg),
-                      ],
-                      const FilterBar(),
-                      const SizedBox(height: Space.lg),
+                      const SizedBox(height: Space.xl),
                     ],
                   ),
                 ),
@@ -164,284 +202,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 }
 
-class _SearchField extends StatelessWidget {
-  const _SearchField({
-    required this.controller,
-    required this.focusNode,
-    required this.onSubmit,
-    required this.onClear,
-    required this.hasQuery,
-    this.voice,
-    this.onVoice,
-  });
-
-  final TextEditingController controller;
-  final FocusNode focusNode;
-  final void Function([String?]) onSubmit;
-  final VoidCallback onClear;
-  final bool hasQuery;
-
-  /// Null when voice search is not configured.
-  final VoiceSearchState? voice;
-  final VoidCallback? onVoice;
-
-  @override
-  Widget build(BuildContext context) {
-    final c = Theme.of(context).colorScheme;
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(Radii.lg),
-        boxShadow: [
-          BoxShadow(
-            color: c.primary.withValues(alpha: 0.08),
-            blurRadius: 24,
-            offset: const Offset(0, 8),
-          ),
-        ],
-      ),
-      child: Semantics(
-        label: 'What are you looking for in your community?',
-        child: TextField(
-          controller: controller,
-          focusNode: focusNode,
-          textInputAction: TextInputAction.search,
-          maxLines: 1,
-          onSubmitted: (_) => onSubmit(),
-          style: Theme.of(context).textTheme.bodyLarge,
-          decoration: InputDecoration(
-            hintText: 'Try “robotics mentor”',
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 18,
-            ),
-            prefixIcon: Icon(Icons.search, color: c.primary),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(Radii.lg),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(Radii.lg),
-              borderSide: BorderSide(color: c.outlineVariant),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(Radii.lg),
-              borderSide: BorderSide(color: c.primary, width: 2),
-            ),
-            suffixIcon: Padding(
-              padding: const EdgeInsets.only(right: 6),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  ListenableBuilder(
-                    listenable: controller,
-                    builder: (context, _) =>
-                        controller.text.isEmpty && !hasQuery
-                        ? const SizedBox.shrink()
-                        : IconButton(
-                            tooltip: 'Clear search',
-                            onPressed: onClear,
-                            icon: const Icon(Icons.close),
-                          ),
-                  ),
-                  if (voice != null)
-                    _VoiceButton(state: voice!, onPressed: onVoice),
-                  IconButton.filled(
-                    tooltip: 'Search',
-                    onPressed: onSubmit,
-                    icon: const Icon(Icons.arrow_forward),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-/// The microphone in the search field. Its ring follows the input level while
-/// listening.
-class _VoiceButton extends StatelessWidget {
-  const _VoiceButton({required this.state, required this.onPressed});
-  final VoiceSearchState state;
-  final VoidCallback? onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    final c = Theme.of(context).colorScheme;
-    return switch (state.phase) {
-      VoicePhase.idle => IconButton(
-        tooltip: 'Search by voice',
-        onPressed: onPressed,
-        icon: Icon(Icons.mic_none, color: c.primary),
-      ),
-      VoicePhase.listening => SizedBox.square(
-        dimension: 48,
-        child: Stack(
-          alignment: Alignment.center,
-          clipBehavior: Clip.none,
-          children: [
-            AnimatedContainer(
-              duration: const Duration(milliseconds: 120),
-              width: 40 + 16 * state.level,
-              height: 40 + 16 * state.level,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: c.error.withValues(alpha: 0.16),
-              ),
-            ),
-            IconButton.filled(
-              tooltip: 'Stop and search',
-              onPressed: onPressed,
-              style: IconButton.styleFrom(
-                backgroundColor: c.error,
-                foregroundColor: c.onError,
-              ),
-              icon: const Icon(Icons.mic),
-            ),
-          ],
-        ),
-      ),
-      VoicePhase.transcribing => const IconButton(
-        tooltip: 'Working out what you said',
-        onPressed: null,
-        icon: SizedBox.square(
-          dimension: 20,
-          child: CircularProgressIndicator(strokeWidth: 2),
-        ),
-      ),
-    };
-  }
-}
-
-/// What voice search is doing, under the search field.
-class _VoiceStatus extends StatelessWidget {
-  const _VoiceStatus({required this.phase});
-  final VoicePhase phase;
-
-  @override
-  Widget build(BuildContext context) {
-    final t = Theme.of(context).textTheme;
-    final c = Theme.of(context).colorScheme;
-    final (icon, text) = switch (phase) {
-      VoicePhase.idle => (null, null),
-      VoicePhase.listening => (
-        Icons.graphic_eq,
-        'Listening… tap the microphone when you’re done.',
-      ),
-      VoicePhase.transcribing => (
-        Icons.hourglass_top,
-        'Working out what you said…',
-      ),
-    };
-    return AnimatedSize(
-      duration: const Duration(milliseconds: 150),
-      alignment: Alignment.topLeft,
-      child: Semantics(
-        liveRegion: true,
-        child: text == null
-            ? const SizedBox(width: double.infinity)
-            : Padding(
-                padding: const EdgeInsets.only(top: Space.xs, left: Space.xxs),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Icon(icon, size: 18, color: c.primary),
-                        const SizedBox(width: Space.xs),
-                        Expanded(child: Text(text, style: t.labelLarge)),
-                      ],
-                    ),
-                    const SizedBox(height: 2),
-                    Text(
-                      'Your recording is sent to Google Gemini to turn it into text.',
-                      style: t.bodySmall?.copyWith(color: c.onSurfaceVariant),
-                    ),
-                  ],
-                ),
-              ),
-      ),
-    );
-  }
-}
-
-class _QuickActions extends ConsumerWidget {
-  const _QuickActions({required this.onSearch});
-  final void Function([String?]) onSearch;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final discovery = ref.read(discoveryProvider.notifier);
-    Widget action(IconData icon, String label, VoidCallback onTap) =>
-        ActionChip(
-          avatar: Icon(icon, size: 18),
-          label: Text(label),
-          onPressed: onTap,
-        );
-    final actions = [
-      action(
-        Icons.diversity_3_outlined,
-        'Find a mentor',
-        () => onSearch('Looking for a mentor'),
-      ),
-      action(
-        Icons.school_outlined,
-        'Explore internships',
-        () => discovery.quick(types: {ListingType.internship}),
-      ),
-      action(
-        Icons.work_outline,
-        'Explore jobs',
-        () => discovery.quick(types: {ListingType.job}),
-      ),
-      action(
-        Icons.handyman_outlined,
-        'Hire local help',
-        () =>
-            discovery.quick(types: {ListingType.service, ListingType.business}),
-      ),
-      action(
-        Icons.volunteer_activism_outlined,
-        'Volunteer',
-        () => onSearch('I want to volunteer'),
-      ),
-      action(
-        Icons.add_circle_outline,
-        'Post an opportunity',
-        () => context.openPost(),
-      ),
-    ];
-    if (Breakpoints.isCompact(context)) {
-      return _HorizontalStrip(children: actions);
-    }
-    return Wrap(spacing: Space.xs, runSpacing: Space.xs, children: actions);
-  }
-}
-
-/// A single horizontally scrollable row of chips.
-class _HorizontalStrip extends StatelessWidget {
-  const _HorizontalStrip({required this.children});
-  final List<Widget> children;
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      clipBehavior: Clip.none,
-      child: Row(
-        children: [
-          for (var i = 0; i < children.length; i++) ...[
-            if (i > 0) const SizedBox(width: Space.xs),
-            children[i],
-          ],
-        ],
-      ),
-    );
-  }
-}
-
-/// Recommendations, categories and newest listings.
+/// Personalized recommendations and the newest community listings.
 class _DiscoverFeed extends ConsumerWidget {
   const _DiscoverFeed();
 
@@ -450,7 +211,6 @@ class _DiscoverFeed extends ConsumerWidget {
     final recs = ref.watch(recommendationsProvider);
     final latest = ref.watch(latestListingsProvider);
     final profile = ref.watch(myProfileProvider).value;
-    final filters = ref.watch(discoveryProvider.select((s) => s.filters));
     final personalizing = profile?.personalizationEnabled ?? false;
 
     return Column(
@@ -473,24 +233,12 @@ class _DiscoverFeed extends ConsumerWidget {
           onRetry: () => ref.invalidate(visibleListingsProvider),
           data: (results) {
             if (results.isEmpty) {
-              return EmptyState(
+              return const EmptyState(
                 compact: true,
                 icon: Icons.travel_explore,
-                title: filters.isEmpty
-                    ? 'No recommendations yet'
-                    : 'No recommendations with these filters',
-                message: filters.isEmpty
-                    ? 'Nothing currently matches your goals. Try a search, or check the newest listings below.'
-                    : 'Clear a filter to see more of what fits you.',
-                actions: [
-                  if (!filters.isEmpty)
-                    OutlinedButton(
-                      onPressed: ref
-                          .read(discoveryProvider.notifier)
-                          .clearFilters,
-                      child: const Text('Clear filters'),
-                    ),
-                ],
+                title: 'No recommendations yet',
+                message:
+                    'Tell us what you’re looking for, or explore the newest listings below.',
               );
             }
             return _ResultGrid(
@@ -500,17 +248,7 @@ class _DiscoverFeed extends ConsumerWidget {
           },
         ),
         const SizedBox(height: Space.xl),
-        if (filters.categories.isEmpty) ...[
-          const SectionHeader(title: 'Browse by category'),
-          const _CategoryGrid(),
-          const SizedBox(height: Space.xl),
-        ],
-        SectionHeader(
-          title: 'Newest in the community',
-          subtitle: filters.isEmpty
-              ? null
-              : 'Filtered by your selections above.',
-        ),
+        const SectionHeader(title: 'Newest in the community'),
         AsyncView(
           value: latest,
           onRetry: () => ref.invalidate(visibleListingsProvider),
@@ -518,92 +256,13 @@ class _DiscoverFeed extends ConsumerWidget {
               ? const EmptyState(
                   compact: true,
                   icon: Icons.inbox_outlined,
-                  title: 'No listings match these filters',
-                  message: 'Try a different area or category.',
+                  title: 'Your community is just getting started',
+                  message:
+                      'Check back soon, or post an opportunity of your own.',
                 )
               : _ListingGrid(listings: listings.take(9).toList()),
         ),
       ],
-    );
-  }
-}
-
-class _CategoryGrid extends ConsumerWidget {
-  const _CategoryGrid();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final counts = ref.watch(categoryCountsProvider).value ?? const {};
-    final t = Theme.of(context).textTheme;
-    final c = Theme.of(context).colorScheme;
-    final categories = ListingCategory.values
-        .where((cat) => (counts[cat] ?? 0) > 0)
-        .toList();
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final columns = constraints.maxWidth >= 900
-            ? 5
-            : constraints.maxWidth >= 600
-            ? 4
-            : 2;
-        final width =
-            (constraints.maxWidth - (columns - 1) * Space.sm) / columns;
-        return Wrap(
-          spacing: Space.sm,
-          runSpacing: Space.sm,
-          children: [
-            for (final cat in categories)
-              SizedBox(
-                width: width,
-                child: FocusableCard(
-                  padding: const EdgeInsets.all(Space.sm),
-                  onTap: () =>
-                      ref.read(discoveryProvider.notifier).setCategory(cat),
-                  semanticLabel: '${cat.label}, ${counts[cat]} listings',
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 36,
-                        height: 36,
-                        decoration: BoxDecoration(
-                          color: c.primaryContainer,
-                          borderRadius: BorderRadius.circular(Radii.sm),
-                        ),
-                        child: Icon(
-                          categoryIcon(cat),
-                          size: 20,
-                          color: c.onPrimaryContainer,
-                        ),
-                      ),
-                      const SizedBox(width: Space.sm),
-                      Expanded(
-                        child: ExcludeSemantics(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                cat.shortLabel,
-                                style: t.labelLarge,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              Text(
-                                '${counts[cat]} listing${counts[cat] == 1 ? '' : 's'}',
-                                style: t.bodySmall?.copyWith(
-                                  color: c.onSurfaceVariant,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-          ],
-        );
-      },
     );
   }
 }
@@ -617,8 +276,7 @@ class _SearchResults extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(discoveryProvider);
     final parsed = ref.watch(parsedQueryProvider);
-    final results = ref.watch(visibleSearchResultsProvider);
-    final all = ref.watch(searchResultsProvider).value ?? const <MatchResult>[];
+    final results = ref.watch(searchResultsProvider);
     final members = ref.watch(memberMatchesProvider).value ?? const [];
     final t = Theme.of(context).textTheme;
     final c = Theme.of(context).colorScheme;
@@ -626,12 +284,29 @@ class _SearchResults extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _Interpretation(
-          parsed: parsed,
-          results: all,
-          selected: state.goalIndex,
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Your matches', style: t.titleLarge),
+                  const SizedBox(height: Space.xs),
+                  SelectableText('“${state.query}”', style: t.bodyLarge),
+                ],
+              ),
+            ),
+            const SizedBox(width: Space.xs),
+            TextButton(
+              onPressed: onClearSearch,
+              child: const Text('Start over'),
+            ),
+          ],
         ),
         const SizedBox(height: Space.md),
+        _Interpretation(parsed: parsed),
+        const SizedBox(height: Space.lg),
         AsyncView(
           value: results,
           onRetry: () => ref.invalidate(visibleListingsProvider),
@@ -641,15 +316,8 @@ class _SearchResults extends ConsumerWidget {
                 icon: Icons.search_off,
                 title: 'No listings match that yet',
                 message:
-                    'Nothing in the community matches “${state.query}”${state.filters.isEmpty ? '' : ' with these filters'}. Try fewer or different words, remove a filter, or post what you’re looking for so others can find you.',
+                    'Nothing in the community matches “${state.query}” yet. Try describing it another way, or post what you’re looking for so others can find you.',
                 actions: [
-                  if (!state.filters.isEmpty)
-                    OutlinedButton(
-                      onPressed: ref
-                          .read(discoveryProvider.notifier)
-                          .clearFilters,
-                      child: const Text('Clear filters'),
-                    ),
                   OutlinedButton(
                     onPressed: onClearSearch,
                     child: const Text('Clear search'),
@@ -742,21 +410,15 @@ class _SearchResults extends ConsumerWidget {
   }
 }
 
-class _Interpretation extends ConsumerWidget {
-  const _Interpretation({
-    required this.parsed,
-    required this.results,
-    required this.selected,
-  });
+/// A read-only explanation of the whole request, with no result filters.
+class _Interpretation extends StatelessWidget {
+  const _Interpretation({required this.parsed});
   final ParsedRequest parsed;
-  final List<MatchResult> results;
-  final int? selected;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final t = Theme.of(context).textTheme;
     final c = Theme.of(context).colorScheme;
-    final controller = ref.read(discoveryProvider.notifier);
     final area = Areas.byId(parsed.areaId);
     final remote = switch (parsed.remote) {
       RemotePreference.remoteOk => 'Remote is fine',
@@ -764,22 +426,22 @@ class _Interpretation extends ConsumerWidget {
       RemotePreference.inPersonOnly => 'In person only',
       RemotePreference.unspecified => null,
     };
-    final keywords = parsed.goals.isEmpty
-        ? parsed.keywords
-              .where((k) => k.weight >= 0.5)
-              .map((k) => k.label)
-              .toList()
-        : const <String>[];
-
-    int countFor(int i) =>
-        results.where((r) => r.matchedGoal == parsed.goals[i]).length;
+    final details = [
+      for (final goal in parsed.goals) goal.fullLabel,
+      if (parsed.goals.isEmpty)
+        for (final keyword in parsed.keywords)
+          if (keyword.weight >= 0.5) keyword.label,
+      if (area != null) 'Near ${area.name}',
+      ?remote,
+    ];
 
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(Space.sm),
+      padding: const EdgeInsets.all(Space.md),
       decoration: BoxDecoration(
-        color: c.surfaceContainerLow,
-        borderRadius: BorderRadius.circular(Radii.md),
+        color: c.surfaceContainerLowest,
+        border: Border(left: BorderSide(color: c.primaryContainer, width: 3)),
+        borderRadius: BorderRadius.circular(Radii.sm),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -790,53 +452,24 @@ class _Interpretation extends ConsumerWidget {
                 : 'What we understood',
             style: t.labelLarge,
           ),
-          const SizedBox(height: Space.xs),
-          Wrap(
-            spacing: Space.xs,
-            runSpacing: Space.xs,
-            children: [
-              if (parsed.goals.length > 1)
-                ChoiceChip(
-                  label: Text('All (${results.length})'),
-                  selected: selected == null,
-                  onSelected: (_) => controller.selectGoal(null),
-                ),
-              for (var i = 0; i < parsed.goals.length; i++)
-                parsed.goals.length > 1
-                    ? ChoiceChip(
-                        avatar: Icon(typeIcon(parsed.goals[i].type), size: 16),
-                        label: Text(
-                          '${parsed.goals[i].fullLabel} (${countFor(i)})',
-                        ),
-                        selected: selected == i,
-                        onSelected: (_) => controller.selectGoal(i),
-                      )
-                    : Chip(
-                        avatar: Icon(typeIcon(parsed.goals[i].type), size: 16),
-                        label: Text(parsed.goals[i].fullLabel),
-                      ),
-              for (final k in keywords)
-                Chip(avatar: const Icon(Icons.tag, size: 16), label: Text(k)),
-              if (area != null)
-                Chip(
-                  avatar: const Icon(Icons.place_outlined, size: 16),
-                  label: Text('Near ${area.name}'),
-                ),
-              if (remote != null)
-                Chip(
-                  avatar: const Icon(Icons.public, size: 16),
-                  label: Text(remote),
-                ),
-              if (parsed.goals.isEmpty &&
-                  keywords.isEmpty &&
-                  area == null &&
-                  remote == null)
-                Text(
-                  'Matching your words against listing titles, tags and descriptions.',
-                  style: t.bodySmall?.copyWith(color: c.onSurfaceVariant),
-                ),
-            ],
-          ),
+          const SizedBox(height: Space.xxs),
+          if (details.isEmpty)
+            Text(
+              'Matching your words against listing titles, tags and descriptions.',
+              style: t.bodySmall?.copyWith(color: c.onSurfaceVariant),
+            )
+          else
+            Wrap(
+              spacing: Space.md,
+              runSpacing: Space.xxs,
+              children: [
+                for (final detail in details)
+                  Text(
+                    detail,
+                    style: t.bodySmall?.copyWith(color: c.onSurfaceVariant),
+                  ),
+              ],
+            ),
         ],
       ),
     );

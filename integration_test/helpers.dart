@@ -101,7 +101,9 @@ Finder fieldLabelled(String label) => find.widgetWithText(TextField, label);
 
 Future<void> search(WidgetTester tester, String query) async {
   await go(tester, '/');
-  await typeInto(tester, find.byType(TextField).first, query);
+  final field = find.byKey(const ValueKey('discovery-search-input'));
+  if (field.evaluate().isEmpty) await tapText(tester, 'Type instead');
+  await typeInto(tester, field, query);
   await tester.testTextInput.receiveAction(TextInputAction.search);
   await settle(tester);
 }

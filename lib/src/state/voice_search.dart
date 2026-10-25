@@ -3,19 +3,29 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../data/supabase/supabase_gateway.dart';
 import '../voice/speech_transcriber.dart';
 import '../voice/voice_recorder.dart';
 import 'discovery.dart';
 import 'session.dart';
 
-/// Null when voice search is not configured (no Gemini key).
+/// Null when no voice service endpoint is configured.
 final speechTranscriberProvider = Provider<SpeechTranscriber?>((ref) {
   final config = ref.watch(appConfigProvider);
   if (!config.hasVoiceSearch) return null;
-  return GeminiTranscriber(
-    apiKey: config.geminiApiKey,
-    model: config.geminiModel,
+  final gateway = ref.watch(accountGatewayProvider);
+  final transcriber = BackendSpeechTranscriber(
+    url: config.voiceSearchUrl,
+    accessToken: () {
+      final session = ref.read(sessionProvider).value;
+      if (session == null || session.isDemo) return null;
+      return gateway is SupabaseAccountGateway
+          ? gateway.client.auth.currentSession?.accessToken
+          : null;
+    },
   );
+  ref.onDispose(transcriber.dispose);
+  return transcriber;
 });
 
 /// Makes a fresh recorder for each voice search.

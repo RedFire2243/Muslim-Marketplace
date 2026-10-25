@@ -1,31 +1,25 @@
 /// Build-time configuration, supplied with `--dart-define` or
-/// `--dart-define-from-file=config/local.json`. The Supabase publishable
-/// (anon) key is designed to ship in clients, and the Claude key for
-/// extraction lives only on the server. The one exception is the optional
-/// Gemini key for voice search, which is compiled into the build that uses it.
+/// `--dart-define-from-file=config/local.json`. Only public service URLs and
+/// the Supabase publishable (anon) key belong in the app. AI provider keys
+/// live on the server.
 class AppConfig {
   const AppConfig({
     this.supabaseUrl = '',
     this.supabaseKey = '',
     this.aiExtraction = false,
-    this.geminiApiKey = '',
-    this.geminiModel = defaultGeminiModel,
+    this.voiceSearchUrl = '',
   });
 
   factory AppConfig.fromEnvironment() {
     const key = String.fromEnvironment('SUPABASE_PUBLISHABLE_KEY');
     const legacyKey = String.fromEnvironment('SUPABASE_ANON_KEY');
-    const model = String.fromEnvironment('GEMINI_MODEL');
     return AppConfig(
       supabaseUrl: const String.fromEnvironment('SUPABASE_URL').trim(),
       supabaseKey: (key.isNotEmpty ? key : legacyKey).trim(),
       aiExtraction: const bool.fromEnvironment('AI_EXTRACTION'),
-      geminiApiKey: const String.fromEnvironment('GEMINI_API_KEY').trim(),
-      geminiModel: model.trim().isEmpty ? defaultGeminiModel : model.trim(),
+      voiceSearchUrl: const String.fromEnvironment('VOICE_SEARCH_URL').trim(),
     );
   }
-
-  static const defaultGeminiModel = 'gemini-3.8-flash';
 
   final String supabaseUrl;
   final String supabaseKey;
@@ -34,16 +28,19 @@ class AppConfig {
   /// connected mode. The deterministic parser is always the fallback.
   final bool aiExtraction;
 
-  /// Gemini API key for voice search. Anyone with the build can read it, so
-  /// use it for local development or with a key restricted to your site.
-  final String geminiApiKey;
-
-  /// Gemini model that transcribes voice searches.
-  final String geminiModel;
+  /// Public endpoint that transcribes voice searches. The endpoint keeps its
+  /// AI provider credentials on the server.
+  final String voiceSearchUrl;
 
   /// Whether real accounts can be offered at all.
   bool get hasBackend => supabaseUrl.isNotEmpty && supabaseKey.isNotEmpty;
 
-  /// Whether the search box offers a microphone.
-  bool get hasVoiceSearch => geminiApiKey.isNotEmpty;
+  /// Whether a valid voice service endpoint is configured. HTTP is supported
+  /// for a development server on the same network as a test device.
+  bool get hasVoiceSearch {
+    final uri = Uri.tryParse(voiceSearchUrl.trim());
+    return uri != null &&
+        (uri.scheme == 'https' || uri.scheme == 'http') &&
+        uri.host.isNotEmpty;
+  }
 }

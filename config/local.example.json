@@ -2,6 +2,6 @@
   "SUPABASE_URL": "http://127.0.0.1:54321",
   "SUPABASE_PUBLISHABLE_KEY": "paste the Publishable key from `supabase status`",
   "AI_EXTRACTION": "false",
-  "GEMINI_API_KEY": "",
+  "GEMINI_API_KEY": "AIzaSyDMgjG23QP4-I7wd4qJ86dwagilW1_BI94",
   "GEMINI_MODEL": "gemini-3.8-flash"
 }

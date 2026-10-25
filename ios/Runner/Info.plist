@@ -28,6 +28,13 @@
 	<true/>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Muslim Marketplace uses the microphone only while you search by voice.</string>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Connect to your local marketplace server for voice search and community listings.</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsLocalNetworking</key>
+		<true/>
+	</dict>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

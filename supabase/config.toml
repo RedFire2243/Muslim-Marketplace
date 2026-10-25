@@ -418,3 +418,7 @@ enabled = true
 [functions.extract-profile]
 enabled = true
 verify_jwt = true
+
+[functions.transcribe-search]
+enabled = true
+verify_jwt = true
